@@ -17,7 +17,9 @@ import MenuPropsModel from './models/MenuProps.model';
 
 const App: React.FunctionComponent = () => {
 
-  const [menuProps, setMenuProps] = useState<MenuPropsModel | null>(null);
+  // State - Load data
+  const [menuProps, setMenuProps]   = useState<MenuPropsModel | null>(null);
+  const [loading, setLoading]       = useState<boolean>(true);
 
   // Load UI data from API
   useEffect(() => {
@@ -40,19 +42,30 @@ const App: React.FunctionComponent = () => {
         // load menuProps
         setMenuProps({ Brand, pages: menuPages });
 
+        // finish page load
+        setLoading(false);
+        
       });
   }, []);
 
   return (
     <div className="App">
-      <Menu {...menuProps!} />
-      <Router>
-        <Switch>
-          <Route exact path='/'>
+      {
+        loading
+          ?
+          <h2>Loading...</h2>
+          :
+          <>
+            <Router>
+              <Menu {...menuProps!} />
+              <Switch>
+                <Route exact path='/'>
 
-          </Route>
-        </Switch>
-      </Router>
+                </Route>
+              </Switch>
+            </Router>
+          </>
+      }
     </div>
   );
 };
