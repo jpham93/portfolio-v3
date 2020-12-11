@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "menus",
+  "info": {
+    "name": "Menu",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "pages": {
+      "collection": "page"
+    },
+    "Brand": {
+      "type": "component",
+      "repeatable": false,
+      "component": "branding.brand",
+      "required": true
+    }
+  }
+}

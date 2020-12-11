@@ -4,7 +4,6 @@ import { Toolbar, ToolbarProps } from 'primereact/toolbar';
 import { NavLink } from 'react-router-dom';
 
 /**
- * Menu
  * Menu in header & footer. Displays links and branding.
  * @param Brand   - {firstname: string, lastname: string}
  * @param pages   -  {name: string, url_slug: string}[]
