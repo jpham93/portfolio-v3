@@ -25,7 +25,7 @@ const Menu = ({ Brand, pages }: MenuPropsModel) => {
     <React.Fragment>
       {
         pages.map((page, index) => (
-          <NavLink to={ '/' + page.url_slug } className="menu-link">
+          <NavLink key={index} to={ '/' + page.url_slug } className="menu-link">
             { page.name }
           </NavLink>
         ))
