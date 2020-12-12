@@ -2,6 +2,7 @@ import React from 'react';
 import MenuPropsModel from '../../models/MenuProps.model';
 import { Toolbar, ToolbarProps } from 'primereact/toolbar';
 import { NavLink } from 'react-router-dom';
+import './Menu.scss';
 
 /**
  * Menu in header & footer. Displays links and branding.
@@ -34,8 +35,8 @@ const Menu = ({ Brand, pages }: MenuPropsModel) => {
   );
 
   return(
-    <div className="menu-wrapper">
-      <Toolbar left={ MenuBrand } right={ MenuLinks } className="menu" />
+    <div className="MenuWrapper">
+      <Toolbar left={ MenuBrand } right={ MenuLinks } className="Menu" />
     </div>
   );
 };
