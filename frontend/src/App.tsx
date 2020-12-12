@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import './global.scss';
 import 'primereact/resources/themes/bootstrap4-dark-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
 
 // Custom Components
 import Menu from './components/menu/Menu';
+import Page from './components/page/Page';
 
 // Models
 import MenuPropsModel from './models/MenuProps.model';
@@ -19,6 +16,7 @@ const App: React.FunctionComponent = () => {
 
   // State - Load data
   const [menuProps, setMenuProps]   = useState<MenuPropsModel | null>(null);
+  const [pages, setPages]           = useState<[] | null>(null);
   const [loading, setLoading]       = useState<boolean>(true);
 
   // Load UI data from API
@@ -26,47 +24,59 @@ const App: React.FunctionComponent = () => {
     fetch(`${process.env.REACT_APP_API_URL!}/menu`)
       .then(res => res.json())
       .then(data => {
-        
+        console.log(data);
         /**
          * LOAD MENU PROPS
          */
-        // extract data
+          // extract data
         const {
-          Brand,
-          pages
-        } = data;
+            Brand,
+            pages
+          } = data;
         // repackage pages into the accepted MenuProps property
-        const menuPages = pages.map((page: {name: string, url_slug: string | undefined}) => ({
+        const menuPages = pages.map((page: { name: string, url_slug: string | undefined }) => ({
           name: page.name, url_slug: page.url_slug
         }));
         // load menuProps
         setMenuProps({ Brand, pages: menuPages });
 
+        // load array of page data to state
+        setPages(pages);
+
         // finish page load
-        setLoading(false);
-        
+        setLoading(false)
+
       });
   }, []);
 
   return (
-    <div className="App">
-      {
-        loading
-          ?
-          <h2>Loading...</h2>
-          :
-          <>
-            <Router>
+    <Router>
+      <div className="App">
+        {
+          loading
+            ?
+            <h2>Loading...</h2>
+            :
+            <>
               <Menu {...menuProps!} />
               <Switch>
-                <Route exact path='/'>
-
-                </Route>
+              {
+                pages && pages.map(page => {
+                  // retrieved used parts only
+                  const { name, title, url_slug, header_image, page_id } = page;
+                  const exactFlag = page_id === 'home';
+                  return(
+                    <Route exact={ exactFlag } path={ '/' + url_slug } >
+                      <Page { ...{ name, title, header_image, page_id } } />
+                    </Route>
+                  );
+                })
+              }
               </Switch>
-            </Router>
-          </>
-      }
-    </div>
+            </>
+        }
+      </div>
+    </Router>
   );
 };
 
