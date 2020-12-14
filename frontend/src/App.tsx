@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
 
 // Custom Components
 import Menu from './components/menu/Menu';
-import Page from './components/page/Page';
+import Home from './pages/home/Home';
 
 // Models
 import MenuPropsModel from './models/MenuProps.model';
@@ -16,7 +16,6 @@ const App: React.FunctionComponent = () => {
 
   // State - Load data
   const [menuProps, setMenuProps]   = useState<MenuPropsModel | null>(null);
-  const [pages, setPages]           = useState<[] | null>(null);
   const [loading, setLoading]       = useState<boolean>(true);
 
   // Load UI data from API
@@ -40,9 +39,6 @@ const App: React.FunctionComponent = () => {
         // load menuProps
         setMenuProps({ Brand, pages: menuPages });
 
-        // load array of page data to state
-        setPages(pages);
-
         // finish page load
         setLoading(false)
 
@@ -60,18 +56,9 @@ const App: React.FunctionComponent = () => {
             <>
               <Menu {...menuProps!} />
               <Switch>
-              {
-                pages && pages.map(page => {
-                  // retrieved used parts only
-                  const { name, title, url_slug, header_image, page_id } = page;
-                  const exactFlag = page_id === 'home';
-                  return(
-                    <Route exact={ exactFlag } path={ '/' + url_slug } >
-                      <Page { ...{ name, title, header_image, page_id } } />
-                    </Route>
-                  );
-                })
-              }
+                <Route exact path='/' >
+                  <Home />
+                </Route>
               </Switch>
             </>
         }

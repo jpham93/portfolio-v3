@@ -1,6 +1,6 @@
 interface HeaderPropsModel {
   title: string;
-  header_image: any;
+  header_img: any;
   height?: number;
 }
 
