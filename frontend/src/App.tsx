@@ -11,14 +11,14 @@ import Home from './pages/home/Home';
 
 // Models
 import MenuPropsModel from './models/MenuProps.model';
-import HomePropsModel from './models/HomeProps.model';
+import GridLinksModel from './models/GridLinks.model';
 
 const App: React.FunctionComponent = () => {
 
   // State - Load data
   const [menuProps, setMenuProps]   = useState<MenuPropsModel | null>(null);
   const [loading, setLoading]       = useState<boolean>(true);
-  const [gridLinks, setGridLinks]   = useState<HomePropsModel|null>(null);
+  const [gridLinks, setGridLinks]   = useState<{ gridLinks: GridLinksModel[] }|null>(null);
 
   // Load MENU UI data from API
   useEffect(() => {
@@ -28,23 +28,24 @@ const App: React.FunctionComponent = () => {
         /**
          * LOAD MENU PROPS
          */
-          // extract data
+        // extract data
         const {
             Brand,
             Links
           } = data;
+
         // load menuProps
         setMenuProps({ Brand, Links });
 
         // load grid Links for "Home" page
-        setGridLinks(
-          Links.map((link: any) => ({
-            name: link.name,
-            alt_title: link.hasOwnProperty('alt_title') ? link.alt_title :  null,
-            path: link.hasOwnProperty('path') ? link.path : null,
-            link_img: link.hasOwnProperty('link_img') ? link.link_img : null
-          }))
-        );
+        const gLinks = Links.map((link: any) => ({
+          name: link.name,
+          alt_title: link.hasOwnProperty('alt_title') ? link.alt_title :  null,
+          path: link.hasOwnProperty('path') ? link.path : null,
+          link_img: link.hasOwnProperty('link_img') ? link.link_img : null
+        }));
+        //@todo - refactor the nested arr inside object. This is due to a TS workaround for defining FC props...
+        setGridLinks({ gridLinks: gLinks });
 
         // finish page load
         setLoading(false)
