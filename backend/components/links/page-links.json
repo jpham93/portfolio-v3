@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_links_page_links",
+  "info": {
+    "name": "Page Links",
+    "icon": "link",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "link_img": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "alt_title": {
+      "type": "string"
+    }
+  }
+}

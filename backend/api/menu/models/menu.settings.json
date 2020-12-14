@@ -11,14 +11,16 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "pages": {
-      "collection": "page"
-    },
     "Brand": {
       "type": "component",
       "repeatable": false,
       "component": "branding.brand",
       "required": true
+    },
+    "Links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.page-links"
     }
   }
 }
