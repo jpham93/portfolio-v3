@@ -13,7 +13,7 @@ const Menu = ({ Brand, pages }: MenuPropsModel) => {
 
   const MenuBrand = (props: ToolbarProps) => (
     <React.Fragment>
-      <span>
+      <span className="MenuBrand">
         { Brand.firstname.toUpperCase() }
         <strong>
           { Brand.lastname.toUpperCase() }
@@ -26,7 +26,7 @@ const Menu = ({ Brand, pages }: MenuPropsModel) => {
     <React.Fragment>
       {
         pages.map((page, index) => (
-          <NavLink key={index} to={ '/' + page.url_slug } className="menu-link">
+          <NavLink key={ index } to={ '/' + page.url_slug } className="MenuLink" activeClassName="MenuLinkActive">
             { page.name }
           </NavLink>
         ))
