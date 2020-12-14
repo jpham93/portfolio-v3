@@ -18,12 +18,11 @@ const App: React.FunctionComponent = () => {
   const [menuProps, setMenuProps]   = useState<MenuPropsModel | null>(null);
   const [loading, setLoading]       = useState<boolean>(true);
 
-  // Load UI data from API
+  // Load MENU UI data from API
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL!}/menu`)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         /**
          * LOAD MENU PROPS
          */
