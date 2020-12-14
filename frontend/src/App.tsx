@@ -30,14 +30,10 @@ const App: React.FunctionComponent = () => {
           // extract data
         const {
             Brand,
-            pages
+            Links
           } = data;
-        // repackage pages into the accepted MenuProps property
-        const menuPages = pages.map((page: { name: string, url_slug: string | undefined }) => ({
-          name: page.name, url_slug: page.url_slug
-        }));
         // load menuProps
-        setMenuProps({ Brand, pages: menuPages });
+        setMenuProps({ Brand, Links });
 
         // finish page load
         setLoading(false)

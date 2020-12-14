@@ -9,7 +9,7 @@ import './Menu.scss';
  * @param Brand   - {firstname: string, lastname: string}
  * @param pages   -  {name: string, url_slug: string}[]
  */
-const Menu = ({ Brand, pages }: MenuPropsModel) => {
+const Menu = ({ Brand, Links }: MenuPropsModel) => {
 
   const MenuBrand = (props: ToolbarProps) => (
     <React.Fragment>
@@ -25,9 +25,9 @@ const Menu = ({ Brand, pages }: MenuPropsModel) => {
   const MenuLinks = () => (
     <React.Fragment>
       {
-        pages.map((page, index) => (
-          <NavLink key={ index } to={ '/' + page.url_slug } className="MenuLink" activeClassName="MenuLinkActive">
-            { page.name }
+        Links.map((link, index) => (
+          <NavLink key={ index } to={ `/${link.path}` } className="MenuLink" activeClassName="MenuLinkActive">
+            { link.name }
           </NavLink>
         ))
       }

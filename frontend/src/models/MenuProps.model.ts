@@ -3,9 +3,9 @@ interface MenuPropsModel {
     firstname: string;
     lastname: string;
   };
-  pages: {
+  Links: {
     name: string;
-    url_slug: string;
+    path?: string;
   }[];
 }
 

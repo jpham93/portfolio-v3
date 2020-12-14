@@ -12,7 +12,7 @@ const Header = ({ title, header_img, height }: HeaderPropsModel) => {
 
   const headerStyle = imgUrl
     ? { backgroundImage: `url(${imgUrl})` }
-    : { background: '#0A3D62' };
+    : { backgroundColor: 'var(--primary-color)' };
 
   return(
     <div className="Header" style={ headerStyle }>
