@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import SocialLinksModel from '../../models/SocialLinks.model';
 import Header from '../../components/header/Header';
+import HomePropsModel from '../../models/HomeProps.model';
 
-const Home = () => {
+const Home = ({ GridLinks }: HomePropsModel) => {
 
     const [loading, setLoading]           = useState<boolean>(true);
     const [headerProps, setHeaderProps ]  = useState<{ title: string, header_img: any }|null>(null);
@@ -15,7 +16,6 @@ const Home = () => {
       fetch(`${process.env.REACT_APP_API_URL!}/home-page`)
         .then(res => res.json())
         .then(data => {
-          console.log(data);
           /**
            * LOAD PAGE CONTENT
            */
