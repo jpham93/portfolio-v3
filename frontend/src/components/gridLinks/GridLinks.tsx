@@ -21,7 +21,7 @@ const GridLinksView = (
     }
 
     return(
-      <div key={index} className={`p-col${colSize} p-sm-col-12`}>
+      <div key={index} className={`p-col-${colSize}`}>
         <span>{ menuLink.alt_title || menuLink.name }</span>
       </div>
     );
@@ -32,7 +32,7 @@ const GridLinksView = (
   });
 
   return(
-    <div className="p-grid">
+    <div className="p-grid GridLinks">
       { gridTiles }
       { socialLinkGrid }
     </div>
