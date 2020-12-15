@@ -40,10 +40,11 @@ const App: React.FunctionComponent = () => {
 
         // load grid Links for "Home" page
         const gLinks = Links.map((link: any) => ({
-          name: link.name,
-          alt_title: link.hasOwnProperty('alt_title') ? link.alt_title :  null,
-          path: link.hasOwnProperty('path') ? link.path : null,
-          link_img: link.hasOwnProperty('link_img') ? link.link_img : null
+          name:       link.name,
+          alt_title:  link.hasOwnProperty('alt_title') ? link.alt_title :  null,
+          path:       link.hasOwnProperty('path') ? link.path : null,
+          link_img:   link.hasOwnProperty('link_img') ? link.link_img : null,
+          color:      link.hasOwnProperty('color') ? link.color : null
         }));
         //@todo - refactor the nested arr inside object. This is due to a TS workaround for defining FC props...
         setGridLinks({ gridLinks: gLinks });

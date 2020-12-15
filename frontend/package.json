@@ -20,6 +20,7 @@
     "react-transition-group": "^4.4.1",
     "sass": "^1.30.0",
     "typescript": "^4.0.3",
+    "validate-color": "^2.1.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
