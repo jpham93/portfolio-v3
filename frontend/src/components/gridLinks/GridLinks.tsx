@@ -43,9 +43,9 @@ const GridLinksView = (
         const imgUrl = process.env.REACT_APP_API_URL + menuLink.link_img.url;
         backgroundStyle = { backgroundImage: `url(${imgUrl})`, background: 'inherit' };
       } else if (menuLink.color && validateColor(menuLink.color)) {
-        backgroundStyle = { background: menuLink.color };
+        backgroundStyle = { backgroundColor: menuLink.color };
       } else {
-        backgroundStyle = { background: defaultGridColors[index] };
+        backgroundStyle = { backgroundColor: defaultGridColors[index] };
       }
 
       return(
@@ -56,19 +56,21 @@ const GridLinksView = (
     });
 
   const socialLinkGridTiles = socialLinks.map((socialLink, index) => {
-    // Determine tile's background & content based on API values
-    let backgroundStyle: {};
+    // Determine tile's content based on API "icon" values
+    let backgroundStyle: {} = {}; // assign to allow for spread regardless of condition
     if (socialLink.icon) {
       const imgUrl = process.env.REACT_APP_API_URL + socialLink.icon.url
-      backgroundStyle = { backgroundImage: `url(${imgUrl})`, background: 'inherit' };
-    } else if (socialLink.color) {
-      backgroundStyle = { background: socialLink.color };
+    }
+
+    // Determine tile's background color based on API "color" values
+    if (socialLink.color && validateColor(socialLink.color)) {
+      backgroundStyle = { ...backgroundStyle, backgroundColor: socialLink.color };
     } else {
-      backgroundStyle = { background: defaultGridColors[index] };
+      backgroundStyle = { ...backgroundStyle, backgroundColor: defaultSocialGridColors[index] };
     }
 
     return(
-      <div key={index} className={`p-col-6 GridTile SocialGridTile`}>
+      <div key={index} className={`p-col-6 GridTile SocialGridTile`} style={ backgroundStyle }>
         <span>{socialLink.name}</span>
       </div>
     );
