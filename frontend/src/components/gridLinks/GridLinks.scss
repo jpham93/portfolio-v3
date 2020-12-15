@@ -10,15 +10,29 @@
         height: 290px;
         padding: 5px;
         border: 5px solid #fff;
+        position: relative;
+
+        .GridTileText {
+            position: absolute;
+            left: 25px;
+            bottom: 25px;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 600;
+            text-align: center;
+            text-shadow: -1px 1px 6px rgba(0, 0, 0, 0.37);
+            letter-spacing: 2px;
+            max-width: 2rem;
+        }
 
         &.SocialGridContainer {
             margin: 0;
             padding: 0;
-        }
 
-        &.SocialGridTile {
-            height: 50%;
-            border: none;
+            .SocialGridTile {
+                height: 50%;
+                border: none;
+            }
         }
     }
 }

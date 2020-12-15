@@ -50,7 +50,7 @@ const GridLinksView = (
 
       return(
         <div key={ index } className={ `p-col-${colSize} GridTile` } style={ backgroundStyle }>
-          <span>{ menuLink.alt_title || menuLink.name }</span>
+          <span className="GridTileText">{ menuLink.alt_title || menuLink.name }</span>
         </div>
       );
     });
