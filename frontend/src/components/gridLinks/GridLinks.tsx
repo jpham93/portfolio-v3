@@ -41,7 +41,7 @@ const GridLinksView = (
       let backgroundStyle: {};
       if (menuLink.link_img) {
         const imgUrl = process.env.REACT_APP_API_URL + menuLink.link_img.url;
-        backgroundStyle = { backgroundImage: `url(${imgUrl})`, background: 'inherit' };
+        backgroundStyle = { backgroundImage: `url(${imgUrl})` };
       } else if (menuLink.color && validateColor(menuLink.color)) {
         backgroundStyle = { backgroundColor: menuLink.color };
       } else {
@@ -65,6 +65,7 @@ const GridLinksView = (
 
     // Determine tile's background color based on API "color" values
     let backgroundStyle: {} = {}; // assign to allow for spread regardless of condition
+    console.log(socialLink.color);
     if (socialLink.color && validateColor(socialLink.color)) {
       backgroundStyle = { ...backgroundStyle, backgroundColor: socialLink.color };
     } else {

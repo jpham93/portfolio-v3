@@ -27,7 +27,8 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
           const sLinks = social_links.map((link: any) => ({
             name: link.name,
             url: link.url,
-            icon: link.icon
+            icon: link.icon,
+            color: link.color
           }));
           setGridLinkProps({gridLinks: gridLinks, socialLinks: sLinks});
 
