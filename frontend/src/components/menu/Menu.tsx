@@ -25,11 +25,15 @@ const Menu = ({ Brand, Links }: MenuPropsModel) => {
   const MenuLinks = () => (
     <React.Fragment>
       {
-        Links.map((link, index) => (
-          <NavLink key={ index } to={ `/${link.path}` } className="MenuLink" activeClassName="MenuLinkActive">
-            { link.name }
-          </NavLink>
-        ))
+        Links.map((link, index) => {
+          // consider for home path (no path)
+          const path = link.path ? link.path : '';
+          return (
+            <NavLink key={ index } to={ `/${path}` } className="MenuLink" activeClassName="MenuLinkActive">
+              { link.name }
+            </NavLink>
+          );
+        })
       }
     </React.Fragment>
   );

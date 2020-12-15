@@ -17,11 +17,13 @@
 
         .MenuLink {
             font-size: 0.8rem;
+            font-weight: 500;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 0.2rem;
             color: #fff;
             opacity: 0.7;
+            padding: 20px;
 
             &.MenuLinkActive {
                 opacity: 1;

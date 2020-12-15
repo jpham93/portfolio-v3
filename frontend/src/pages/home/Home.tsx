@@ -46,7 +46,7 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
           setLoading(false);
         });
 
-    }, []);
+    }, [gridLinks]);
 
     return(
       <>

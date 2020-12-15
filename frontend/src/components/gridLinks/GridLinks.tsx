@@ -65,7 +65,6 @@ const GridLinksView = (
 
     // Determine tile's background color based on API "color" values
     let backgroundStyle: {} = {}; // assign to allow for spread regardless of condition
-    console.log(socialLink.color);
     if (socialLink.color && validateColor(socialLink.color)) {
       backgroundStyle = { ...backgroundStyle, backgroundColor: socialLink.color };
     } else {
