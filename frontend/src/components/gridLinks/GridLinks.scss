@@ -1,12 +1,24 @@
 .GridContainer {
+    background: #fff;
+    padding: 5px;
     max-width: 940px;
     margin: auto;
+    position: relative;
+    top: -70px;
 
     .GridTile {
         height: 290px;
+        padding: 5px;
+        border: 5px solid #fff;
+
+        &.SocialGridContainer {
+            margin: 0;
+            padding: 0;
+        }
 
         &.SocialGridTile {
             height: 50%;
+            border: none;
         }
     }
 }

@@ -72,7 +72,7 @@ const GridLinksView = (
     }
 
     return(
-      <div key={index} className={`p-col-6 GridTile SocialGridTile`} style={ backgroundStyle }>
+      <div key={index} className="p-col-6 GridTile SocialGridTile" style={ backgroundStyle }>
         <span className="SocialLinkContent">{ content }</span>
       </div>
     );
@@ -81,7 +81,7 @@ const GridLinksView = (
   return(
     <div className="p-grid GridContainer">
       { gridTiles }
-      <div className="p-col-4 p-grid GridTile">
+      <div className="p-col-4 p-grid GridTile SocialGridContainer">
         { socialLinkGridTiles }
       </div>
     </div>
