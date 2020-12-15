@@ -24,6 +24,10 @@
     },
     "alt_title": {
       "type": "string"
+    },
+    "color": {
+      "type": "string",
+      "required": false
     }
   }
 }
