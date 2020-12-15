@@ -1,4 +1,12 @@
-.GridLinks {
+.GridContainer {
     max-width: 940px;
     margin: auto;
+
+    .GridTile {
+        height: 290px;
+
+        &.SocialGridTile {
+            height: 50%;
+        }
+    }
 }

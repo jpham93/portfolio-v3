@@ -10,31 +10,37 @@ const GridLinksView = (
   console.log(gridLinks);
   console.log(socialLinks);
 
-  const gridTiles = gridLinks.map((menuLink, index) => {
+  const gridTiles = gridLinks
+    .filter(menuLink => menuLink.name.toLowerCase() !== 'home') // remove home from the array
+    .map((menuLink, index) => {
 
-    let colSize = 3;
-    // special grid column sizes for first two links
-    if (index === 0) {
-      colSize = 5
-    } else if (index === 1) {
-      colSize = 4
-    }
+      let colSize = 4;
+      // special grid column sizes for first two links
+      if (index === 0) {
+        colSize = 7
+      } else if (index === 1) {
+        colSize = 5
+      }
 
-    return(
-      <div key={index} className={`p-col-${colSize}`}>
-        <span>{ menuLink.alt_title || menuLink.name }</span>
-      </div>
-    );
-  });
+      return(
+        <div key={index} className={`p-col-${colSize} GridTile`}>
+          <span>{ menuLink.alt_title || menuLink.name }</span>
+        </div>
+      );
+    });
 
-  const socialLinkGrid = socialLinks.map((socialLink, index) => {
-    return 0;
-  });
+  const socialLinkGridTiles = socialLinks.map((socialLink, index) => (
+    <div key={index} className={`p-col-6 GridTile SocialGridTile`}>
+      <span>{ socialLink.name }</span>
+    </div>
+  ));
 
   return(
-    <div className="p-grid GridLinks">
+    <div className="p-grid GridContainer">
       { gridTiles }
-      { socialLinkGrid }
+      <div className="p-col-4 p-grid GridTile">
+        { socialLinkGridTiles }
+      </div>
     </div>
   );
 };
