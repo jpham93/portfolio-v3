@@ -1,12 +1,15 @@
 interface MenuPropsModel {
   Brand: {
-    firstname: string;
-    lastname: string;
+    firstname:  string;
+    lastname:   string;
   };
   Links: {
-    name: string;
-    path?: string;
+    name:   string;
+    path?:  string;
   }[];
+  inFooter:   boolean;
+  color?:     string;
+  alt_color?: string;
 }
 
 export default MenuPropsModel;

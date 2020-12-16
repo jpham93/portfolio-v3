@@ -11,13 +11,23 @@ import Menu from './components/menu/Menu';
 import Home from './pages/home/Home';
 
 // Models
-import MenuPropsModel from './models/MenuProps.model';
 import GridLinksModel from './models/GridLinks.model';
 
 const App: React.FunctionComponent = () => {
 
   // State - Load data
-  const [menuProps, setMenuProps]   = useState<MenuPropsModel | null>(null);
+  const [menuProps, setMenuProps]   = useState<{
+    // Note, not using Model here, because isFooter is hardcoded in JSX
+    Brand : {
+      firstname: string, lastname: string
+    },
+    Links: {
+      name: string,
+      path?: string
+    }[],
+    color?: string,
+    alt_color?: string
+  } | null>(null);
   const [loading, setLoading]       = useState<boolean>(true);
   const [gridLinks, setGridLinks]   = useState<{ gridLinks: GridLinksModel[] }|null>(null);
 
@@ -32,11 +42,16 @@ const App: React.FunctionComponent = () => {
         // extract data
         const {
             Brand,
-            Links
+            Links,
           } = data;
 
         // load menuProps
-        setMenuProps({ Brand, Links });
+        setMenuProps({
+          Brand,
+          Links,
+          color:        data.hasOwnProperty('color') ? data.color : null,
+          alt_color:    data.hasOwnProperty('color') ? data.alt_color : null
+        });
 
         // load grid Links for "Home" page
         const gLinks = Links.map((link: any) => ({
@@ -64,12 +79,13 @@ const App: React.FunctionComponent = () => {
             <h2>Loading...</h2>
             :
             <>
-              <Menu {...menuProps!} />
+              <Menu {...{ ...menuProps!, inFooter: false }} />
               <Switch>
                 <Route exact path='/' >
                   <Home {...gridLinks!} />
                 </Route>
               </Switch>
+              <Menu {...{ ...menuProps!, inFooter: true }} />
             </>
         }
       </div>
