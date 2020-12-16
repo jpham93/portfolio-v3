@@ -72,7 +72,7 @@ const App: React.FunctionComponent = () => {
 
   return (
     <Router>
-      <div className="App">
+      <div className="App" id={ "OuterContainer" }>
         {
           loading
             ?
@@ -80,11 +80,13 @@ const App: React.FunctionComponent = () => {
             :
             <>
               <Menu {...{ ...menuProps!, inFooter: false }} />
+              <div id={ "PageWrap" }>
                 <Switch>
                   <Route exact path='/' >
                     <Home {...gridLinks!} />
                   </Route>
                 </Switch>
+              </div>
               <Menu {...{ ...menuProps!, inFooter: true }} />
             </>
         }

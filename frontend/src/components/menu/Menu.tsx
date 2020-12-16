@@ -1,11 +1,11 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './Menu.scss';
 import { Toolbar, ToolbarProps } from 'primereact/toolbar';
 import { NavLink } from 'react-router-dom';
-import { slide as ToggleMenu } from 'react-burger-menu';
 import MenuPropsModel from '../../models/MenuProps.model';
 import validateColor from 'validate-color';
 import { useResizeObserver } from '../../hooks/useResizeObserver';
+import ToggleMenu from '../toggleMenu/ToggleMenu';
 
 /**
  * Menu in header & footer. Displays links and branding.
@@ -43,10 +43,9 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
       </React.Fragment>
     );
 
-  // @ts-ignore @todo- fix. Type error for rect.width
   const FinalMenuLinks = width < 992
-    ? () => (<h1>Fake Menu</h1>) //(<ToggleMenu>{ MenuLinks() }</ToggleMenu>)
-    : MenuLinks
+    ? () => <ToggleMenu menuProps={{ pageWrapId:"PageWrap", outerContainerId:"OuterContainer" }} links={MenuLinks()} />
+    : MenuLinks;
 
   const MenuBrand = (props: ToolbarProps) => (
     <React.Fragment>
@@ -71,7 +70,7 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
       : { backgroundColor: 'inherit', position: 'absolute' };
 
   return(
-    <div className="MenuWrapper" style={ menuStyle } ref={ ref }>
+    <div className="MenuWrapper" id="PageWrap" style={ menuStyle } ref={ ref }>
       <Toolbar left={ MenuBrand } right={ FinalMenuLinks } className="Menu" />
     </div>
   );

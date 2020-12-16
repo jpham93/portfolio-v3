@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import './Header.scss';
 
-const Header = ({ title, header_img, height, headerRef }: HeaderPropsModel) => {
+const Header = ({ title, header_img, height }: HeaderPropsModel, ref: any) => {
 
   // check to make sure image exist from API
   let imgUrl = null;
@@ -21,10 +21,10 @@ const Header = ({ title, header_img, height, headerRef }: HeaderPropsModel) => {
   const headerStyle = { ...headerBackground, ...headerHeight };
 
   return(
-    <div className="Header" style={ headerStyle } ref={ headerRef }>
+    <div className="Header" style={ headerStyle } ref={ ref }>
       <h1 className="HeaderTitle">{ title }</h1>
     </div>
   );
 };
 
-export default Header;
+export default React.forwardRef(Header);

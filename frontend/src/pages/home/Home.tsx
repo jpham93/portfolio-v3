@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../components/header/Header';
 import GridLinksView from '../../components/gridLinks/GridLinks';
 import SocialLinksModel from '../../models/SocialLinks.model';
@@ -6,10 +6,11 @@ import GridLinksModel from '../../models/GridLinks.model';
 
 const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
 
+    const HEADER_HEIGHT = 400;
+
     const [loading, setLoading]             = useState<boolean>(true);
-    const [headerProps, setHeaderProps ]    = useState<{ title: string, header_img: any, height?: number, headerRef: any } | null>(null);
+    const [headerProps, setHeaderProps ]    = useState<{ title: string, header_img: any, height?: number } | null>(null);
     const [gridLinkProps, setGridLinkProps] = useState<{gridLinks: GridLinksModel[], socialLinks: SocialLinksModel[]} | null>(null);
-    const headerRef                         = useRef<HTMLDivElement>();
 
     useEffect(() => {
       /**
@@ -42,18 +43,15 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
             title: header_title,
             header_img: headerImage,
             height: 400, // hardcoded for "Home" page. May apply to other pages
-            headerRef
           });
-
-          // indicate load is finished
           setLoading(false);
         });
 
-    }, [gridLinks, headerProps]);
+    }, []);
 
-    // adjust main content dynamically
+    // adjust main content based on starting screen size
     const mainStyle = {
-      minHeight: `calc(100vh - var(--menu-height) - ${headerRef.current ? headerRef.current.offsetHeight : 0}px)`
+      minHeight: `calc(100vh - var(--menu-height) - ${HEADER_HEIGHT}px)`
     };
 
     return(
@@ -65,7 +63,7 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
             :
             <>
               <Header {...headerProps!} />
-              <div className="Main" style={ headerRef.current ? mainStyle : { height: 'auto' } }>
+              <div className="Main" style={ mainStyle }>
                 <GridLinksView {...gridLinkProps!} />
               </div>
             </>

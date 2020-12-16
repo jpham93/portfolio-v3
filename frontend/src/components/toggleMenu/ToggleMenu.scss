@@ -1,0 +1,100 @@
+/**
+Please refer to https://github.com/negomi/react-burger-menu for styling guide
+ */
+
+/* Burger Button (Toggle) */
+.bm-burger-button {
+    position: absolute;
+    color: #fff;
+    width: 18px;
+    height: 13px;
+    right: 20px;
+    top: 20px;
+
+    span {
+
+        .bm-burger-bars {
+            background: white;
+            opacity : 1 !important;
+            height: 15% !important;
+        }
+
+        .bm-burger-bars-hover {
+            background-color:      var(--light-grey);
+            background-blend-mode: multiply;
+        }
+    }
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    box-shadow: var(--light-box-shadow);
+
+    .bm-menu {
+        background: var(--secondary-color);
+
+        .bm-item-list {
+            display: flex;
+            flex-direction: column;
+
+            .MenuLink {
+                border-bottom: var(--thin-white);
+            }
+        }
+    }
+}
+
+
+.bm-item {
+    display: inline-block;
+
+    /* Our sidebar item styling */
+    text-decoration: none;
+    margin-bottom: 10px;
+    color: #d1d1d1;
+    transition: color 0.2s;
+}
+
+/* Change color on hover */
+.bm-item:hover {
+    color: white;
+}
+
+/* The rest copied directly from react-burger-menu docs */
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+    background: #373a47;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+    height: 24px;
+    width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+    background: #bdc3c7;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+    fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+    color: #b8b7ad;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+}
