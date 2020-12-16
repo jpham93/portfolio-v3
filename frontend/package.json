@@ -19,6 +19,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-transition-group": "^4.4.1",
+    "resize-observer-polyfill": "^1.5.1",
     "sass": "^1.30.0",
     "typescript": "^4.0.3",
     "validate-color": "^2.1.1",

@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import './Menu.scss';
 import { Toolbar, ToolbarProps } from 'primereact/toolbar';
 import { NavLink } from 'react-router-dom';
 import { slide as ToggleMenu } from 'react-burger-menu';
 import MenuPropsModel from '../../models/MenuProps.model';
 import validateColor from 'validate-color';
+import { useResizeObserver } from '../../hooks/useResizeObserver';
 
 /**
  * Menu in header & footer. Displays links and branding.
@@ -16,18 +17,17 @@ import validateColor from 'validate-color';
  */
 const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
 
-  // @see - https://reactjs.org/docs/hooks-reference.html#usecallback
-  const [width, setWidth] = useState(0);
+  // Dynamic size tracking. @see - https://codesandbox.io/s/zw8kylol8m?file=/src/index.tsx:537-602 &
+  const ref = useRef(null);
+  const [dimensions, setDimensions] = useState({ top: 0, left: 0 });
 
-  const measuredRef = useCallback(node => {
-    if (node !== null) {
-      setWidth(node.getBoundingClientRect().width);
-    }
-  }, [width]);
+  // Optional callback to access the full DOMRect object if required.
+  const optionalCallback = (entry: DOMRectReadOnly) =>
+    setDimensions({ top: entry.x, left: entry.left });
 
-  const MenuLinks = width < 479
-    ? () => (<ToggleMenu></ToggleMenu>)
-    : () => (
+  const [width, height] = useResizeObserver(ref, optionalCallback);
+
+  const MenuLinks = () => (
       <React.Fragment>
         {
           Links.map((link, index) => {
@@ -42,6 +42,11 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
         }
       </React.Fragment>
     );
+
+  // @ts-ignore @todo- fix. Type error for rect.width
+  const FinalMenuLinks = width < 992
+    ? () => (<h1>Fake Menu</h1>) //(<ToggleMenu>{ MenuLinks() }</ToggleMenu>)
+    : MenuLinks
 
   const MenuBrand = (props: ToolbarProps) => (
     <React.Fragment>
@@ -66,8 +71,8 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
       : { backgroundColor: 'inherit', position: 'absolute' };
 
   return(
-    <div className="MenuWrapper" style={ menuStyle } ref={ measuredRef }>
-      <Toolbar left={ MenuBrand } right={ MenuLinks } className="Menu" />
+    <div className="MenuWrapper" style={ menuStyle } ref={ ref }>
+      <Toolbar left={ MenuBrand } right={ FinalMenuLinks } className="Menu" />
     </div>
   );
 };
