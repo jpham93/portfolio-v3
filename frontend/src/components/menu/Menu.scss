@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .MenuWrapper {
     top: 0;
     width: 100%;
@@ -27,6 +29,26 @@
 
             &.MenuLinkActive {
                 opacity: 1;
+            }
+        }
+    }
+
+    &.Footer {
+        @media (max-width: $tablet-breakpoint) {
+            height: 100%;
+        }
+
+        .Menu {
+            @media (max-width: $tablet-breakpoint) {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .p-toolbar-group-right {
+                @media (max-width: $mobile-portrait-breakpoint) {
+                    display:        flex;
+                    flex-direction: column;
+                }
             }
         }
     }

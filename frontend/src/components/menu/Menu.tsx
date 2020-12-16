@@ -43,9 +43,12 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
       </React.Fragment>
     );
 
-  const FinalMenuLinks = width < 992
+  // Special Top Menu Link configuration()
+  const TopMenuLinks = width < 992
     ? () => <ToggleMenu menuProps={{ pageWrapId:"PageWrap", outerContainerId:"OuterContainer" }} links={MenuLinks()} />
     : MenuLinks;
+
+  const BottomMenuLinks = 0;
 
   const MenuBrand = (props: ToolbarProps) => (
     <React.Fragment>
@@ -70,8 +73,8 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
       : { backgroundColor: 'inherit', position: 'absolute' };
 
   return(
-    <div className="MenuWrapper" id="PageWrap" style={ menuStyle } ref={ ref }>
-      <Toolbar left={ MenuBrand } right={ FinalMenuLinks } className="Menu" />
+    <div className={`MenuWrapper ${inFooter && 'Footer'}`} id="PageWrap" style={ menuStyle } ref={ ref }>
+      <Toolbar left={ MenuBrand } right={ !inFooter ? TopMenuLinks : MenuLinks } className="Menu Footer" />
     </div>
   );
 };

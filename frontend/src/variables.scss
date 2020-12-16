@@ -1,8 +1,14 @@
+// SCSS (i.e. for media queries)
+$tablet-breakpoint:            992px;
+$mobile-landscape-breakpoint:  768px;
+$mobile-portrait-breakpoint:   479px;
+
+// CSS VARIABLES
 :root {
     /** Screen Sizes **/
-    --tablet-breakpoint:            992px;
-    --mobile-landscape-breakpoint:  768px;
-    --mobile-portrait-breakpoint:   479px;
+    --tablet-breakpoint:            $tablet-breakpoint;
+    --mobile-landscape-breakpoint:  $mobile-landscape-breakpoint;
+    --mobile-portrait-breakpoint:   $mobile-portrait-breakpoint;
 
     /** Colors **/
     --primary-color:        #0A3D62 !important;
