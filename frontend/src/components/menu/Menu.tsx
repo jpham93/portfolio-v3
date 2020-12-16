@@ -1,8 +1,9 @@
-import React, { CSSProperties } from 'react';
-import MenuPropsModel from '../../models/MenuProps.model';
+import React, { useCallback, useState } from 'react';
+import './Menu.scss';
 import { Toolbar, ToolbarProps } from 'primereact/toolbar';
 import { NavLink } from 'react-router-dom';
-import './Menu.scss';
+import { slide as ToggleMenu } from 'react-burger-menu';
+import MenuPropsModel from '../../models/MenuProps.model';
 import validateColor from 'validate-color';
 
 /**
@@ -15,6 +16,33 @@ import validateColor from 'validate-color';
  */
 const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
 
+  // @see - https://reactjs.org/docs/hooks-reference.html#usecallback
+  const [width, setWidth] = useState(0);
+
+  const measuredRef = useCallback(node => {
+    if (node !== null) {
+      setWidth(node.getBoundingClientRect().width);
+    }
+  }, [width]);
+
+  const MenuLinks = width < 479
+    ? () => (<ToggleMenu></ToggleMenu>)
+    : () => (
+      <React.Fragment>
+        {
+          Links.map((link, index) => {
+            // consider for home path (no value)
+            const path = link.path ? link.path : '';
+            return (
+              <NavLink key={ index } to={ `/${path}` } className="MenuLink" activeClassName="MenuLinkActive">
+                { link.name }
+              </NavLink>
+            );
+          })
+        }
+      </React.Fragment>
+    );
+
   const MenuBrand = (props: ToolbarProps) => (
     <React.Fragment>
       <span className="MenuBrand">
@@ -23,22 +51,6 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
           { Brand.lastname.toUpperCase() }
         </strong>
       </span>
-    </React.Fragment>
-  );
-
-  const MenuLinks = () => (
-    <React.Fragment>
-      {
-        Links.map((link, index) => {
-          // consider for home path (no value)
-          const path = link.path ? link.path : '';
-          return (
-            <NavLink key={ index } to={ `/${path}` } className="MenuLink" activeClassName="MenuLinkActive">
-              { link.name }
-            </NavLink>
-          );
-        })
-      }
     </React.Fragment>
   );
 
@@ -54,7 +66,7 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
       : { backgroundColor: 'inherit', position: 'absolute' };
 
   return(
-    <div className="MenuWrapper" style={ menuStyle }>
+    <div className="MenuWrapper" style={ menuStyle } ref={ measuredRef }>
       <Toolbar left={ MenuBrand } right={ MenuLinks } className="Menu" />
     </div>
   );

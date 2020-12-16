@@ -1,6 +1,8 @@
 :root {
     /** Screen Sizes **/
-    --tablet-breakpoint:    768px;
+    --tablet-breakpoint:            992px;
+    --mobile-landscape-breakpoint:  768px;
+    --mobile-portrait-breakpoint:   479px;
 
     /** Colors **/
     --primary-color:        #0A3D62 !important;
