@@ -53,8 +53,6 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
       ? { backgroundColor: color, position: 'absolute' }
       : { backgroundColor: 'inherit', position: 'absolute' };
 
-  console.log(inFooter);
-
   return(
     <div className="MenuWrapper" style={ menuStyle }>
       <Toolbar left={ MenuBrand } right={ MenuLinks } className="Menu" />

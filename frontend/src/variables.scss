@@ -1,8 +1,11 @@
 :root {
-    /** Screen Sizes */
+    /** Screen Sizes **/
     --tablet-breakpoint:    768px;
 
     /** Colors **/
     --primary-color:        #0A3D62 !important;
     --secondary-color:      #2a2a2a !important;
+
+    /** Component Sizes **/
+    --menu-height:          90px;
 }

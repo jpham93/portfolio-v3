@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from '../../components/header/Header';
 import GridLinksView from '../../components/gridLinks/GridLinks';
 import SocialLinksModel from '../../models/SocialLinks.model';
@@ -6,9 +6,10 @@ import GridLinksModel from '../../models/GridLinks.model';
 
 const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
 
-    const [loading, setLoading]           = useState<boolean>(true);
-    const [headerProps, setHeaderProps ]  = useState<{ title: string, header_img: any } | null>(null);
+    const [loading, setLoading]             = useState<boolean>(true);
+    const [headerProps, setHeaderProps ]    = useState<{ title: string, header_img: any, height?: number, headerRef: any } | null>(null);
     const [gridLinkProps, setGridLinkProps] = useState<{gridLinks: GridLinksModel[], socialLinks: SocialLinksModel[]} | null>(null);
+    const headerRef                         = useRef<HTMLDivElement>();
 
     useEffect(() => {
       /**
@@ -39,14 +40,21 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
           }
           setHeaderProps({
             title: header_title,
-            header_img: headerImage
+            header_img: headerImage,
+            height: 400, // hardcoded for "Home" page. May apply to other pages
+            headerRef
           });
 
           // indicate load is finished
           setLoading(false);
         });
 
-    }, [gridLinks]);
+    }, [gridLinks, headerProps]);
+
+    // adjust main content dynamically
+    const mainStyle = {
+      minHeight: `calc(100vh - var(--menu-height) - ${headerRef.current ? headerRef.current.offsetHeight : 0}px)`
+    };
 
     return(
       <>
@@ -57,7 +65,9 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
             :
             <>
               <Header {...headerProps!} />
-              <GridLinksView {...gridLinkProps!} />
+              <div className="Main" style={ headerRef.current ? mainStyle : { height: 'auto' } }>
+                <GridLinksView {...gridLinkProps!} />
+              </div>
             </>
         }
       </>

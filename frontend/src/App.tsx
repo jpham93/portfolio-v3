@@ -80,11 +80,11 @@ const App: React.FunctionComponent = () => {
             :
             <>
               <Menu {...{ ...menuProps!, inFooter: false }} />
-              <Switch>
-                <Route exact path='/' >
-                  <Home {...gridLinks!} />
-                </Route>
-              </Switch>
+                <Switch>
+                  <Route exact path='/' >
+                    <Home {...gridLinks!} />
+                  </Route>
+                </Switch>
               <Menu {...{ ...menuProps!, inFooter: true }} />
             </>
         }
