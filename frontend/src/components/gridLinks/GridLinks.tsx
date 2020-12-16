@@ -49,7 +49,7 @@ const GridLinksView = (
       }
 
       return(
-        <div key={ index } className={ `p-col-${colSize} GridTile` } style={ backgroundStyle }>
+        <div key={ index } className={ `p-md-${colSize} p-col-12 GridTile` } style={ backgroundStyle }>
           <span className="GridTileText">{ menuLink.alt_title || menuLink.name }</span>
         </div>
       );
@@ -79,9 +79,9 @@ const GridLinksView = (
   });
 
   return(
-    <div className="p-grid GridContainer">
+    <div className="p-grid p-col-12 GridContainer">
       { gridTiles }
-      <div className="p-col-4 p-grid GridTile SocialGridContainer">
+      <div className="p-md-4 p-col-12 p-grid GridTile SocialGridContainer">
         { socialLinkGridTiles }
       </div>
     </div>
