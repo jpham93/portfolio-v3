@@ -37,19 +37,25 @@ const GridLinksView = (
         colSize = 5
       }
 
-      // Determine tile's background based on API values (Order: image, given color, default color)
+      // Determine tile's background color based on API values
       let backgroundStyle: {};
-      if (menuLink.link_img) {
-        const imgUrl = process.env.REACT_APP_API_URL + menuLink.link_img.url;
-        backgroundStyle = { backgroundImage: `url(${imgUrl})` };
-      } else if (menuLink.color && validateColor(menuLink.color)) {
+      if (menuLink.color && validateColor(menuLink.color)) {
         backgroundStyle = { backgroundColor: menuLink.color };
       } else {
         backgroundStyle = { backgroundColor: defaultGridColors[index] };
       }
 
+      // Determine background image
+      let backgroundImage: {} = {};
+      if (menuLink.link_img) {
+        const imgUrl = process.env.REACT_APP_API_URL + menuLink.link_img.url;
+        backgroundImage = { backgroundImage: `url(${imgUrl})` };
+        backgroundStyle = {};
+      }
+
       return(
         <div key={ index } className={ `p-md-${colSize} p-col-12 GridTile` } style={ backgroundStyle }>
+          <div className="GridTileImg" style={ backgroundImage }></div>
           <span className="GridTileText">{ menuLink.alt_title || menuLink.name }</span>
         </div>
       );

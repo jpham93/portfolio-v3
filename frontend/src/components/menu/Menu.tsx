@@ -48,8 +48,6 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
     ? () => <ToggleMenu menuProps={{ pageWrapId:"PageWrap", outerContainerId:"OuterContainer" }} links={MenuLinks()} />
     : MenuLinks;
 
-  const BottomMenuLinks = 0;
-
   const MenuBrand = (props: ToolbarProps) => (
     <React.Fragment>
       <span className="MenuBrand">
