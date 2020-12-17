@@ -25,7 +25,10 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
             // extract data
           const { header_title, social_links } = data;
 
-          // @TODO - narrow down retrieval with future GraphQL implementation
+          /**
+           * GridLinkView props
+           */
+            // @TODO - narrow down retrieval with future GraphQL implementation
           const sLinks = social_links.map((link: any) => ({
             name: link.name,
             url: link.url,
@@ -34,6 +37,9 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
           }));
           setGridLinkProps({gridLinks: gridLinks, socialLinks: sLinks});
 
+          /**
+           * Header Props
+           */
           // set all state (if it applicable)
           let headerImage = null;
           if (data.header_img) {

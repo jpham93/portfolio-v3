@@ -78,8 +78,6 @@ const GridLinksView = (
       backgroundStyle = { ...backgroundStyle, backgroundColor: defaultSocialGridColors[index] };
     }
 
-    console.log(socialLink);
-
     return(
       <a href={ `${socialLink.url}` } target="_blank" key={ index } className="p-col-6 GridTile SocialGridTile" style={ backgroundStyle }>
         <span className="SocialLinkContent">{ content }</span>

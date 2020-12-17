@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
 // Custom Components
 import Menu from './components/menu/Menu';
 import Home from './pages/home/Home';
+import About from './pages/about/About';
 
 // Models
 import GridLinksModel from './models/GridLinks.model';
@@ -84,6 +85,9 @@ const App: React.FunctionComponent = () => {
                 <Switch>
                   <Route exact path='/' >
                     <Home {...gridLinks!} />
+                  </Route>
+                  <Route path='/about' >
+                    <About />
                   </Route>
                 </Switch>
               </div>
