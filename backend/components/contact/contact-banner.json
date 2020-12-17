@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_contact_contact_banners",
+  "info": {
+    "name": "Contact Banner",
+    "icon": "phone",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "string",
+      "required": true
+    },
+    "button_text": {
+      "type": "string",
+      "required": true
+    },
+    "color": {
+      "type": "string"
+    },
+    "alt_color": {
+      "type": "string"
+    }
+  }
+}
