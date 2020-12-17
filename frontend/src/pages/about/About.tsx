@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './About.scss';
 import Header from '../../components/header/Header';
 import HeaderPropsModel from '../../models/HeaderProps.model';
+import ReactMarkdown from 'react-markdown';
 
 const About = (props: any) => {
 
   const [loading, setLoading]           = useState(true);
-  const [headerProps, setHeaderProps]   = useState<{ title: string, header_img?: any, height?: number, color?: string } | null>();
-  const [pageContent, setPageContent]           = useState(null);
+  const [headerProps, setHeaderProps]   = useState<{ title: string, header_img?: any, height?: number, color?: string, isHome: boolean } | null>(null);
+  const [pageContent, setPageContent]   = useState<string>("");
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/about-page`)
@@ -15,7 +16,7 @@ const About = (props: any) => {
       .then(data => {
         const { header_title, content } = data;
 
-        let hProps: HeaderPropsModel = { title: header_title };
+        let hProps: HeaderPropsModel = { title: header_title, isHome: false };
 
         // check if there is a header image
         if (data.hasOwnProperty('header_img')) {
@@ -44,7 +45,9 @@ const About = (props: any) => {
           <>
             <Header {...headerProps!} />
             <div className="AboutContent">
-              { pageContent }
+              <ReactMarkdown>
+                { pageContent! }
+              </ReactMarkdown>
             </div>
           </>
       }

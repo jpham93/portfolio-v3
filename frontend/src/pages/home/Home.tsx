@@ -9,7 +9,7 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
     const HEADER_HEIGHT = 400;
 
     const [loading, setLoading]             = useState<boolean>(true);
-    const [headerProps, setHeaderProps ]    = useState<{ title: string, header_img: any, height?: number } | null>(null);
+    const [headerProps, setHeaderProps ]    = useState<{ title: string, header_img: any, height?: number, isHome: boolean } | null>(null);
     const [gridLinkProps, setGridLinkProps] = useState<{gridLinks: GridLinksModel[], socialLinks: SocialLinksModel[]} | null>(null);
 
     useEffect(() => {
@@ -48,7 +48,8 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
           setHeaderProps({
             title: header_title,
             header_img: headerImage,
-            height: 400, // hardcoded for "Home" page. May apply to other pages
+            height: 400, // hardcoded for "Home" page. May apply to other pages,
+            isHome: true
           });
           setLoading(false);
         });

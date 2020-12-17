@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import './Header.scss';
 
-const Header = ({ title, header_img, height }: HeaderPropsModel) => {
+const Header = ({ title, header_img, height, isHome }: HeaderPropsModel) => {
 
   // check to make sure image exist from API
   let imgUrl = null;
@@ -20,9 +20,19 @@ const Header = ({ title, header_img, height }: HeaderPropsModel) => {
 
   const headerStyle = { ...headerBackground, ...headerHeight };
 
+  const titleMargin = !height  // if there is no custom height,
+    ? { marginTop: '2rem' }
+    : {};
+
+  const titleFontSize = isHome
+    ? { fontSize: 'var(--header-font-size-home)', fontWeight: 300 }
+    : { fontSize: 'var(--header-font-size-default)', fontWeight: 200 };
+
+  const titleStyle = { ...titleMargin, ...titleFontSize };
+
   return(
     <div className="Header" style={ headerStyle }>
-      <h1 className="HeaderTitle">{ title }</h1>
+      <h1 className="HeaderTitle" style={ titleStyle }>{ title }</h1>
     </div>
   );
 };
