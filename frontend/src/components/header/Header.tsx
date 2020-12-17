@@ -3,7 +3,7 @@ import HeaderPropsModel from '../../models/HeaderProps.model';
 import './Header.scss';
 import validateColor from 'validate-color';
 
-const Header = ({ title, header_img, height, isHome, header_color }: HeaderPropsModel) => {
+const Header = ({ title, header_img, headerType, header_color }: HeaderPropsModel) => {
 
   // check to make sure image exist from API
   let imgUrl = null;
@@ -15,9 +15,7 @@ const Header = ({ title, header_img, height, isHome, header_color }: HeaderProps
     ? { backgroundImage: `url(${imgUrl})` }
     : { backgroundColor: 'var(--primary-color)' };
 
-  const headerHeight = height
-    ? { height: `${height}px` }
-    : { height: '275px' };
+  const headerHeight = { height: `var(--header-height-${headerType})` };
 
   const headerColor = header_color && validateColor(header_color)
     ? { backgroundColor: header_color }
@@ -25,11 +23,11 @@ const Header = ({ title, header_img, height, isHome, header_color }: HeaderProps
 
   const headerStyle = { ...headerBackground, ...headerHeight, ...headerColor };
 
-  const titleMargin = !height  // if there is no custom height,
+  const titleMargin = headerType === 'default'
     ? { marginTop: '2.5rem' }
     : {};
 
-  const titleFontSize = isHome
+  const titleFontSize = headerType === 'large'
     ? { fontSize: 'var(--header-font-size-home)', fontWeight: 300 }
     : { fontSize: 'var(--header-font-size-default)', fontWeight: 200 };
 
@@ -37,7 +35,7 @@ const Header = ({ title, header_img, height, isHome, header_color }: HeaderProps
 
   return(
     <div className="Header" style={ headerStyle }>
-      <h1 className="HeaderTitle" style={ titleStyle }>{ isHome ? title : title.toUpperCase() }</h1>
+      <h1 className="HeaderTitle" style={ titleStyle }>{ headerType === 'large' ? title : title.toUpperCase() }</h1>
     </div>
   );
 };

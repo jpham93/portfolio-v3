@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './About.scss';
 import Header from '../../components/header/Header';
 import HeaderPropsModel from '../../models/HeaderProps.model';
@@ -7,16 +7,19 @@ import ReactMarkdown from 'react-markdown';
 const About = (props: any) => {
 
   const [loading, setLoading]           = useState(true);
-  const [headerProps, setHeaderProps]   = useState<{ title: string, header_img?: any, height?: number, color?: string, isHome: boolean } | null>(null);
+  const [headerProps, setHeaderProps]   = useState<{ title: string, header_img?: any, headerType: 'large' | 'default', color?: string } | null>(null);
   const [pageContent, setPageContent]   = useState<string>("");
 
+  /**
+   * LOAD ABOUT CONTENT
+   */
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/about-page`)
       .then(res => res.json())
       .then(data => {
         const { header_title, content } = data;
 
-        let hProps: HeaderPropsModel = { title: header_title, isHome: false };
+        let hProps: HeaderPropsModel = { title: header_title, headerType: 'default' };
 
         // check if there is a header image
         if (data.hasOwnProperty('header_img')) {
@@ -24,7 +27,7 @@ const About = (props: any) => {
         }
 
         // check if there is a header color
-        if (data.hasOwnProperty('color')) {
+        if (data.hasOwnProperty('header_color')) {
           hProps.header_color = data.header_color;
         }
 
@@ -33,7 +36,7 @@ const About = (props: any) => {
 
         setLoading(false);
       });
-  }, [])
+  }, []);
 
   return (
     <>

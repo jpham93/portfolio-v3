@@ -4,4 +4,11 @@
     padding-bottom: 5rem;
     max-width: var(--page-content-width);
     margin: auto;
+    min-height: calc(100vh - var(--header-height-default) - var(--menu-height));
+
+    img {
+        width: 400px;
+        max-width: 100%;
+        height: auto;
+    }
 }

@@ -1,9 +1,8 @@
 interface HeaderPropsModel {
   title: string;
+  headerType: 'large' | 'default';
   header_img?: any;
-  height?: number;
   header_color?: string;
-  isHome: boolean;
 }
 
 export default HeaderPropsModel;
