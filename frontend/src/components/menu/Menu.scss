@@ -1,0 +1,61 @@
+@import '../../variables';
+
+.MenuWrapper {
+    top: 0;
+    width: 100%;
+    height: var(--menu-height);
+
+    .Menu {
+        max-width: 940px;
+        margin: auto;
+        border: none;
+        background: rgba(0, 0, 0, 0);
+
+        .MenuBrand {
+            font-size: 2rem;
+            font-weight: 300;
+            color: #fff;
+        }
+
+        .MenuLink {
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            color: #fff;
+            padding: 20px;
+            opacity: 0.6;
+            transition: opacity 0.4s ease-out;
+
+            &.MenuLinkActive {
+                opacity: 1;
+            }
+
+            &:hover {
+                opacity: 1;
+                transition: opacity 0.4s ease-in;
+            }
+        }
+    }
+
+    &.Footer {
+        @media (max-width: $tablet-breakpoint) {
+            height: 100%;
+        }
+
+        .Menu {
+            @media (max-width: $tablet-breakpoint) {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .p-toolbar-group-right {
+                @media (max-width: $mobile-portrait-breakpoint) {
+                    display:        flex;
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+}

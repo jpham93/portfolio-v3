@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "menus",
+  "info": {
+    "name": "Menu",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Brand": {
+      "type": "component",
+      "repeatable": false,
+      "component": "branding.brand",
+      "required": true
+    },
+    "Links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.page-links"
+    },
+    "color": {
+      "type": "string"
+    },
+    "alt_color": {
+      "type": "string"
+    }
+  }
+}

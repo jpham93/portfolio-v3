@@ -10,14 +10,19 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
     "primereact": "^5.0.2",
     "react": "^17.0.1",
+    "react-burger-menu": "^3.0.2",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-transition-group": "^4.4.1",
+    "resize-observer-polyfill": "^1.5.1",
+    "sass": "^1.30.0",
     "typescript": "^4.0.3",
+    "validate-color": "^2.1.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -43,5 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-burger-menu": "^2.6.2",
+    "@types/react-router-dom": "^5.1.6"
   }
 }

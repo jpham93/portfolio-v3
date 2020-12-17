@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_branding_brands",
+  "info": {
+    "name": "Brand",
+    "icon": "ad"
+  },
+  "options": {},
+  "attributes": {
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    }
+  }
+}

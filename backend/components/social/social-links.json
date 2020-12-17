@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_social_social_links",
+  "info": {
+    "name": "social_links",
+    "icon": "hand-point-right",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "icon": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "url": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    }
+  }
+}

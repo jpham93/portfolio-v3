@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "blogs",
+  "collectionName": "projects",
   "info": {
-    "name": "Blog"
+    "name": "Project"
   },
   "options": {
     "increments": true,
@@ -12,13 +12,12 @@
   "attributes": {
     "title": {
       "type": "string",
-      "private": false,
       "required": true,
       "unique": true,
       "maxLength": 120
     },
     "main_image": {
-      "model": "file",
+      "collection": "file",
       "via": "related",
       "allowedTypes": [
         "images"
@@ -26,24 +25,30 @@
       "plugin": "upload",
       "required": false
     },
-    "body": {
+    "description": {
       "type": "richtext",
       "required": true
     },
-    "blog_categories": {
-      "via": "blogs",
-      "collection": "blog-category",
-      "dominant": true
+    "example_media": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files",
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
     },
-    "author": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "blog"
-    },
-    "blog_id": {
+    "project_id": {
       "type": "uid",
       "targetField": "title",
       "required": true
+    },
+    "project_categories": {
+      "collection": "project-category",
+      "via": "projects",
+      "dominant": true
     }
   }
 }
