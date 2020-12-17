@@ -54,6 +54,12 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                transition: opacity 0.3s ease;
+
+                &:hover {
+                    opacity: 0.7;
+                    transition: opacity 0.3s ease-in;
+                }
 
                 .SocialLinkContent {
                     color: #fff;
