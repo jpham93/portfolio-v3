@@ -3,6 +3,7 @@ import './GridLinks.scss';
 import SocialLinksModel from '../../models/SocialLinks.model';
 import GridLinksModel from '../../models/GridLinks.model';
 import validateColor from 'validate-color';
+import { NavLink } from 'react-router-dom';
 
 const defaultGridColors = [
   '#CD5C5C',
@@ -50,14 +51,14 @@ const GridLinksView = (
       if (menuLink.link_img) {
         const imgUrl = process.env.REACT_APP_API_URL + menuLink.link_img.url;
         backgroundImage = { backgroundImage: `url(${imgUrl})` };
-        backgroundStyle = {};
+        backgroundStyle = { backgroundColor: '#fff' };
       }
 
       return(
-        <div key={ index } className={ `p-md-${colSize} p-col-12 GridTile` } style={ backgroundStyle }>
-          <div className="GridTileImg" style={ backgroundImage }></div>
+        <NavLink to={ `/${menuLink.path}` } key={ index } className={ `p-md-${colSize} p-col-12 GridTile` } style={ backgroundStyle }>
+          <div className="GridTileImg" style={backgroundImage} />
           <span className="GridTileText">{ menuLink.alt_title || menuLink.name }</span>
-        </div>
+        </NavLink>
       );
     });
 
@@ -77,10 +78,12 @@ const GridLinksView = (
       backgroundStyle = { ...backgroundStyle, backgroundColor: defaultSocialGridColors[index] };
     }
 
+    console.log(socialLink);
+
     return(
-      <div key={index} className="p-col-6 GridTile SocialGridTile" style={ backgroundStyle }>
+      <a href={ `${socialLink.url}` } target="_blank" key={ index } className="p-col-6 GridTile SocialGridTile" style={ backgroundStyle }>
         <span className="SocialLinkContent">{ content }</span>
-      </div>
+      </a>
     );
   });
 
