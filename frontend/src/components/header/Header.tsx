@@ -37,7 +37,7 @@ const Header = ({ title, header_img, height, isHome, header_color }: HeaderProps
 
   return(
     <div className="Header" style={ headerStyle }>
-      <h1 className="HeaderTitle" style={ titleStyle }>{ title }</h1>
+      <h1 className="HeaderTitle" style={ titleStyle }>{ isHome ? title : title.toUpperCase() }</h1>
     </div>
   );
 };
