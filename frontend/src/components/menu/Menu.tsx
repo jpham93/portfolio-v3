@@ -34,7 +34,7 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
             // consider for home path (no value)
             const path = link.path ? link.path : '';
             return (
-              <NavLink key={ index } to={ `/${path}` } className="MenuLink" activeClassName="MenuLinkActive">
+              <NavLink exact key={ index } to={ `/${path}` } className="MenuLink" activeClassName="MenuLinkActive">
                 { link.name }
               </NavLink>
             );
