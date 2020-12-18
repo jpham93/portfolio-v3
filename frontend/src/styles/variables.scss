@@ -1,4 +1,5 @@
 // SCSS (i.e. for media queries)
+$page-breakpoint:              1024px;
 $tablet-breakpoint:            992px;
 $mobile-landscape-breakpoint:  768px;
 $mobile-portrait-breakpoint:   479px;
@@ -18,6 +19,7 @@ $mobile-portrait-breakpoint:   479px;
     /** Font Sizes **/
     --header-font-size-home:    3.5rem;
     --header-font-size-default: 2.5rem;
+    --header-font-size-mobile:  2rem;
 
     /** Component Sizes **/
     --menu-height:              90px;

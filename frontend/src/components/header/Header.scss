@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .Header {
     background-color: rgba(0,0,0,0.25);
     background-blend-mode: multiply;
@@ -10,5 +12,13 @@
     .HeaderTitle {
         margin: 0;
         color: #fff;
+        text-align: center;
+
+        @media (max-width: $page-breakpoint) {
+
+            & {
+                font-size: var(--header-font-size-default) !important;
+            }
+        }
     }
 }
