@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import './About.scss';
 import Header from '../../components/header/Header';
 import HeaderPropsModel from '../../models/HeaderProps.model';

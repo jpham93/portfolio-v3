@@ -17,7 +17,7 @@ const Header = ({ title, header_img, headerType, header_color }: HeaderPropsMode
 
   const headerHeight = { height: `var(--header-height-${headerType})` };
 
-  const headerColor = header_color && validateColor(header_color)
+  const headerColor = !header_img && header_color && validateColor(header_color)
     ? { backgroundColor: header_color }
     : {};
 
