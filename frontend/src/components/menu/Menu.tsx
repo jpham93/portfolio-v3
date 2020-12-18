@@ -28,19 +28,15 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
   const [width, height] = useResizeObserver(ref, optionalCallback);
 
   const MenuLinks = () => (
-      <React.Fragment>
-        {
-          Links.map((link, index) => {
-            // consider for home path (no value)
-            const path = link.path ? link.path : '';
-            return (
-              <NavLink key={ index } to={ `/${path}` } className="MenuLink" activeClassName="MenuLinkActive">
-                { link.name }
-              </NavLink>
-            );
-          })
-        }
-      </React.Fragment>
+      Links.map((link, index) => {
+        // consider for home path (no value)
+        const path = link.path ? link.path : '';
+        return (
+          <NavLink exact key={ index } to={ `/${path}` } className="MenuLink" activeClassName="MenuLinkActive" onClick={() => null}>
+            { link.name }
+          </NavLink>
+        );
+      })
     );
 
   // Special Top Menu Link configuration()

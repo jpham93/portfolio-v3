@@ -1,4 +1,4 @@
-@import '../../variables';
+@import '../../styles/variables';
 
 .MenuWrapper {
     top: 0;
@@ -6,7 +6,7 @@
     height: var(--menu-height);
 
     .Menu {
-        max-width: 940px;
+        max-width: var(--page-content-width);
         margin: auto;
         border: none;
         background: rgba(0, 0, 0, 0);

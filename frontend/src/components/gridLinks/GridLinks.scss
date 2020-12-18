@@ -1,7 +1,7 @@
 .GridContainer {
     background: #fff;
     padding: 5px;
-    max-width: 940px;
+    max-width: var(--page-content-width);
     margin: auto;
     position: relative;
     top: -70px;
@@ -55,6 +55,7 @@
                 align-items: center;
                 justify-content: center;
                 transition: opacity 0.3s ease;
+                text-decoration: none;
 
                 &:hover {
                     opacity: 0.7;

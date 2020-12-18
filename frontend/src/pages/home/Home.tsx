@@ -9,7 +9,7 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
     const HEADER_HEIGHT = 400;
 
     const [loading, setLoading]             = useState<boolean>(true);
-    const [headerProps, setHeaderProps ]    = useState<{ title: string, header_img: any, height?: number } | null>(null);
+    const [headerProps, setHeaderProps ]    = useState<{ title: string, header_img: any, height?: number, headerType: 'large' | 'default' } | null>(null);
     const [gridLinkProps, setGridLinkProps] = useState<{gridLinks: GridLinksModel[], socialLinks: SocialLinksModel[]} | null>(null);
 
     useEffect(() => {
@@ -25,7 +25,10 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
             // extract data
           const { header_title, social_links } = data;
 
-          // @TODO - narrow down retrieval with future GraphQL implementation
+          /**
+           * GridLinkView props
+           */
+            // @TODO - narrow down retrieval with future GraphQL implementation
           const sLinks = social_links.map((link: any) => ({
             name: link.name,
             url: link.url,
@@ -34,6 +37,9 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
           }));
           setGridLinkProps({gridLinks: gridLinks, socialLinks: sLinks});
 
+          /**
+           * Header Props
+           */
           // set all state (if it applicable)
           let headerImage = null;
           if (data.header_img) {
@@ -42,7 +48,7 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
           setHeaderProps({
             title: header_title,
             header_img: headerImage,
-            height: 400, // hardcoded for "Home" page. May apply to other pages
+            headerType: 'large'
           });
           setLoading(false);
         });

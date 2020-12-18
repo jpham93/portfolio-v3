@@ -1,0 +1,44 @@
+@import 'variables';
+
+@media (max-width: $tablet-breakpoint) {
+  body {
+    box-sizing: border-box;
+  }
+}
+
+/* Pseudo Classes for Markdown Images  */
+img[src*="#float-right"] {
+  float: right;
+}
+
+img[src*="#float-left"] {
+  float: left;
+}
+
+img[src*="#clear-right"] {
+  clear: right;
+}
+
+img[src*="#clear-left"] {
+  clear: right;
+}
+
+img[src*="#thumbnail"] {
+  width: 150px;
+}
+
+img[src*="#small"] {
+  width: 300px;
+}
+
+img[src*="#medium"] {
+  width: 438px;
+}
+
+img[src*="#large"] {
+  width: 625px;
+}
+
+img[src*="#x-large"] {
+  width: 1024px
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './global.scss';
+import './styles/global.scss';
 import 'primereact/resources/themes/bootstrap4-dark-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
 // Custom Components
 import Menu from './components/menu/Menu';
 import Home from './pages/home/Home';
+import About from './pages/about/About';
 
 // Models
 import GridLinksModel from './models/GridLinks.model';
@@ -84,6 +85,9 @@ const App: React.FunctionComponent = () => {
                 <Switch>
                   <Route exact path='/' >
                     <Home {...gridLinks!} />
+                  </Route>
+                  <Route path='/about' >
+                    <About />
                   </Route>
                 </Switch>
               </div>

@@ -1,7 +1,8 @@
 interface HeaderPropsModel {
   title: string;
-  header_img: any;
-  height?: number;
+  headerType: 'large' | 'default';
+  header_img?: any;
+  header_color?: string;
 }
 
 export default HeaderPropsModel;
