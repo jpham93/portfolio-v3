@@ -3,22 +3,23 @@ import './Portfolio.scss';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import Header from '../../components/header/Header';
+import ContactBanner from '../../components/contactBanner/ContactBanner';
 
 const Portfolio = () => {
 
-  const [headerProps, setHeaderProps]               = useState<{
+  const [headerProps, setHeaderProps] = useState<{
     title:        string,
     header_img?:  any,
     headerType:   'large' | 'default',
     color?:       string
   } | null>(null)
-  const [projects, setProjects]                     = useState<{
+  const [projects, setProjects]       = useState<{
 
   } | null>(null);
-  const [projectCategories, setProjectCategories]   = useState<{
+  const [projectCategories, setProjectCategories] = useState<{
 
   } | null>(null);
-  const [loading, setLoading]                       = useState<boolean>(true);
+  const [loading, setLoading]         = useState<boolean>(true);
 
   /**
    * Retrieve Projects from Project Page.
@@ -65,11 +66,16 @@ const Portfolio = () => {
         loading
           ?
           <>
-          <ProgressSpinner />
-          <h2>Loading. Please wait...</h2>
+            <ProgressSpinner />
+            <h2>Loading. Please wait...</h2>
           </>
           :
-          <Header { ...headerProps! } />
+          <>
+            <Header { ...headerProps! } />
+            <div className="PortfolioContent">
+              <ContactBanner />
+            </div>
+          </>
       }
     </>
   );
