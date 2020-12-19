@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "projects",
   "info": {
-    "name": "Project"
+    "name": "Project",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -16,8 +17,8 @@
       "unique": true,
       "maxLength": 120
     },
-    "main_image": {
-      "collection": "file",
+    "main_img": {
+      "model": "file",
       "via": "related",
       "allowedTypes": [
         "images"
@@ -29,11 +30,10 @@
       "type": "richtext",
       "required": true
     },
-    "example_media": {
+    "galleria_media": {
       "collection": "file",
       "via": "related",
       "allowedTypes": [
-        "files",
         "images",
         "videos"
       ],

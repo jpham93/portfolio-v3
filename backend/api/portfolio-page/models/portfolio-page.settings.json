@@ -1,8 +1,8 @@
 {
   "kind": "singleType",
-  "collectionName": "about_pages",
+  "collectionName": "portfolio_pages",
   "info": {
-    "name": "About Page",
+    "name": "Portfolio Page",
     "description": ""
   },
   "options": {
@@ -17,6 +17,14 @@
     "header_title": {
       "type": "string"
     },
+    "contact_banner": {
+      "type": "component",
+      "repeatable": false,
+      "component": "contact.contact-banner"
+    },
+    "header_color": {
+      "type": "string"
+    },
     "header_img": {
       "model": "file",
       "via": "related",
@@ -25,12 +33,6 @@
       ],
       "plugin": "upload",
       "required": false
-    },
-    "content": {
-      "type": "richtext"
-    },
-    "header_color": {
-      "type": "string"
     }
   }
 }
