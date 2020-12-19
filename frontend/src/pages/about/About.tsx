@@ -7,7 +7,12 @@ import ReactMarkdown from 'react-markdown';
 const About = (props: any) => {
 
   const [loading, setLoading]           = useState(true);
-  const [headerProps, setHeaderProps]   = useState<{ title: string, header_img?: any, headerType: 'large' | 'default', color?: string } | null>(null);
+  const [headerProps, setHeaderProps]   = useState<{
+      title:        string,
+      header_img?:  any,
+      headerType:   'large' | 'default',
+      color?:       string
+  } | null>(null);
   const [pageContent, setPageContent]   = useState<string>("");
 
   /**

@@ -2,12 +2,22 @@ import React, { useEffect, useState } from 'react';
 import './Portfolio.scss';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import HeaderPropsModel from '../../models/HeaderProps.model';
+import Header from '../../components/header/Header';
 
 const Portfolio = () => {
 
-  const [headerProps, setHeaderProps]               = useState<{} | null>(null)
-  const [projects, setProjects]                     = useState<{} | null>(null);
-  const [projectCategories, setProjectCategories]   = useState<{} | null>(null);
+  const [headerProps, setHeaderProps]               = useState<{
+    title:        string,
+    header_img?:  any,
+    headerType:   'large' | 'default',
+    color?:       string
+  } | null>(null)
+  const [projects, setProjects]                     = useState<{
+
+  } | null>(null);
+  const [projectCategories, setProjectCategories]   = useState<{
+
+  } | null>(null);
   const [loading, setLoading]                       = useState<boolean>(true);
 
   /**
@@ -42,7 +52,7 @@ const Portfolio = () => {
         }
 
         // set child component props
-        setHeaderProps(headerProps);
+        setHeaderProps(hProps);
 
         setLoading(false);
       });
@@ -59,7 +69,7 @@ const Portfolio = () => {
           <h2>Loading. Please wait...</h2>
           </>
           :
-          <h1>Finished</h1>
+          <Header { ...headerProps! } />
       }
     </>
   );
