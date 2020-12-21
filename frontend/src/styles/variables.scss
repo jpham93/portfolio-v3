@@ -27,6 +27,9 @@ $mobile-portrait-breakpoint:   479px;
     --header-height-default:    275px;
     --page-content-width:       1024px;
 
+    --page-content-min-height-default:          calc(100vh - var(--header-height-default) - var(--menu-height));
+    --page-content-min-height-large-header:     calc(100vh - var(--header-height-large) - var(--menu-height));
+
     /** Box shadows **/
     /* @credit - https://codepen.io/sdthornton/pen/wBZdXq */
     --lightest-box-shadow:  0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);

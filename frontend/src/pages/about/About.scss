@@ -6,7 +6,7 @@
     padding-bottom: 5rem;
     max-width: var(--page-content-width);
     margin: auto;
-    min-height: calc(100vh - var(--header-height-default) - var(--menu-height));
+    min-height: var(--page-content-min-height-default);
 
     @media (max-width: $tablet-breakpoint) {
         padding: 0 1rem;

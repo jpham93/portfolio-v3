@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Home.scss';
 import Header from '../../components/header/Header';
 import GridLinksView from '../../components/gridLinks/GridLinks';
 import SocialLinksModel from '../../models/SocialLinks.model';
@@ -55,11 +56,6 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
 
     }, []);
 
-    // adjust main content based on starting screen size
-    const mainStyle = {
-      minHeight: `calc(100vh - var(--menu-height) - ${HEADER_HEIGHT}px)`
-    };
-
     return(
       <>
         {
@@ -69,7 +65,7 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
             :
             <>
               <Header {...headerProps!} />
-              <div className="Main" style={ mainStyle }>
+              <div className="HomeContent">
                 <GridLinksView {...gridLinkProps!} />
               </div>
             </>
