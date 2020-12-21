@@ -79,7 +79,7 @@ const Portfolio = () => {
         }
 
         if (contactBanner.hasOwnProperty('button_color')) {
-          cBannerProps.button_color = contactBanner.background_color;
+          cBannerProps.button_color = contactBanner.button_color;
         }
 
         // set child component props
