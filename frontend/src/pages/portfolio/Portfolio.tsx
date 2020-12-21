@@ -4,6 +4,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import Header from '../../components/header/Header';
 import ContactBanner from '../../components/contactBanner/ContactBanner';
+import ContactBannerPropsModel from '../../models/ContactBannerProps.model';
 
 const Portfolio = () => {
 
@@ -13,6 +14,12 @@ const Portfolio = () => {
     headerType:   'large' | 'default',
     color?:       string
   } | null>(null)
+  const [contactBannerProps, setContactBannerProps] = useState<{
+    header:             string,
+    button_text:        string,
+    background_color?:  string,
+    button_color?:      string
+  } | null>(null);
   const [projects, setProjects]       = useState<{
 
   } | null>(null);
@@ -28,7 +35,9 @@ const Portfolio = () => {
     fetch(`${process.env.REACT_APP_API_URL}/portfolio-page`)
       .then(res => res.json())
       .then(async data => {
-        // extract project collections
+        /**
+         * Extract Projects & Categories collections
+         */
         const projectsRes          = await fetch(`${process.env.REACT_APP_API_URL}/projects`);
         const projectCategoriesRes = await fetch(`${process.env.REACT_APP_API_URL}/project-categories`);
 
@@ -38,6 +47,9 @@ const Portfolio = () => {
         console.log(projects);
         console.log(projectCategories);
 
+        /**
+         * Extract Header Props from Portfolio Page endpoint
+         */
         const { header_title } = data;
 
         let hProps: HeaderPropsModel = { title: header_title, headerType: 'default' };
@@ -52,8 +64,27 @@ const Portfolio = () => {
           hProps.header_color = data.header_color;
         }
 
+        /**
+         * Extract Contact Banner content
+         */
+        const contactBannerRes            = await fetch(`${process.env.REACT_APP_API_URL}/contact-banner`);
+        const contactBanner               = await contactBannerRes.json();
+        const { header, button_text }     = contactBanner;
+
+        let cBannerProps: ContactBannerPropsModel = { header, button_text };
+
+        // check if there are optional color options specified
+        if (contactBanner.hasOwnProperty('background_color')) {
+          cBannerProps.background_color = contactBanner.background_color;
+        }
+
+        if (contactBanner.hasOwnProperty('button_color')) {
+          cBannerProps.button_color = contactBanner.background_color;
+        }
+
         // set child component props
         setHeaderProps(hProps);
+        setContactBannerProps(cBannerProps);
 
         setLoading(false);
       });
@@ -73,7 +104,7 @@ const Portfolio = () => {
           <>
             <Header { ...headerProps! } />
             <div className="PortfolioContent">
-              <ContactBanner />
+              <ContactBanner { ...contactBannerProps! } />
             </div>
           </>
       }
