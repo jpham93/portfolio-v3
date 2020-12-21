@@ -20,7 +20,7 @@ const Portfolio = () => {
     background_color?:  string,
     button_color?:      string
   } | null>(null);
-  const [projects, setProjects]       = useState<{
+  const [projectCards, setProjectCards]       = useState<{
 
   } | null>(null);
   const [projectCategories, setProjectCategories] = useState<{
@@ -43,6 +43,10 @@ const Portfolio = () => {
 
         const projects          = await projectsRes.json();
         const projectCategories = await projectCategoriesRes.json();
+
+        const projectCardsProps = projects.map((project: any) => {
+          return project;
+        });
 
         console.log(projects);
         console.log(projectCategories);
@@ -86,6 +90,11 @@ const Portfolio = () => {
         setHeaderProps(hProps);
         setContactBannerProps(cBannerProps);
 
+        // only set Project Card props
+        if (projectCardsProps.length) {
+
+        }
+
         setLoading(false);
       });
   }, []);
@@ -104,6 +113,15 @@ const Portfolio = () => {
           <>
             <Header { ...headerProps! } />
             <div className="PortfolioContent">
+              <div className="ProjectCardsContainer">
+                {
+                  projectCards === null
+                  ?
+                    <h2 className="NoProjectsHeader">No Projects Available. Coming Soon...</h2>
+                  :
+                    null
+                }
+              </div>
               <ContactBanner { ...contactBannerProps! } />
             </div>
           </>
