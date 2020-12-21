@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './Portfolio.scss';
+
+// Components
 import { ProgressSpinner } from 'primereact/progressspinner';
-import HeaderPropsModel from '../../models/HeaderProps.model';
 import Header from '../../components/header/Header';
 import ContactBanner from '../../components/contactBanner/ContactBanner';
+import ProjectCards from '../../components/projectCards/ProjectCards';
+
+// Models
+import HeaderPropsModel from '../../models/HeaderProps.model';
 import ContactBannerPropsModel from '../../models/ContactBannerProps.model';
+import ProjectCardsPropsModel from '../../models/ProjectCardsProps.model';
 
 const Portfolio = () => {
 
@@ -20,8 +26,8 @@ const Portfolio = () => {
     background_color?:  string,
     button_color?:      string
   } | null>(null);
-  const [projectCards, setProjectCards]       = useState<{
-
+  const [projectCards, setProjectCards]           = useState<{
+    projectCardsProps: ProjectCardsPropsModel[]
   } | null>(null);
   const [projectCategories, setProjectCategories] = useState<{
 
@@ -44,12 +50,28 @@ const Portfolio = () => {
         const projects          = await projectsRes.json();
         const projectCategories = await projectCategoriesRes.json();
 
+        // filter Projects data @todo - replace with GraphQL in the future
         const projectCardsProps = projects.map((project: any) => {
-          return project;
-        });
+          console.log(project);
+          console.log(project.project_category);
+          const { title, project_id, project_category: { type, color } } = project;
 
-        console.log(projects);
-        console.log(projectCategories);
+          let returnProjectModelProp: ProjectCardsPropsModel = {
+            project_id,
+            title,
+            project_category: {
+              type,
+              color
+            }
+          }
+
+          // check if header image has been identified
+          if (project.main_img) {
+            returnProjectModelProp.main_img = project.main_img;
+          }
+
+          return returnProjectModelProp;
+        });
 
         /**
          * Extract Header Props from Portfolio Page endpoint
@@ -92,7 +114,7 @@ const Portfolio = () => {
 
         // only set Project Card props
         if (projectCardsProps.length) {
-
+          setProjectCards({ projectCardsProps: projectCardsProps });
         }
 
         setLoading(false);
@@ -119,7 +141,7 @@ const Portfolio = () => {
                   ?
                     <h2 className="NoProjectsHeader">No Projects Available. Coming Soon...</h2>
                   :
-                    null
+                    <ProjectCards { ...projectCards! } />
                 }
               </div>
               <ContactBanner { ...contactBannerProps! } />
