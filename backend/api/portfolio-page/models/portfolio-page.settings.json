@@ -17,11 +17,6 @@
     "header_title": {
       "type": "string"
     },
-    "contact_banner": {
-      "type": "component",
-      "repeatable": false,
-      "component": "contact.contact-banner"
-    },
     "header_color": {
       "type": "string"
     },

@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/contact-banner",
+      "handler": "contact-banner.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/contact-banner",
+      "handler": "contact-banner.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/contact-banner",
+      "handler": "contact-banner.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

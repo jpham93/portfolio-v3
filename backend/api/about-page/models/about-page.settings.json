@@ -31,11 +31,6 @@
     },
     "header_color": {
       "type": "string"
-    },
-    "contact_banner": {
-      "type": "component",
-      "repeatable": false,
-      "component": "contact.contact-banner"
     }
   }
 }
