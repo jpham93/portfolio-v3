@@ -45,10 +45,12 @@
       "targetField": "title",
       "required": true
     },
-    "project_categories": {
-      "collection": "project-category",
+    "project_category": {
       "via": "projects",
-      "dominant": true
+      "model": "project-category"
+    },
+    "header_color": {
+      "type": "string"
     }
   }
 }
