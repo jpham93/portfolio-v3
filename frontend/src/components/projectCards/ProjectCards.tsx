@@ -13,7 +13,7 @@ const ProjectCards = ({ projectCardsProps }: { projectCardsProps: ProjectCardsPr
     let backgroundStyle = {};
 
     if (projectCard.main_img) {
-
+      backgroundStyle = { backgroundImage: `url(${process.env.REACT_APP_API_URL}${projectCard.main_img.url})` };
     } else if (validateColor(color)) {
       backgroundStyle = { backgroundColor: color };
     }
