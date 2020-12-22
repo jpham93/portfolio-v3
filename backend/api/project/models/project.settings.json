@@ -46,11 +46,20 @@
       "required": true
     },
     "project_category": {
-      "via": "projects",
-      "model": "project-category"
+      "model": "project-category",
+      "via": "projects"
     },
     "header_color": {
       "type": "string"
+    },
+    "alt_img": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
     }
   }
 }

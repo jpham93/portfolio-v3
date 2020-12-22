@@ -28,8 +28,8 @@
       "required": true
     },
     "projects": {
-      "collection": "project",
-      "via": "project_category"
+      "via": "project_category",
+      "collection": "project"
     }
   }
 }
