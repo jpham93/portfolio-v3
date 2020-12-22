@@ -19,9 +19,6 @@ module.exports = {
     const project_id       = path.match(regex)[1];
 
     // query
-    const res         = await strapi.query('project').findOne({ project_id });
-
-    // return res
-    return res;
+    return await strapi.query('project').findOne({ project_id });
   }
 };
