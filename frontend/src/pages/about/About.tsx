@@ -52,7 +52,7 @@ const About = (props: any) => {
         :
           <>
             <Header {...headerProps!} />
-            <div className="AboutContent">
+            <div className="AboutContent Content">
               <ReactMarkdown>
                 { pageContent! }
               </ReactMarkdown>

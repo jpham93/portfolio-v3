@@ -80,12 +80,13 @@ const Project = () => {
                 // load Project content when set
                 project
                 ?
-                  <div className="ProjectContent">
+                  <div className="ProjectContent Content">
                   {
                     // check if alternative image is defined and display dynamically
                     project.hasOwnProperty('alt_img')
                       ?
-                      <img src={ `${process.env.REACT_APP_API_URL}${project.alt_img.url}` } alt=""/>
+                      <img src={ `${process.env.REACT_APP_API_URL}${project.alt_img.url}` }
+                           alt="" className="ProjectAltImg"/>
                       :
                       null
                   }
