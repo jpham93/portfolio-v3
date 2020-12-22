@@ -86,7 +86,7 @@ const GridLinksView = (
   });
 
   return(
-    <div className="p-grid p-col-12 GridContainer">
+    <div className="p-grid p-col-12 GridContainer LargeHeaderOverlap">
       { gridTiles }
       <div className="p-md-4 p-col-12 p-grid GridTile SocialGridContainer">
         { socialLinkGridTiles }

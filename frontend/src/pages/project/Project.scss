@@ -1,5 +1,13 @@
 .ProjectContent {
     min-height: var(--page-content-min-height-large-header);
+    padding: 10px;
+    background: #fff;
 
-
+    .ProjectAltImg {
+        max-width: 100%;
+        height: 360px;
+        background-size: cover;
+        background-position-x: 50%;
+        background-position-y: 50%;
+    }
 }

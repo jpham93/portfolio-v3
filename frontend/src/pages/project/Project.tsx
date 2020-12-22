@@ -80,13 +80,13 @@ const Project = () => {
                 // load Project content when set
                 project
                 ?
-                  <div className="ProjectContent Content">
+                  <div className="ProjectContent Content LargeHeaderOverlap">
                   {
                     // check if alternative image is defined and display dynamically
                     project.hasOwnProperty('alt_img')
                       ?
-                      <img src={ `${process.env.REACT_APP_API_URL}${project.alt_img.url}` }
-                           alt="" className="ProjectAltImg"/>
+                      <div style={{ backgroundImage: `url(${process.env.REACT_APP_API_URL}${project.alt_img.url})` }}
+                           className="ProjectAltImg"/>
                       :
                       null
                   }
