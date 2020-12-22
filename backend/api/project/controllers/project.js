@@ -16,7 +16,7 @@ module.exports = {
     // extract project_id
     const path        = ctx.url;
     const regex       = /^\/project\/(.*)$/
-    const project_id       = path.match(regex)[1];
+    const project_id  = path.match(regex)[1];
 
     // query
     const project = await strapi.query('project').findOne({ project_id });
@@ -25,10 +25,12 @@ module.exports = {
     if (project) {
       delete project.created_by;
       delete project.updated_by;
-      delete project.main_img.created_by;
-      delete project.main_img.updated_by;
-    }
 
+      if (project.hasOwnProperty('main_img')) {
+        delete project.main_img.created_by;
+        delete project.main_img.updated_by;
+      }
+    }
     return project;
   }
 };
