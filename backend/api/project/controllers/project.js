@@ -19,6 +19,16 @@ module.exports = {
     const project_id       = path.match(regex)[1];
 
     // query
-    return await strapi.query('project').findOne({ project_id });
+    const project = await strapi.query('project').findOne({ project_id });
+
+    // if project is found, remove all created_by & updated_by information
+    if (project) {
+      delete project.created_by;
+      delete project.updated_by;
+      delete project.main_img.created_by;
+      delete project.main_img.updated_by;
+    }
+
+    return project;
   }
 };
