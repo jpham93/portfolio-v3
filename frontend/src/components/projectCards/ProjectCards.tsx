@@ -19,7 +19,7 @@ const ProjectCards = ({ projectCardsProps }: { projectCardsProps: ProjectCardsPr
     }
 
     return (
-      <NavLink key={ index } to="/" className="ProjectCard p-md-4 p-col-12">
+      <NavLink key={ index } to={`/project/${projectCard.project_id}`} className="ProjectCard p-md-4 p-col-12">
         <div className="ProjectCardImg" style={ backgroundStyle } />
         <span className="ProjectCardCategory">{ type }</span>
         <span className="ProjectName">{ title }</span>

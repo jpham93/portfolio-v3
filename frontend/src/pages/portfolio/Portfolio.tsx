@@ -52,8 +52,7 @@ const Portfolio = () => {
 
         // filter Projects data @todo - replace with GraphQL in the future
         const projectCardsProps = projects.map((project: any) => {
-          console.log(project);
-          console.log(project.project_category);
+          
           const { title, project_id, project_category: { type, color } } = project;
 
           let returnProjectModelProp: ProjectCardsPropsModel = {
