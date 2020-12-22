@@ -5,6 +5,7 @@ import ProjectStateModel from '../../models/ProjectState.model';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import validateColor from 'validate-color';
 import Header from '../../components/header/Header';
+import ReactMarkdown from 'react-markdown';
 
 const Project = () => {
 
@@ -44,13 +45,27 @@ const Project = () => {
         setHeaderProps(hProps);
 
         /**
-         * Set Content data
+         * Set Content data for Project page
          */
+        let pState: ProjectStateModel = { title, description, project_category: { type, color } };
+        // check for optional Gallery Media
+
+        if (data.hasOwnProperty('alt_img')) {
+          pState.alt_img = data.alt_img;
+        }
+
+        if (data.hasOwnProperty('galleria_media') && data.galleria_media.length) {
+          pState.galleria_media = data.galleria_media;
+        }
+
+        setProject(pState);
 
         setLoading(false);
       });
 
   }, []);
+
+  console.log(project);
 
   return (
     <>
@@ -61,9 +76,28 @@ const Project = () => {
           :
           <>
             <Header { ...headerProps! } />
-            <div className="ProjectContent">
-              
-            </div>
+              {
+                // load Project content when set
+                project
+                ?
+                  <div className="ProjectContent">
+                  {
+                    // check if alternative image is defined and display dynamically
+                    project.hasOwnProperty('alt_img')
+                      ?
+                      <img src={ `${process.env.REACT_APP_API_URL}${project.alt_img.url}` } alt=""/>
+                      :
+                      null
+                  }
+                    <div className="ProjectDescription">
+                      <ReactMarkdown>
+                        { project.description }
+                      </ReactMarkdown>
+                    </div>
+                  </div>
+                :
+                  null
+              }
           </>
       }
     </>
