@@ -42,5 +42,10 @@ $mobile-portrait-breakpoint:   479px;
     --card-title-text-shadow: -1px 1px 6px rgba(0, 0, 0, 0.37);
 
     /** Borders **/
-    --thin-white: 1px solid #fff;
+    --thin-white:   1px solid #fff;
+    --thick-white:  8px solid #fff;
+
+    /** Transform, Transitions, and Animations **/
+    --card-zoom:         scale(1.05);
+    --card-transition:   transform 1s ease;
 }
