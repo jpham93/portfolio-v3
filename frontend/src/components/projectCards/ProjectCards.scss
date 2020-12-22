@@ -1,8 +1,14 @@
+@import '../../styles/variables';
+
 .ProjectCards {
     max-width: var(--page-content-width);
     margin: auto;
     height: 250px;
     padding: 60px 0;
+
+    @media (max-width: $mobile-landscape-breakpoint) {
+        padding: 20px 0;
+    }
 
     .ProjectCard {
         height: 250px;
