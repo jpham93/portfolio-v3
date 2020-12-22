@@ -30,6 +30,11 @@ module.exports = {
         delete project.main_img.created_by;
         delete project.main_img.updated_by;
       }
+
+      if (project.hasOwnProperty('project_category')) {
+        delete project.project_category.created_by;
+        delete project.project_category.updated_by;
+      }
     }
     return project;
   }
