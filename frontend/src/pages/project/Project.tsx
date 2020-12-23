@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './Project.scss';
-import ProjectStateModel from '../../models/ProjectState.model';
-import HeaderPropsModel from '../../models/HeaderProps.model';
 import validateColor from 'validate-color';
+
+// Components
 import Header from '../../components/header/Header';
 import ReactMarkdown from 'react-markdown';
+import ProjectGalleria from '../../components/projectGalleria/ProjectGalleria';
+
+// Model
+import ProjectStateModel from '../../models/ProjectState.model';
+import HeaderPropsModel from '../../models/HeaderProps.model';
 
 const Project = () => {
 
@@ -94,6 +99,16 @@ const Project = () => {
                       <ReactMarkdown>
                         { project.description }
                       </ReactMarkdown>
+                    </div>
+                    <div className="ProjectGalleriaContainer">
+                      {/*{*/}
+                      {/*  project.hasOwnProperty('galleria_media')*/}
+                      {/*  ?*/}
+                      {/*    <ProjectGalleria />*/}
+                      {/*  :*/}
+                      {/*    <h2 className="NoImagesMessage">- No Example Images Available -</h2>*/}
+                      {/*}*/}
+                        <ProjectGalleria />
                     </div>
                   </div>
                 :
