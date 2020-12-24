@@ -42,7 +42,7 @@ const Project = () => {
         /**
          * Set Header Props first
          */
-        let hProps: HeaderPropsModel = { title, headerType: 'large' };
+        let hProps: HeaderPropsModel = { title, headerType: 'large', subtitle: { text: type, backgroundColor: color } };
         // check for optional characteristics
         if (data.hasOwnProperty('header_color') && validateColor(data.header_color)) {
           hProps.header_color = data.header_color;

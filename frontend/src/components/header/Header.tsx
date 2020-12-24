@@ -3,7 +3,7 @@ import HeaderPropsModel from '../../models/HeaderProps.model';
 import './Header.scss';
 import validateColor from 'validate-color';
 
-const Header = ({ title, header_img, headerType, header_color }: HeaderPropsModel) => {
+const Header = ({ title, header_img, headerType, header_color, subtitle }: HeaderPropsModel) => {
 
   // check to make sure image exist from API
   let imgUrl = null;
@@ -36,6 +36,20 @@ const Header = ({ title, header_img, headerType, header_color }: HeaderPropsMode
   return(
     <div className="Header" style={ headerStyle }>
       <h1 className="HeaderTitle" style={ titleStyle }>{ headerType === 'large' ? title : title.toUpperCase() }</h1>
+      {
+        subtitle
+          ?
+          <h2 className="HeaderSubTitle">
+            <span
+              className={subtitle.backgroundColor ? "p-tag p-tag-rounded" : ""}
+              style={{ backgroundColor: subtitle.backgroundColor }}
+            >:
+              { subtitle.text }
+            </span>
+          </h2>
+          :
+          null
+      }
     </div>
   );
 };
