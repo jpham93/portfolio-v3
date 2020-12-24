@@ -32,8 +32,9 @@ const Project = () => {
     fetch(`${process.env.REACT_APP_API_URL}/project/${project_id}`)
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         // extract required content first
-        const { title, description, project_category: { type, color } } = data;
+        const { title, description, project_category: { type, color } , galleriaMedia } = data;
 
         /**
          * Set Header Props first
@@ -60,17 +61,23 @@ const Project = () => {
         }
 
         if (data.hasOwnProperty('galleria_media') && data.galleria_media.length) {
-          pState.galleria_media = data.galleria_media;
+          pState.galleria_media = data.galleria_media.map((obj: { url: string; alternativeText: string; caption: string; }) => ({
+            url:             obj.url,
+            alternativeText: obj.alternativeText,
+            caption:         obj.caption
+          }));
         }
 
         setProject(pState);
+
+        /**
+         * Set Project Galleria Props
+         */
 
         setLoading(false);
       });
 
   }, []);
-
-  console.log(project);
 
   return (
     <>
@@ -101,14 +108,7 @@ const Project = () => {
                       </ReactMarkdown>
                     </div>
                     <div className="ProjectGalleriaContainer">
-                      {/*{*/}
-                      {/*  project.hasOwnProperty('galleria_media')*/}
-                      {/*  ?*/}
-                      {/*    <ProjectGalleria />*/}
-                      {/*  :*/}
-                      {/*    <h2 className="NoImagesMessage">- No Example Images Available -</h2>*/}
-                      {/*}*/}
-                        <ProjectGalleria />
+                        <ProjectGalleria { ...project.galleria_media! } />
                     </div>
                   </div>
                 :

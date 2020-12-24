@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './ProjectGalleria.scss';
 
 // Components
 import { Galleria } from 'primereact/galleria';
+import ProjectGalleriaPropsModel from '../../models/ProjectGalleriaProps.model';
 
-const ProjectGalleria = () => {
+const ProjectGalleria = (projectGalleria: ProjectGalleriaPropsModel[]) => {
 
-  const [images, setImages]           = useState<any[]>([]);
+  const API_URL                       = process.env.REACT_APP_API_URL;
   const [galleriaRef, setGalleriaRef] = useState<Galleria | null>(null);  // hacky/deprecated way of using ref... Framework is just outdated
-
-  useEffect(() => {
-    for (let i = 1; i <= 10; i++) {
-      fetch(`https://picsum.photos/id/${i}/500/940`)
-        .then(res => {
-          return res.url;
-        })
-        .then(data => {
-          // @ts-ignore
-          setImages((prevState) => [...prevState, data]);
-        })
-    }
-  }, []);
 
   /**
    * GALLERIA SETTINGS (STATIC)
@@ -46,17 +34,19 @@ const ProjectGalleria = () => {
     }
   }
 
-  const itemTemplate = (url: string) => (
+  const itemTemplate = (project: ProjectGalleriaPropsModel) => (
     <img
-      src={ url }
+      src={ `${API_URL}${project.url}` }
+      alt={ project.alternativeText ? project.alternativeText : '' }
       style={{ width: '100%', display: 'block' }}
       onClick={ showFullScreen }
     />
   );
 
-  const thumbnailTemplate = (url: string) => (
+  const thumbnailTemplate = (project: ProjectGalleriaPropsModel) => (
    <img
-     src={ url }
+     src={ `${API_URL}${project.url}` }
+     alt={ project.alternativeText ? project.alternativeText : '' }
      style={{ width: '100%', display: 'block' }}
    />
   );
@@ -64,29 +54,27 @@ const ProjectGalleria = () => {
   // TODO: update ref. Framework is using deprecated syntax
   return (
     <>
+      <h2>Project Gallery</h2>
       <Galleria
         responsiveOptions={ responsiveOptions }
         numVisible={ 5 }
         thumbnail={ thumbnailTemplate }
         item={ itemTemplate }
-        value={ images }
+        value={ Object.values(projectGalleria) }
         circular
         transitionInterval={ 5000 }
         autoPlay
         showThumbnails
-        showIndicators
         changeItemOnIndicatorHover
       >
       </Galleria>
       <Galleria
-        numVisible={ 5 }
-        thumbnail={ thumbnailTemplate }
-        showItemNavigators
         item={ itemTemplate }
-        value={ images }
+        value={ Object.values(projectGalleria) }
         ref={ (el) => setGalleriaRef(el) }
         fullScreen
         showThumbnails={ false }
+        showItemNavigators
       >
       </Galleria>
     </>
