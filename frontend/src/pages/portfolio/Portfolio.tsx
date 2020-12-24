@@ -14,12 +14,10 @@ import ProjectCardsPropsModel from '../../models/ProjectCardsProps.model';
 
 const Portfolio = () => {
 
-  const [headerProps, setHeaderProps] = useState<HeaderPropsModel| null>(null)
+  const [headerProps, setHeaderProps]               = useState<HeaderPropsModel| null>(null)
   const [contactBannerProps, setContactBannerProps] = useState<ContactBannerPropsModel| null>(null);
-  const [projectCards, setProjectCards]           = useState<{
-    projectCardsProps: ProjectCardsPropsModel[]
-  } | null>(null);
-  const [projectCategories, setProjectCategories] = useState<{
+  const [projectCards, setProjectCards]             = useState<{ projectCardsProps: ProjectCardsPropsModel[] } | null>(null);
+  const [projectCategories, setProjectCategories]   = useState<{
 
   } | null>(null);
   const [loading, setLoading]         = useState<boolean>(true);

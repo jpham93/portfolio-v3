@@ -30,3 +30,40 @@
         }
     }
 }
+
+.RecentProjectsContainer {
+    background: var(--tertiary-color);
+    min-height: 520px;
+    padding: 40px 0;
+
+    @media (max-width: $mobile-landscape-breakpoint) {
+        min-height: 920px;
+    }
+
+    .RecentProjectsHeader {
+        font-size: 32px;
+        font-family: 'Lato', sans-serif;
+        text-align: center;
+        line-height: 36px;
+        margin-top: 20px;
+        margin-bottom: 0;
+        font-weight: 700;
+    }
+
+    .ProjectCards {
+        justify-content: center;
+        padding: 0;
+
+        .ProjectCard {
+            border: 8px solid var(--tertiary-color) !important;
+        }
+    }
+}
+
+.Divider {
+    height: 2px;
+    width: 80px;
+    opacity: 0.2;
+    margin: 10px auto;
+    background-color: black;
+}

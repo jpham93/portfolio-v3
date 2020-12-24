@@ -7,20 +7,23 @@ import validateColor from 'validate-color';
 import Header from '../../components/header/Header';
 import ReactMarkdown from 'react-markdown';
 import ProjectGalleria from '../../components/projectGalleria/ProjectGalleria';
+import ContactBanner from '../../components/contactBanner/ContactBanner';
+import ProjectCards from '../../components/projectCards/ProjectCards';
 
 // Model
 import ProjectStateModel from '../../models/ProjectState.model';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import ContactBannerPropsModel from '../../models/ContactBannerProps.model';
-import ContactBanner from '../../components/contactBanner/ContactBanner';
+import ProjectCardsPropsModel from '../../models/ProjectCardsProps.model';
 
 const Project = () => {
 
   // extract project_id from router parameter (provided by ProjectCard component)
   const { project_id } : { project_id: string }       = useParams();
-  const [headerProps, setHeaderProps]                 = useState<HeaderPropsModel| null>(null);
+  const [headerProps, setHeaderProps]                 = useState<HeaderPropsModel | null>(null);
   const [project, setProject]                         = useState<ProjectStateModel | null>(null);
   const [contactBannerProps, setContactBannerProps]   = useState<ContactBannerPropsModel | null>(null);
+  const [projectCardsProps, setProjectCardsProps]     = useState<{ projectCardsProps: ProjectCardsPropsModel[] } | null>(null);
   const [loading, setLoading]                         = useState<boolean>(true);
 
   useEffect(() => {
@@ -92,6 +95,24 @@ const Project = () => {
 
         setContactBannerProps(cBannerProps);
 
+        /**
+         * Fetch Projects 3 recent Projects (excluding this project) for Recent Projects cards
+         * @Note - can't use Strapi filter because they don't have reverse built-in. May want to write this into our custom endpoint.
+         */
+        const projectsRes = await fetch(`${process.env.REACT_APP_API_URL}/projects?project_id_ne=${project_id}`);
+        const projects    = await projectsRes.json();
+
+        const recentProjects: ProjectCardsPropsModel[] = projects.reverse().slice(0,3).map((projectCard: any) => ({
+          title:    projectCard.title,
+          main_img: projectCard.main_img,
+          project_category: {
+            type: projectCard.project_category.type,
+            color: projectCard.project_category.color
+          }
+        }));
+
+        setProjectCardsProps({ projectCardsProps: recentProjects });
+
         setLoading(false);
       });
 
@@ -135,6 +156,11 @@ const Project = () => {
                             <ProjectGalleria { ...project.galleria_media! } />
                         }
                       </div>
+                    </div>
+                    <div className="RecentProjectsContainer">
+                      <h2 className="RecentProjectsHeader">Recent Projects</h2>
+                      <div className="Divider" />
+                      <ProjectCards { ...projectCardsProps! } />
                     </div>
                     <ContactBanner { ...contactBannerProps! } />
                   </>
