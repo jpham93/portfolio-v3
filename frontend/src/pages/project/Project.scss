@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .ProjectContent {
-    min-height: var(--page-content-min-height-large-header);
+    min-height: calc( var(--page-content-min-height-large-header) - var(--contact-banner-height) );
     padding: 10px;
     background: #fff;
 
