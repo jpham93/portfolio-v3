@@ -11,6 +11,8 @@ import ProjectGalleria from '../../components/projectGalleria/ProjectGalleria';
 // Model
 import ProjectStateModel from '../../models/ProjectState.model';
 import HeaderPropsModel from '../../models/HeaderProps.model';
+import ContactBannerPropsModel from '../../models/ContactBannerProps.model';
+import ContactBanner from '../../components/contactBanner/ContactBanner';
 
 const Project = () => {
 
@@ -22,8 +24,9 @@ const Project = () => {
     header_img?:   any,
     header_color?: string
   } | null>(null);
-  const [project, setProject]                   = useState<ProjectStateModel | null>(null);
-  const [loading, setLoading]                   = useState<boolean>(true);
+  const [project, setProject]                         = useState<ProjectStateModel | null>(null);
+  const [contactBannerProps, setContactBannerProps]   = useState<ContactBannerPropsModel | null>(null);
+  const [loading, setLoading]                         = useState<boolean>(true);
 
   useEffect(() => {
     /**
@@ -31,7 +34,7 @@ const Project = () => {
      */
     fetch(`${process.env.REACT_APP_API_URL}/project/${project_id}`)
       .then(res => res.json())
-      .then(data => {
+      .then(async data => {
         console.log(data);
         // extract required content first
         const { title, description, project_category: { type, color } , galleriaMedia } = data;
@@ -51,7 +54,7 @@ const Project = () => {
         setHeaderProps(hProps);
 
         /**
-         * Set Content data for Project page
+         * Set Content data for Project page (including Galleria)
          */
         let pState: ProjectStateModel = { title, description, project_category: { type, color } };
         // check for optional Gallery Media
@@ -71,8 +74,24 @@ const Project = () => {
         setProject(pState);
 
         /**
-         * Set Project Galleria Props
+         * Set Props for Contact Banner
          */
+        const contactBannerRes            = await fetch(`${process.env.REACT_APP_API_URL}/contact-banner`);
+        const contactBanner               = await contactBannerRes.json();
+        const { header, button_text }     = contactBanner;
+
+        let cBannerProps: ContactBannerPropsModel = { header, button_text };
+
+        // check if there are optional color options specified
+        if (contactBanner.hasOwnProperty('background_color')) {
+          cBannerProps.background_color = contactBanner.background_color;
+        }
+
+        if (contactBanner.hasOwnProperty('button_color')) {
+          cBannerProps.button_color = contactBanner.button_color;
+        }
+
+        setContactBannerProps(cBannerProps);
 
         setLoading(false);
       });
@@ -92,31 +111,34 @@ const Project = () => {
                 // load Project content when set
                 project
                 ?
-                  <div className="ProjectContent Content LargeHeaderOverlap">
-                  {
-                    // check if alternative image is defined and display dynamically
-                    project.hasOwnProperty('alt_img')
-                      ?
-                      <div style={{ backgroundImage: `url(${process.env.REACT_APP_API_URL}${project.alt_img.url})` }}
-                           className="ProjectAltImg"/>
-                      :
-                      null
-                  }
-                    <div className="ProjectDescription">
-                      <ReactMarkdown>
-                        { project.description }
-                      </ReactMarkdown>
+                  <>
+                    <div className="ProjectContent Content LargeHeaderOverlap">
+                    {
+                      // check if alternative image is defined and display dynamically
+                      project.hasOwnProperty('alt_img')
+                        ?
+                        <div style={{ backgroundImage: `url(${process.env.REACT_APP_API_URL}${project.alt_img.url})` }}
+                             className="ProjectAltImg"/>
+                        :
+                        null
+                    }
+                      <div className="ProjectDescription">
+                        <ReactMarkdown>
+                          { project.description }
+                        </ReactMarkdown>
+                      </div>
+                      <div className="ProjectGalleriaContainer">
+                        {
+                          !project.galleria_media
+                            ?
+                            <h2 className="NoImageMessage">Sorry - No examples images available</h2>
+                            :
+                            <ProjectGalleria { ...project.galleria_media! } />
+                        }
+                      </div>
                     </div>
-                    <div className="ProjectGalleriaContainer">
-                      {
-                        !project.galleria_media
-                          ?
-                          <h2 className="NoImageMessage">Sorry - No examples images available</h2>
-                          :
-                          <ProjectGalleria { ...project.galleria_media! } />
-                      }
-                    </div>
-                  </div>
+                    <ContactBanner { ...contactBannerProps! } />
+                  </>
                 :
                   null
               }
