@@ -9,6 +9,7 @@ const ProjectGalleria = (projectGalleria: ProjectGalleriaPropsModel[]) => {
 
   const API_URL                       = process.env.REACT_APP_API_URL;
   const [galleriaRef, setGalleriaRef] = useState<Galleria | null>(null);  // hacky/deprecated way of using ref... Framework is just outdated
+  const [index, setIndex]             = useState<number>(0);
 
   /**
    * GALLERIA SETTINGS (STATIC)
@@ -64,7 +65,9 @@ const ProjectGalleria = (projectGalleria: ProjectGalleriaPropsModel[]) => {
         transitionInterval={ 5000 }
         autoPlay
         showThumbnails
-        changeItemOnIndicatorHover
+        showItemNavigators
+        onItemChange={ (e) => setIndex(e.index) }
+        activeIndex={ index }
       >
       </Galleria>
       <Galleria
@@ -74,6 +77,8 @@ const ProjectGalleria = (projectGalleria: ProjectGalleriaPropsModel[]) => {
         fullScreen
         showThumbnails={ false }
         showItemNavigators
+        onItemChange={ (e) => setIndex(e.index) }
+        activeIndex={ index }
       >
       </Galleria>
     </>
