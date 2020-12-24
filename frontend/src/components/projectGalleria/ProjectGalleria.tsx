@@ -53,6 +53,7 @@ const ProjectGalleria = (projectGalleria: ProjectGalleriaPropsModel[]) => {
   // TODO: update ref. Framework is using deprecated syntax
   return (
     <>
+      <hr/>
       <h2>Project Gallery</h2>
       <Galleria
         className="ComponentMode"

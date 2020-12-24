@@ -131,7 +131,7 @@ const Project = () => {
                         {
                           !project.galleria_media
                             ?
-                            <h2 className="NoImageMessage">Sorry - No examples images available</h2>
+                            <h2 className="NoImagesMessage">Sorry - No examples images available</h2>
                             :
                             <ProjectGalleria { ...project.galleria_media! } />
                         }
