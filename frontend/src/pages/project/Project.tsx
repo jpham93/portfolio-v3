@@ -17,13 +17,8 @@ import ContactBanner from '../../components/contactBanner/ContactBanner';
 const Project = () => {
 
   // extract project_id from router parameter (provided by ProjectCard component)
-  const { project_id } : { project_id: string } = useParams();
-  const [headerProps, setHeaderProps]           = useState<{
-    title:        string,
-    headerType:   'default' | 'large',
-    header_img?:   any,
-    header_color?: string
-  } | null>(null);
+  const { project_id } : { project_id: string }       = useParams();
+  const [headerProps, setHeaderProps]                 = useState<HeaderPropsModel| null>(null);
   const [project, setProject]                         = useState<ProjectStateModel | null>(null);
   const [contactBannerProps, setContactBannerProps]   = useState<ContactBannerPropsModel | null>(null);
   const [loading, setLoading]                         = useState<boolean>(true);

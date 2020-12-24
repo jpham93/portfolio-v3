@@ -14,18 +14,8 @@ import ProjectCardsPropsModel from '../../models/ProjectCardsProps.model';
 
 const Portfolio = () => {
 
-  const [headerProps, setHeaderProps] = useState<{
-    title:        string,
-    header_img?:  any,
-    headerType:   'large' | 'default',
-    color?:       string
-  } | null>(null)
-  const [contactBannerProps, setContactBannerProps] = useState<{
-    header:             string,
-    button_text:        string,
-    background_color?:  string,
-    button_color?:      string
-  } | null>(null);
+  const [headerProps, setHeaderProps] = useState<HeaderPropsModel| null>(null)
+  const [contactBannerProps, setContactBannerProps] = useState<ContactBannerPropsModel| null>(null);
   const [projectCards, setProjectCards]           = useState<{
     projectCardsProps: ProjectCardsPropsModel[]
   } | null>(null);
@@ -77,7 +67,7 @@ const Portfolio = () => {
          */
         const { header_title } = data;
 
-        let hProps: HeaderPropsModel = { title: header_title, headerType: 'default' };
+        let hProps: HeaderPropsModel = { title: { text: header_title, style: 'default' }, headerType: 'default' };
 
         // check if there is a header image
         if (data.hasOwnProperty('header_img')) {
@@ -88,6 +78,8 @@ const Portfolio = () => {
         if (data.hasOwnProperty('header_color')) {
           hProps.header_color = data.header_color;
         }
+
+        setHeaderProps(hProps);
 
         /**
          * Extract Contact Banner content
@@ -107,8 +99,6 @@ const Portfolio = () => {
           cBannerProps.button_color = contactBanner.button_color;
         }
 
-        // set child component props
-        setHeaderProps(hProps);
         setContactBannerProps(cBannerProps);
 
         // only set Project Card props

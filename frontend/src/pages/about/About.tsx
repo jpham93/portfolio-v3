@@ -7,12 +7,7 @@ import ReactMarkdown from 'react-markdown';
 const About = (props: any) => {
 
   const [loading, setLoading]           = useState(true);
-  const [headerProps, setHeaderProps]   = useState<{
-      title:        string,
-      header_img?:  any,
-      headerType:   'large' | 'default',
-      color?:       string
-  } | null>(null);
+  const [headerProps, setHeaderProps]   = useState< HeaderPropsModel | null>(null);
   const [pageContent, setPageContent]   = useState<string>("");
 
   /**
@@ -24,7 +19,7 @@ const About = (props: any) => {
       .then(data => {
         const { header_title, content } = data;
 
-        let hProps: HeaderPropsModel = { title: header_title, headerType: 'default' };
+        let hProps: HeaderPropsModel = { title: { text: header_title, style: 'default' }, headerType: 'default' };
 
         // check if there is a header image
         if (data.hasOwnProperty('header_img')) {
