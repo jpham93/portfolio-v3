@@ -16,6 +16,10 @@
                     img {
                         width: auto;
                         max-width: 100%;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
                 }
             }
