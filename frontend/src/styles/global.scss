@@ -62,3 +62,11 @@ img[src*="#x-large"] {
   position: relative;
   top: -70px;
 }
+
+.SmallDivider {
+  height: 2px;
+  width: 80px;
+  opacity: 0.2;
+  margin: 10px auto;
+  background-color: black;
+}

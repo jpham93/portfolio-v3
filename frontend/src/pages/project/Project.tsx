@@ -159,7 +159,7 @@ const Project = () => {
                     </div>
                     <div className="RecentProjectsContainer">
                       <h2 className="RecentProjectsHeader">Recent Projects</h2>
-                      <div className="Divider" />
+                      <div className="SmallDivider" />
                       <ProjectCards { ...projectCardsProps! } />
                     </div>
                     <ContactBanner { ...contactBannerProps! } />

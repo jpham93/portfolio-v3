@@ -54,7 +54,8 @@ const ProjectGalleria = (projectGalleria: ProjectGalleriaPropsModel[]) => {
   return (
     <>
       <hr/>
-      <h2>Project Gallery</h2>
+      <h2 className="ProjectGalleriaHeader">Project Gallery</h2>
+      <div className="SmallDivider" />
       <Galleria
         className="ComponentMode"
         responsiveOptions={ responsiveOptions }
@@ -82,6 +83,7 @@ const ProjectGalleria = (projectGalleria: ProjectGalleriaPropsModel[]) => {
         activeIndex={ index }
       >
       </Galleria>
+      <hr style={{ marginTop: '40px' }}/>
     </>
   );
 }
