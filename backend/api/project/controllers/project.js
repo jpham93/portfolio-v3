@@ -40,6 +40,13 @@ module.exports = {
         delete project.project_category.created_by;
         delete project.project_category.updated_by;
       }
+
+      if (project.hasOwnProperty('galleria_media') && project.galleria_media.length) {
+        for (const obj of project.galleria_media) {
+          delete obj.created_by;
+          delete obj.updated_by;
+        }
+      }
     }
     return project;
   }
