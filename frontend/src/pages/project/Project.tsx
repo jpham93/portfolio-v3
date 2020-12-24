@@ -108,7 +108,13 @@ const Project = () => {
                       </ReactMarkdown>
                     </div>
                     <div className="ProjectGalleriaContainer">
-                        <ProjectGalleria { ...project.galleria_media! } />
+                      {
+                        !project.galleria_media
+                          ?
+                          <h2 className="NoImageMessage">Sorry - No examples images available</h2>
+                          :
+                          <ProjectGalleria { ...project.galleria_media! } />
+                      }
                     </div>
                   </div>
                 :

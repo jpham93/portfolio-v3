@@ -38,7 +38,6 @@ const ProjectGalleria = (projectGalleria: ProjectGalleriaPropsModel[]) => {
     <img
       src={ `${API_URL}${project.url}` }
       alt={ project.alternativeText ? project.alternativeText : '' }
-      style={{ width: '100%', display: 'block' }}
       onClick={ showFullScreen }
     />
   );
@@ -47,7 +46,6 @@ const ProjectGalleria = (projectGalleria: ProjectGalleriaPropsModel[]) => {
    <img
      src={ `${API_URL}${project.url}` }
      alt={ project.alternativeText ? project.alternativeText : '' }
-     style={{ width: '100%', display: 'block' }}
    />
   );
 
@@ -56,6 +54,7 @@ const ProjectGalleria = (projectGalleria: ProjectGalleriaPropsModel[]) => {
     <>
       <h2>Project Gallery</h2>
       <Galleria
+        className="ComponentMode"
         responsiveOptions={ responsiveOptions }
         numVisible={ 5 }
         thumbnail={ thumbnailTemplate }
