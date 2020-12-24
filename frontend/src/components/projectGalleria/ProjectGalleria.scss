@@ -1,0 +1,28 @@
+.p-galleria {
+
+    .p-galleria-content {
+        padding: 20px;
+        background: var(--secondary-color);
+
+        .p-galleria-item-wrapper {
+
+            .p-galleria-item-container {
+
+                .p-galleria-item {
+                    max-height: 540px;
+                    overflow: hidden;
+                    background: black;
+                }
+            }
+        }
+    }
+}
+
+.p-galleria-mask.p-galleria-visible {
+    background: #000;
+
+    .p-galleria-content.p-galleria-fullscreen {
+        width: 100%;
+        height: 100%;
+    }
+}

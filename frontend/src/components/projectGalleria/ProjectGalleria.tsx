@@ -6,7 +6,8 @@ import { Galleria } from 'primereact/galleria';
 
 const ProjectGalleria = () => {
 
-  const [images, setImages] = useState<any[]>([]);
+  const [images, setImages]           = useState<any[]>([]);
+  const [galleriaRef, setGalleriaRef] = useState<Galleria | null>(null);  // hacky/deprecated way of using ref... Framework is just outdated
 
   useEffect(() => {
     for (let i = 1; i <= 10; i++) {
@@ -39,26 +40,56 @@ const ProjectGalleria = () => {
     }
   ];
 
-  const itemTemplate = (url: string) => {
-    return <img src={url} style={{ width: '100%', display: 'block' }} />;
+  const showFullScreen = () => {
+    if (galleriaRef) {
+      galleriaRef.show();
+    }
   }
 
-  const thumbnailTemplate = (url: string) => (
-   <img src={url} style={{ width: '100%', display: 'block' }} />
+  const itemTemplate = (url: string) => (
+    <img
+      src={ url }
+      style={{ width: '100%', display: 'block' }}
+      onClick={ showFullScreen }
+    />
   );
 
+  const thumbnailTemplate = (url: string) => (
+   <img
+     src={ url }
+     style={{ width: '100%', display: 'block' }}
+   />
+  );
+
+  // TODO: update ref. Framework is using deprecated syntax
   return (
-    <Galleria
-      responsiveOptions={ responsiveOptions }
-      numVisible={ 5 }
-      thumbnail={ thumbnailTemplate }
-      item={ itemTemplate }
-      value={ images }
-      autoPlay
-      circular
-      transitionInterval={ 5000 }
-    >
-    </Galleria>
+    <>
+      <Galleria
+        responsiveOptions={ responsiveOptions }
+        numVisible={ 5 }
+        thumbnail={ thumbnailTemplate }
+        item={ itemTemplate }
+        value={ images }
+        circular
+        transitionInterval={ 5000 }
+        autoPlay
+        showThumbnails
+        showIndicators
+        changeItemOnIndicatorHover
+      >
+      </Galleria>
+      <Galleria
+        numVisible={ 5 }
+        thumbnail={ thumbnailTemplate }
+        showItemNavigators
+        item={ itemTemplate }
+        value={ images }
+        ref={ (el) => setGalleriaRef(el) }
+        fullScreen
+        showThumbnails={ false }
+      >
+      </Galleria>
+    </>
   );
 }
 
