@@ -10,7 +10,7 @@ const ContactBanner = ({ header, button_text, background_color, button_color }: 
   return (
     <div className="ContactBanner" style={ backgroundStyle }>
       <h2 className="ContactBannerHeader">{ header }</h2>
-      <button className="ContactBannerButton" style={ buttonStyle }>{ button_text.toUpperCase() }</button>
+      <button className="ContactBannerButton" style={ buttonStyle }>{ button_text }</button>
     </div>
   );
 }

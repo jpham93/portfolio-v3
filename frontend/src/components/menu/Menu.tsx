@@ -47,9 +47,9 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
   const MenuBrand = (props: ToolbarProps) => (
     <React.Fragment>
       <span className="MenuBrand">
-        { Brand.firstname.toUpperCase() }
+        { Brand.firstname }
         <strong>
-          { Brand.lastname.toUpperCase() }
+          { Brand.lastname }
         </strong>
       </span>
     </React.Fragment>
