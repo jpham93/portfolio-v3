@@ -1,0 +1,27 @@
+{
+  "kind": "singleType",
+  "collectionName": "contact_banners",
+  "info": {
+    "name": "Contact Banner",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "header": {
+      "type": "string"
+    },
+    "button_text": {
+      "type": "string"
+    },
+    "background_color": {
+      "type": "string"
+    },
+    "button_color": {
+      "type": "string"
+    }
+  }
+}

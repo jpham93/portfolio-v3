@@ -42,3 +42,31 @@ img[src*="#large"] {
 img[src*="#x-large"] {
   width: 1024px
 }
+
+.Content {
+  max-width: var(--page-content-width);
+  margin: auto;
+  min-height: var(--page-content-min-height-default);
+  font-family: 'Lato', sans-serif;
+  font-size: 1.1rem;
+  padding-bottom: 5rem;
+
+  img {
+    width: 400px;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.LargeHeaderOverlap {
+  position: relative;
+  top: -70px;
+}
+
+.SmallDivider {
+  height: 2px;
+  width: 80px;
+  opacity: 0.2;
+  margin: 10px auto;
+  background-color: black;
+}

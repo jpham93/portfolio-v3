@@ -1,0 +1,75 @@
+.ProjectGalleriaHeader {
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 40px;
+}
+
+.p-galleria.ComponentMode {
+
+    .p-galleria-content {
+
+        .p-galleria-item-wrapper {
+
+            .p-galleria-item-container {
+
+                .p-galleria-item {
+                    height: 450px;
+                    overflow: hidden;
+                    background: black;
+                    justify-content: center;
+                    align-items: center;
+
+                    img {
+                        width: auto;
+                        max-width: 100%;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .p-galleria-thumbnail-wrapper {
+
+        .p-galleria-thumbnail-container {
+
+            .p-galleria-thumbnail-items {
+
+                .p-galleria-thumbnail-item {
+                    padding: 20px;
+                }
+            }
+        }
+    }
+}
+
+.p-galleria-mask.p-galleria-visible {
+    background: #000;
+
+    .p-galleria.p-galleria-fullscreen {
+        width: 100%;
+        height: 100%;
+
+        .p-galleria-content {
+            height: 100%;
+            justify-content: center;
+
+            .p-galleria-item-wrapper {
+
+                .p-galleria-item-container {
+
+                    .p-galleria-item {
+
+                        img {
+                            width: auto;
+                            max-width: calc(100vw - 128px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

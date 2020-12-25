@@ -3,15 +3,12 @@
     padding: 5px;
     max-width: var(--page-content-width);
     margin: auto;
-    position: relative;
-    top: -70px;
 
     .GridTile {
         height: 290px;
         padding: 0;
         border: 5px solid #fff;
         position: relative;
-        background-size: cover;
         overflow: hidden;
 
         &:hover {
@@ -23,11 +20,11 @@
             background-size: cover;
             width: 100%;
             height: 100%;
-            transition: transform 1s ease;
+            transition: var(--card-transition);
 
             &:hover {
-                transform: scale(1.05);
-                transition: transform 1s ease;
+                transform: var(--card-zoom);
+                transition: var(--card-transition);
             }
         }
 

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import './Home.scss';
 import Header from '../../components/header/Header';
 import GridLinksView from '../../components/gridLinks/GridLinks';
 import SocialLinksModel from '../../models/SocialLinks.model';
 import GridLinksModel from '../../models/GridLinks.model';
+import HeaderPropsModel from '../../models/HeaderProps.model';
 
 const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
 
-    const HEADER_HEIGHT = 400;
-
     const [loading, setLoading]             = useState<boolean>(true);
-    const [headerProps, setHeaderProps ]    = useState<{ title: string, header_img: any, height?: number, headerType: 'large' | 'default' } | null>(null);
-    const [gridLinkProps, setGridLinkProps] = useState<{gridLinks: GridLinksModel[], socialLinks: SocialLinksModel[]} | null>(null);
+    const [headerProps, setHeaderProps ]    = useState<HeaderPropsModel | null>(null);
+    const [gridLinkProps, setGridLinkProps] = useState<{ gridLinks: GridLinksModel[], socialLinks: SocialLinksModel[] } | null>(null);
 
     useEffect(() => {
       /**
@@ -40,25 +40,26 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
           /**
            * Header Props
            */
-          // set all state (if it applicable)
-          let headerImage = null;
-          if (data.header_img) {
-            headerImage =  data.header_img;
-          }
-          setHeaderProps({
-            title: header_title,
-            header_img: headerImage,
+          let hProps: HeaderPropsModel = {
+            title: {
+              text: header_title,
+              style: 'large'
+            },
             headerType: 'large'
-          });
+          }
+          // set all state (if it applicable)
+          if (data.hasOwnProperty('header_img')) {
+            hProps.header_img =  data.header_img;
+          }
+          if (data.hasOwnProperty('header_color')){
+            hProps.header_color = data.header_color;
+          }
+          setHeaderProps(hProps);
+
           setLoading(false);
         });
 
     }, []);
-
-    // adjust main content based on starting screen size
-    const mainStyle = {
-      minHeight: `calc(100vh - var(--menu-height) - ${HEADER_HEIGHT}px)`
-    };
 
     return(
       <>
@@ -69,7 +70,7 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
             :
             <>
               <Header {...headerProps!} />
-              <div className="Main" style={ mainStyle }>
+              <div className="HomeContent">
                 <GridLinksView {...gridLinkProps!} />
               </div>
             </>

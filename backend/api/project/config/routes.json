@@ -25,6 +25,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/project/:project_id",
+      "handler": "project.findOneByProjectId",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/projects",
       "handler": "project.create",

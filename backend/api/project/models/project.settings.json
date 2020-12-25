@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "projects",
   "info": {
-    "name": "Project"
+    "name": "Project",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -16,8 +17,8 @@
       "unique": true,
       "maxLength": 120
     },
-    "main_image": {
-      "collection": "file",
+    "main_img": {
+      "model": "file",
       "via": "related",
       "allowedTypes": [
         "images"
@@ -29,11 +30,10 @@
       "type": "richtext",
       "required": true
     },
-    "example_media": {
+    "galleria_media": {
       "collection": "file",
       "via": "related",
       "allowedTypes": [
-        "files",
         "images",
         "videos"
       ],
@@ -45,10 +45,21 @@
       "targetField": "title",
       "required": true
     },
-    "project_categories": {
-      "collection": "project-category",
-      "via": "projects",
-      "dominant": true
+    "project_category": {
+      "model": "project-category",
+      "via": "projects"
+    },
+    "header_color": {
+      "type": "string"
+    },
+    "alt_img": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
     }
   }
 }

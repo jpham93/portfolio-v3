@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { slide as Menu } from "react-burger-menu";
 import './ToggleMenu.scss';
 
+//@TODO (Optional) - replace  react-burger-menu with Sidebar. Overlooked Primefaces documentation
 const ToggleMenu = ( props: any ) => {
 
   const [open, setOpen] = useState(false);

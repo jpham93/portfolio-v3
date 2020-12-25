@@ -1,0 +1,56 @@
+@import '../../styles/variables';
+
+.ProjectCards {
+    max-width: var(--page-content-width);
+    margin: auto;
+    height: 250px;
+    padding: 60px 0;
+
+    @media (max-width: $mobile-landscape-breakpoint) {
+        padding: 20px 0;
+    }
+
+    .ProjectCard {
+        height: 250px;
+        position: relative;
+        overflow: hidden;
+        padding: 0;
+        border: var(--thick-white);
+
+        .ProjectCardImg {
+            background-position: 50% 50%;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            border-radius: 3px;
+            transition: var(--card-transition);
+
+            &:hover {
+                transform: var(--card-zoom);
+                transition: var(--card-transition);
+            }
+        }
+
+        .ProjectCardCategory {
+            position: absolute;
+            right: 25px;
+            top: 25px;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 12px;
+        }
+
+        .ProjectName {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            color: #fff;
+            font-size: 22px;
+            line-height: 24px;
+            font-weight: 700;
+            text-shadow: var(--card-title-text-shadow);
+        }
+    }
+}

@@ -29,11 +29,6 @@
     "content": {
       "type": "richtext"
     },
-    "Contact_Banner": {
-      "type": "component",
-      "repeatable": false,
-      "component": "contact.contact-banner"
-    },
     "header_color": {
       "type": "string"
     }
