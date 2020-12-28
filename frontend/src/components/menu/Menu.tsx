@@ -30,9 +30,17 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
   const MenuLinks = () => (
       Links.map((link, index) => {
         // consider for home path (no value)
-        const path = link.path ? link.path : '';
+        const path        = link.path ? link.path : '';
+        const lastIndex   = Links.length - 1;
         return (
-          <NavLink exact key={ index } to={ `/${path}` } className="MenuLink" activeClassName="MenuLinkActive" onClick={() => null}>
+          <NavLink
+            exact
+            key={ index }
+            to={ index !== lastIndex ? `/${path}` : '#' }
+            className="MenuLink"
+            activeClassName={ index !== lastIndex ? 'MenuLinkActive' : '' }
+            onClick={() => null}
+          >
             { link.name }
           </NavLink>
         );
