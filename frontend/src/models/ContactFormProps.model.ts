@@ -1,10 +1,6 @@
 interface ContactFormPropsModel {
-  header:               string;
-  description:          string;
-  name_placeholder:     string;
-  email_placeholder:    string;
-  details_placeholder:  string;
-  button_text:          string;
+  formVisible:    boolean;
+  setFormVisible: (arg0: boolean) => void;
 }
 
 export default ContactFormPropsModel;

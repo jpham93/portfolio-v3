@@ -10,6 +10,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "lodash": "^4.17.20",
     "next": "^10.0.4",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
@@ -52,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.166",
     "@types/react-burger-menu": "^2.6.2",
     "@types/react-router-dom": "^5.1.6"
   }
