@@ -42,11 +42,13 @@ const Blogs = () => {
         const bCardsProps = blogs.map((blog: any) => ({
           title:        blog.title,
           main_img:     blog.main_img,
-          project_category: {
+          blog_category: {
             type:       blog.blog_category.type,
             color:      blog.blog_category.color
           },
-          description:  blog.description
+          blog_id:      blog.blog_id,
+          description:  blog.description,
+          date:         blog.published_at
         }));
 
         if (bCardsProps.length) {

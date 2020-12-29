@@ -27,7 +27,7 @@
       "plugin": "upload",
       "required": false
     },
-    "body": {
+    "content": {
       "type": "richtext",
       "required": true
     },
@@ -41,6 +41,9 @@
       "required": true
     },
     "header_color": {
+      "type": "string"
+    },
+    "description": {
       "type": "string"
     }
   }
