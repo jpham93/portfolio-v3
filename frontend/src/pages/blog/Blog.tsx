@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Blog.scss';
 import { useParams } from 'react-router-dom';
 
 const Blog = () => {
 
   const { blog_id } : { blog_id: string }       = useParams();
-  console.log(blog_id);
+
+  useEffect(() => {
+
+  }, []);
 
   return(
     <>
