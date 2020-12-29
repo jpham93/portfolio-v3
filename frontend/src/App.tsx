@@ -13,6 +13,7 @@ import About from './pages/about/About';
 import Portfolio from './pages/portfolio/Portfolio';
 import Project from './pages/project/Project';
 import Blogs from './pages/blogs/Blogs';
+import Blog from './pages/blog/Blog';
 
 // Models
 import GridLinksModel from './models/GridLinks.model';
@@ -100,6 +101,9 @@ const App: React.FunctionComponent = () => {
                   </Route>
                   <Route path='/project/:project_id'>
                     <Project />
+                  </Route>
+                  <Route path='/blog/:blog_id'>
+                    <Blog />
                   </Route>
                 </Switch>
               </div>

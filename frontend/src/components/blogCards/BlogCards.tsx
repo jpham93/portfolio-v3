@@ -21,8 +21,6 @@ const BlogCards = ({ blogCardsProps }: { blogCardsProps: BlogCardsPropsModel[] }
     // format date w/ moment i.e. Jun 26, 2020
     const formattedDate = moment(date).format('MMM D, YYYY');
 
-    console.log(formattedDate);
-
     return (
       <NavLink className="BlogCard p-md-4 p-col-12" to={ `/blog/${blogCard.blog_id}` } key={ index }>
         <div className="BlogCardImgWrapper">
