@@ -7,11 +7,10 @@ import validateColor from 'validate-color';
 const ProjectCards = ({ projectCardsProps }: { projectCardsProps: ProjectCardsPropsModel[]}) => {
 
   const Cards = projectCardsProps.map((projectCard, index) => {
-    console.log(projectCard);
+
     const { title, project_category: { type, color } } = projectCard;
 
     let backgroundStyle = {};
-
     if (projectCard.main_img) {
       backgroundStyle = { backgroundImage: `url(${process.env.REACT_APP_API_URL}${projectCard.main_img.url})` };
     } else if (validateColor(color)) {
