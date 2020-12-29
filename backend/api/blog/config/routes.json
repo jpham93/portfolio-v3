@@ -25,6 +25,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/blog/:blog_id",
+      "handler": "blog.findOneByBlogId",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/blogs",
       "handler": "blog.create",
