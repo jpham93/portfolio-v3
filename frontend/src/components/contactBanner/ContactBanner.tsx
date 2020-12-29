@@ -5,9 +5,8 @@ import ContactForm from '../ContactForm';
 
 const ContactBanner = ({ header, button_text, background_color, button_color }: ContactBannerPropsModel) => {
 
-  const backgroundStyle = background_color ? { backgroundColor: background_color } : {};
-  const buttonStyle     = button_color ? { backgroundColor: button_color } : {};
-  //@todo - fix workaround. Used state to attach to built-in ref for Prime Overlay
+  const backgroundStyle               = background_color ? { backgroundColor: background_color } : {};
+  const buttonStyle                   = button_color ? { backgroundColor: button_color } : {};
   const [formVisible, setFormVisible] = useState<boolean>(false);
 
   return (
