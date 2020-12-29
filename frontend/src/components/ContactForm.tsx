@@ -58,6 +58,14 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
     }
   }
 
+  // Hacky way of injecting text into close icon. API does not provide a method to do so.
+  const injectCloseText = () => {
+    const closeButton = document.querySelector('button[aria-label="Close"].p-dialog-header-close');
+    if (closeButton) {
+      closeButton.innerHTML = '<span class="CloseString">Close&nbsp;</span>' + closeButton.innerHTML;
+    }
+  }
+
   const validateInputs = (): boolean => {
     let valid: boolean = true;
 
@@ -93,8 +101,10 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
       className="p-fluid"
       position="top"
       dismissableMask
-      header="Close"
+      // header="Close"
+      ariaCloseIconLabel="Close"
       focusOnShow={ false }
+      onShow={ injectCloseText }
     >
       <form onSubmit={handleSubmit}>
         <h1 className="ContactFormHeader">{ contactFormContent.header }</h1>
