@@ -36,9 +36,9 @@
       "dominant": true
     },
     "author": {
+      "via": "blog",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "blog"
+      "model": "user"
     },
     "blog_id": {
       "type": "uid",

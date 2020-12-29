@@ -10,11 +10,12 @@ import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
 import Menu from './components/menu/Menu';
 import Home from './pages/home/Home';
 import About from './pages/about/About';
+import Portfolio from './pages/portfolio/Portfolio';
+import Project from './pages/project/Project';
+import Blogs from './pages/blogs/Blogs';
 
 // Models
 import GridLinksModel from './models/GridLinks.model';
-import Portfolio from './pages/portfolio/Portfolio';
-import Project from './pages/project/Project';
 
 const App: React.FunctionComponent = () => {
 
@@ -93,6 +94,9 @@ const App: React.FunctionComponent = () => {
                   </Route>
                   <Route path='/projects'>
                     <Portfolio />
+                  </Route>
+                  <Route path='/blogs'>
+                    <Blogs />
                   </Route>
                   <Route path='/project/:project_id'>
                     <Project />
