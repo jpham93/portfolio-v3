@@ -30,7 +30,6 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
 
   useEffect(() => {
     if (loading) {
-      console.log('fetching...');
       fetch(`${process.env.REACT_APP_API_URL}/contact-form`)
         .then(res => res.json())
         .then(data => {
@@ -55,6 +54,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
     e.preventDefault();
     if (validateInputs()) {
       console.log(inputValues);
+      setFormVisible(false);
     }
   }
 
@@ -91,6 +91,10 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
         setFormVisible(false);
       }}
       className="p-fluid"
+      position="top"
+      dismissableMask
+      header="Close"
+      focusOnShow={ false }
     >
       <form onSubmit={handleSubmit}>
         <h1 className="ContactFormHeader">{ contactFormContent.header }</h1>
@@ -99,7 +103,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
         <div className="p-field ContactFormName">
           <InputText
             type="text"
-            className={ `p-inputtext-lg ${inputErrors.name && 'p-invalid'}` }
+            className={ `p-inputtext-lg ${inputErrors.name && 'p-invalid'} ContactFormInput` }
             placeholder={ contactFormContent.name_placeholder }
             onChange={ handleChange }
             name="name"
@@ -112,7 +116,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
         <div className="p-field ContactFormEmail">
           <InputText
             type="email"
-            className={ `p-inputtext-lg ${inputErrors.email && 'p-invalid'}` }
+            className={ `p-inputtext-lg ${inputErrors.email && 'p-invalid'} ContactFormInput` }
             placeholder={ contactFormContent.email_placeholder }
             onChange={ handleChange }
             name="email"
@@ -124,7 +128,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
         </div>
         <div className="p-field ContactFormDetails">
           <InputTextarea
-            className={ `p-inputtext-lg ${inputErrors.details && 'p-invalid'}` }
+            className={ `p-inputtext-lg ${inputErrors.details && 'p-invalid'} ContactFormTextarea` }
             placeholder={ contactFormContent.details_placeholder }
             onChange={ handleChange }
             name="details"
@@ -134,7 +138,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
             inputErrors.details && <small id="username2-help" className="p-invalid p-d-block">Please provide a description.</small>
           }
         </div>
-        <Button>{ contactFormContent.button_text }</Button>
+        <Button className="ContactFormButton" label={ contactFormContent.button_text }/>
       </form>
     </Dialog>
   );
