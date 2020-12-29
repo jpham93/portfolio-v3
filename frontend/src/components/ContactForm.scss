@@ -1,10 +1,10 @@
 .p-dialog-mask.p-component-overlay {
     font-family: 'Lato Light', sans-serif;
     background-color: rgba(0, 0, 0, 0.9);
-    transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-    transform-style: preserve-3d;
 
     .p-dialog {
+        transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg) !important;
+        transform-style: preserve-3d !important;
         background-color: transparent;
         border: none;
         margin-top: 2rem;
@@ -38,7 +38,7 @@
 
         .p-dialog-content {
             background-color: inherit;
-            max-width: 470px;
+            max-width: 520px;
             margin: auto;
             padding-top: 0;
 

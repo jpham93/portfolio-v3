@@ -9,6 +9,8 @@ const ContactBanner = ({ header, button_text, background_color, button_color }: 
   const buttonStyle                   = button_color ? { backgroundColor: button_color } : {};
   const [formVisible, setFormVisible] = useState<boolean>(false);
 
+  // const closeIcon =
+
   return (
     <div className="ContactBanner" style={ backgroundStyle }>
       <h2 className="ContactBannerHeader">{ header }</h2>
