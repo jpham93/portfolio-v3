@@ -8,7 +8,7 @@ import ProjectGalleriaPropsModel from '../../models/ProjectGalleriaProps.model';
 const ProjectGalleria = (projectGalleria: ProjectGalleriaPropsModel[]) => {
 
   const API_URL                       = process.env.REACT_APP_API_URL;
-  const [galleriaRef, setGalleriaRef] = useState<Galleria | null>(null);  // hacky/deprecated way of using ref... Framework is just outdated
+  const [galleriaRef, setGalleriaRef] = useState<Galleria | null>(null);  //@todo - hacky/deprecated way of using ref... Framework is just outdated
   const [index, setIndex]             = useState<number>(0);
 
   /**

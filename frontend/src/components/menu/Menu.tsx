@@ -6,6 +6,7 @@ import MenuPropsModel from '../../models/MenuProps.model';
 import validateColor from 'validate-color';
 import { useResizeObserver } from '../../hooks/useResizeObserver';
 import ToggleMenu from '../toggleMenu/ToggleMenu';
+import ContactForm from '../ContactForm';
 
 /**
  * Menu in header & footer. Displays links and branding.
@@ -18,8 +19,9 @@ import ToggleMenu from '../toggleMenu/ToggleMenu';
 const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
 
   // Dynamic size tracking. @see - https://codesandbox.io/s/zw8kylol8m?file=/src/index.tsx:537-602 &
-  const ref = useRef(null);
-  const [dimensions, setDimensions] = useState({ top: 0, left: 0 });
+  const ref                           = useRef(null);
+  const [dimensions, setDimensions]   = useState({ top: 0, left: 0 });
+  const [formVisible, setFormVisible] = useState<boolean>(false);
 
   // Optional callback to access the full DOMRect object if required.
   const optionalCallback = (entry: DOMRectReadOnly) =>
@@ -30,9 +32,17 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
   const MenuLinks = () => (
       Links.map((link, index) => {
         // consider for home path (no value)
-        const path = link.path ? link.path : '';
+        const path        = link.path ? link.path : '';
+        const lastIndex   = Links.length - 1;
         return (
-          <NavLink exact key={ index } to={ `/${path}` } className="MenuLink" activeClassName="MenuLinkActive" onClick={() => null}>
+          <NavLink
+            exact
+            key={ index }
+            to={ index !== lastIndex ? `/${path}` : '#' }
+            className="MenuLink"
+            activeClassName={ index !== lastIndex ? 'MenuLinkActive' : '' }
+            onClick={ index !== lastIndex ? () => null : () => setFormVisible(true) }
+          >
             { link.name }
           </NavLink>
         );
@@ -45,14 +55,14 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
     : MenuLinks;
 
   const MenuBrand = (props: ToolbarProps) => (
-    <React.Fragment>
+    <>
       <span className="MenuBrand">
-        { Brand.firstname.toUpperCase() }
+        { Brand.firstname }
         <strong>
-          { Brand.lastname.toUpperCase() }
+          { Brand.lastname }
         </strong>
       </span>
-    </React.Fragment>
+    </>
   );
 
   // dynamic color for Header/Footer Menu
@@ -69,6 +79,7 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
   return(
     <div className={`MenuWrapper ${inFooter && 'Footer'}`} id="PageWrap" style={ menuStyle } ref={ ref }>
       <Toolbar left={ MenuBrand } right={ !inFooter ? TopMenuLinks : MenuLinks } className="Menu Footer" />
+      <ContactForm formVisible={ formVisible } setFormVisible={ setFormVisible }/>
     </div>
   );
 };
