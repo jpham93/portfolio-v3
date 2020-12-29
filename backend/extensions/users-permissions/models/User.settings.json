@@ -59,10 +59,6 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "blog": {
-      "model": "blog",
-      "via": "author"
-    },
     "image": {
       "model": "file",
       "via": "related",

@@ -4,12 +4,14 @@ import HeaderPropsModel from '../../models/HeaderProps.model';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import Header from '../../components/header/Header';
 import validateColor from 'validate-color';
+import BlogCardsPropsModel from '../../models/BlogCardsProps.model';
+import BlogCards from '../../components/blogCards/BlogCards';
 
 const Blogs = () => {
 
   const [loading, setLoading]               = useState<boolean>(true);
   const [headerProps, setHeaderProps]       = useState<HeaderPropsModel | null>(null);
-  const [blogCardsProps, setBlogCardsProps] = useState(null);
+  const [blogCardsProps, setBlogCardsProps] = useState<BlogCardsPropsModel[] | null>(null);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/blogs-page`)
@@ -30,11 +32,30 @@ const Blogs = () => {
         }
 
         setHeaderProps(hProps);
-        console.log(hProps);
+
+        /**
+         * Extract individual Blogs
+         */
+        const blogsRes  = await fetch(`${process.env.REACT_APP_API_URL}/blogs`);
+        const blogs     = await blogsRes.json();
+
+        const bCardsProps = blogs.map((blog: any) => ({
+          title:        blog.title,
+          main_img:     blog.main_img,
+          project_category: {
+            type:       blog.blog_category.type,
+            color:      blog.blog_category.color
+          },
+          description:  blog.description
+        }));
+
+        if (bCardsProps.length) {
+          setBlogCardsProps(bCardsProps);
+        }
 
         setLoading(false);
       });
-  }, [])
+  }, []);
 
   return(
     <>
@@ -50,7 +71,13 @@ const Blogs = () => {
           <Header { ...headerProps! } />
             <div className="BlogsContent">
               <div className="BlogCardsContainer">
-                
+                {
+                  blogCardsProps === null
+                    ?
+                      <h2 className="NoBlogsHeader">No Blogs Available. Coming Soon...</h2>
+                    :
+                      <BlogCards blogCardsProps={ blogCardsProps } />
+                }
               </div>
             </div>
           </>

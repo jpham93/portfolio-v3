@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "blogs",
   "info": {
-    "name": "Blog"
+    "name": "Blog",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -17,7 +18,7 @@
       "unique": true,
       "maxLength": 120
     },
-    "main_image": {
+    "main_img": {
       "model": "file",
       "via": "related",
       "allowedTypes": [
@@ -30,20 +31,17 @@
       "type": "richtext",
       "required": true
     },
-    "blog_categories": {
-      "via": "blogs",
-      "collection": "blog-category",
-      "dominant": true
-    },
-    "author": {
-      "via": "blog",
-      "plugin": "users-permissions",
-      "model": "user"
+    "blog_category": {
+      "model": "blog-category",
+      "via": "blogs"
     },
     "blog_id": {
       "type": "uid",
       "targetField": "title",
       "required": true
+    },
+    "header_color": {
+      "type": "string"
     }
   }
 }

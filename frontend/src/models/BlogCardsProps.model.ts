@@ -2,7 +2,7 @@ interface BlogCardsPropsModel {
   title:            string;
   description:      string;
   blog_category: {
-    text:     string;
+    type:     string;
     color:    string;
   }
   author_name:      string;
