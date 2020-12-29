@@ -22,14 +22,15 @@ const Blogs = () => {
 
         let hProps: HeaderPropsModel = { title: { text: header_title, style: 'default' }, headerType: 'default' };
         // add additional content if they exist
-        if (header_img.length) {
+        if (header_img) {
           hProps.header_img = header_img;
         }
         if (header_color && validateColor(header_color)) {
           hProps.header_color = header_color;
         }
-        
+
         setHeaderProps(hProps);
+        console.log(hProps);
 
         setLoading(false);
       });
@@ -45,7 +46,14 @@ const Blogs = () => {
             <h2>Loading. Please wait...</h2>
           </>
         :
+          <>
           <Header { ...headerProps! } />
+            <div className="BlogsContent">
+              <div className="BlogCardsContainer">
+                
+              </div>
+            </div>
+          </>
       }
     </>
   );
