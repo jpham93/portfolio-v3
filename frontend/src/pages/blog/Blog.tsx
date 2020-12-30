@@ -4,24 +4,25 @@ import { useParams } from 'react-router-dom';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import Header from '../../components/header/Header';
 import ReactMarkdown from 'react-markdown';
+import BlogStateModel from '../../models/BlogState.model';
 
 const Blog = () => {
 
   const { blog_id } : { blog_id: string }       = useParams();
   const [loading, setLoading]                   = useState<boolean>(true);
   const [headerProps, setHeaderProps]           = useState<HeaderPropsModel | null>(null);
+  const [blogState, setBlogState]               = useState<BlogStateModel | null>(null);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/blog/${blog_id}`)
       .then(res => res.json())
-      .then(data => {
-        console.log(data);
+      .then(async data => {
         /**
          * Extract Header Props
          */
         const { title, header_color, main_img } = data;
 
-        let hProps: HeaderPropsModel = { title: {text: title, style: 'default'} , headerType: 'large' }
+        let hProps: HeaderPropsModel = { title: { text: title, style: 'default' } , headerType: 'large' }
 
         // optional content
         if (header_color) {
@@ -32,6 +33,15 @@ const Blog = () => {
         }
 
         setHeaderProps(hProps);
+
+        /**
+         * Extract Blog State
+         */
+        const { content, date, author, blog_category: { type, color } } = data;
+
+        const bState: BlogStateModel = { blog_category: { type, color}, content, date, author };
+
+        setBlogState(bState);
 
         setLoading(false);
       });
@@ -48,7 +58,7 @@ const Blog = () => {
             <Header { ...headerProps! } />
             <div className="BlogContent LargeHeaderOverlap">
               <ReactMarkdown>
-                # Blog Page
+                { blogState!.content }
               </ReactMarkdown>
             </div>
           </>
