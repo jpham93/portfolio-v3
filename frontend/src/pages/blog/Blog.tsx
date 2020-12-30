@@ -5,6 +5,9 @@ import { useParams } from 'react-router-dom';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import Header from '../../components/header/Header';
 import ReactMarkdown from 'react-markdown';
+import BlogCards from '../../components/blogCards/BlogCards';
+import BlogCardsPropsModel from '../../models/BlogCardsProps.model';
+import ProjectCardsPropsModel from '../../models/ProjectCardsProps.model';
 
 const Blog = () => {
 
@@ -12,6 +15,7 @@ const Blog = () => {
   const [loading, setLoading]                   = useState<boolean>(true);
   const [headerProps, setHeaderProps]           = useState<HeaderPropsModel | null>(null);
   const [content, setContent]                   = useState<string | null>(null);
+  const [blogCardsProps, setBlogCardsProps]     = useState<{ blogCardsProps: BlogCardsPropsModel[] } | null>(null);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/blog/${blog_id}`)
@@ -45,9 +49,33 @@ const Blog = () => {
         setHeaderProps(hProps);
 
         /**
-         * Extract Blog State
+         * Extract Blog content
          */
         setContent(data.content);
+
+        /**
+         * Extract Recent Blogs
+         */
+        /**
+         * Fetch Projects 3 recent Projects (excluding this project) for Recent Projects cards
+         * @Note - can't use Strapi filter because they don't have reverse built-in. May want to write this into our custom endpoint.
+         */
+        const blogsRes = await fetch(`${process.env.REACT_APP_API_URL}/blogs?blog_id_ne=${blog_id}`);
+        const blogs    = await blogsRes.json();
+
+        const recentBlogs: BlogCardsPropsModel[] = blogs.reverse().slice(0,3).map((blog: any) => ({
+          title:        blog.title,
+          main_img:     blog.main_img,
+          blog_category: {
+            type:       blog.blog_category.type,
+            color:      blog.blog_category.color
+          },
+          blog_id:      blog.blog_id,
+          description:  blog.description,
+          date:         blog.published_at
+        }));
+
+        setBlogCardsProps({ blogCardsProps: recentBlogs });
 
         setLoading(false);
       });
@@ -66,6 +94,11 @@ const Blog = () => {
               <ReactMarkdown>
                 { content! }
               </ReactMarkdown>
+            </div>
+            <div className="RecentBlogsContainer">
+              <h2 className="RecentBlogHeader">Recent Blogs</h2>
+              <div className="SmallDivider" />
+              <BlogCards { ...blogCardsProps! } />
             </div>
           </>
       }
