@@ -1,0 +1,48 @@
+@import '../../styles/variables';
+
+.BlogContent {
+    min-height: var(--page-content-min-height-large-header);
+    max-width: var(--page-content-width);
+    background: #fff;
+    margin: auto;
+    padding: 20px 60px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.3rem;
+    color: var(--secondary-color);
+    line-height: 30px;
+
+    @media (max-width: $mobile-portrait-breakpoint) {
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        line-height: 25px;
+    }
+}
+
+.RecentBlogsContainer {
+    background: var(--tertiary-color);
+    min-height: 520px;
+    padding: 40px 0;
+
+    @media (max-width: $mobile-landscape-breakpoint) {
+        min-height: 920px;
+    }
+
+    .RecentBlogHeader {
+        font-size: 32px;
+        font-family: 'Lato', sans-serif;
+        text-align: center;
+        line-height: 36px;
+        margin-top: 20px;
+        margin-bottom: 0;
+        font-weight: 700;
+    }
+
+    .BlogCards {
+        justify-content: center;
+        padding: 0;
+
+        .BlogCard {
+            border: 8px solid var(--tertiary-color) !important;
+        }
+    }
+}

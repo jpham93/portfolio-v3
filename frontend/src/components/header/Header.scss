@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .Header {
-    background-color: rgba(0,0,0,0.25);
+    background-color: rgba(0,0,0,0.4);
     background-blend-mode: multiply;
     background-position: center;
     background-size: cover;
@@ -17,10 +17,11 @@
         text-transform: capitalize;
 
         @media (max-width: $page-breakpoint) {
+            font-size: var(--header-font-size-default) !important;
+        }
 
-            & {
-                font-size: var(--header-font-size-default) !important;
-            }
+        @media (max-width: $mobile-landscape-breakpoint) {
+            font-size: 2rem !important;
         }
     }
 
@@ -33,6 +34,23 @@
             font-weight: 300;
             padding-right: 1rem;
             padding-left: 1rem;
+
+            &.BlogSubTitle {
+                font-family: 'Lato', sans-serif;
+                font-size: 1rem;
+                font-weight: 500;
+                opacity: 0.8;
+                text-align: center;
+                width: 100%;
+                display: block;
+
+                @media (max-width: $mobile-landscape-breakpoint) {
+
+                    .Divider {
+                        padding: 5px 0;
+                    }
+                }
+            }
         }
     }
 }

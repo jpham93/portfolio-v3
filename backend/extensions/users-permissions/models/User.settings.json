@@ -59,9 +59,17 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "blog": {
-      "via": "author",
-      "model": "blog"
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "description": {
+      "type": "string"
     }
   }
 }
