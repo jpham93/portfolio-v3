@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './Blog.scss';
+import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import Header from '../../components/header/Header';
 import ReactMarkdown from 'react-markdown';
-import BlogStateModel from '../../models/BlogState.model';
 
 const Blog = () => {
 
   const { blog_id } : { blog_id: string }       = useParams();
   const [loading, setLoading]                   = useState<boolean>(true);
   const [headerProps, setHeaderProps]           = useState<HeaderPropsModel | null>(null);
-  const [blogState, setBlogState]               = useState<BlogStateModel | null>(null);
+  const [content, setContent]                   = useState<string | null>(null);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/blog/${blog_id}`)
@@ -20,9 +20,19 @@ const Blog = () => {
         /**
          * Extract Header Props
          */
-        const { title, header_color, main_img } = data;
+        const { title, header_color, main_img, date, author, blog_category: { type, color } } = data;
 
-        let hProps: HeaderPropsModel = { title: { text: title, style: 'default' } , headerType: 'large' }
+        const subtitleText = { author, type, date: moment(date).format('MMM D, YYYY') };
+
+        let hProps: HeaderPropsModel = {
+          title: {
+            text: title, style: 'default'
+          },
+          headerType: 'large',
+          subtitle: {
+            text: subtitleText
+          }
+        };
 
         // optional content
         if (header_color) {
@@ -37,11 +47,7 @@ const Blog = () => {
         /**
          * Extract Blog State
          */
-        const { content, date, author, blog_category: { type, color } } = data;
-
-        const bState: BlogStateModel = { blog_category: { type, color}, content, date, author };
-
-        setBlogState(bState);
+        setContent(data.content);
 
         setLoading(false);
       });
@@ -58,7 +64,7 @@ const Blog = () => {
             <Header { ...headerProps! } />
             <div className="BlogContent LargeHeaderOverlap">
               <ReactMarkdown>
-                { blogState!.content }
+                { content! }
               </ReactMarkdown>
             </div>
           </>

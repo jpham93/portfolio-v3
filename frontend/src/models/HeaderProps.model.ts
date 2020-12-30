@@ -7,7 +7,11 @@ interface HeaderPropsModel {
   header_img?:    any;
   header_color?:  string;
   subtitle?: {
-    text:             string;
+    text:             string | {
+      author: string;
+      type: string;
+      date: string;
+    };
     backgroundColor?: string;
   }
 }

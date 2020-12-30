@@ -3,6 +3,14 @@ import HeaderPropsModel from '../../models/HeaderProps.model';
 import './Header.scss';
 import validateColor from 'validate-color';
 
+/**
+ * @param title
+ * @param header_img
+ * @param headerType
+ * @param header_color
+ * @param subtitle
+ * @todo - redo dynamic rendering of Project Chips & Blog subtitle
+ */
 const Header = ({ title, header_img, headerType, header_color, subtitle }: HeaderPropsModel) => {
 
   // check to make sure image exist from API
@@ -44,10 +52,18 @@ const Header = ({ title, header_img, headerType, header_color, subtitle }: Heade
           ?
           <h2 className="HeaderSubTitle">
             <span
-              className={subtitle.backgroundColor ? "p-tag p-tag-rounded" : ""}
-              style={{ backgroundColor: subtitle.backgroundColor }}
+              className={ subtitle.backgroundColor ? "p-tag p-tag-rounded" : "BlogSubTitle" }
+              style={{ backgroundColor: subtitle.backgroundColor ? subtitle.backgroundColor  : "" }}
             >
-              { subtitle.text }
+              {
+                typeof subtitle.text === 'string'
+                ?
+                  subtitle.text
+                :
+                  <>
+                    { subtitle.text.author } <span className="Divider">|</span> { subtitle.text.type } <span className="Divider">|</span> { subtitle.text.date }
+                  </>
+              }
             </span>
           </h2>
           :
