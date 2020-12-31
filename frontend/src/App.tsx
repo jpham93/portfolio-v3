@@ -81,8 +81,8 @@ const App: React.FunctionComponent = () => {
   return (
     <Router>
       <div className="App" id={ "OuterContainer" }>
-          <CSSTransition in={ loading } classNames="Loading" timeout={ 400 } unmountOnExit>
-            <Loading headerType="large" />
+          <CSSTransition in={ loading } classNames="Loading" timeout={ 300 } unmountOnExit>
+            <Loading headerType="default" />
           </CSSTransition>
           <CSSTransition in={ !loading } classNames="AppContent" timeout={ 500 } mountOnEnter>
             <>

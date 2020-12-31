@@ -65,10 +65,10 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
 
     return(
       <>
-        <CSSTransition in={ loading } timeout={ 300 } unmountOnExit classNames="Loading">
-          <Loading headerType="large" />
+        <CSSTransition in={ loading } timeout={ 400 } unmountOnExit classNames="Loading">
+          <Loading headerType="large" initLoad={ true } />
         </CSSTransition>
-        <CSSTransition in={ !loading } timeout={ 800 } unmountOnExit classNames="Content">
+        <CSSTransition in={ !loading } timeout={ 500 } unmountOnExit classNames="Content">
           <>
             <Header {...headerProps!} />
             <div className="HomeContent">

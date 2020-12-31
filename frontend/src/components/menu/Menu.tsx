@@ -69,8 +69,8 @@ const Menu = ({ Brand, Links, inFooter, color, alt_color }: MenuPropsModel) => {
   const menuStyle: React.CSSProperties = inFooter
     // Footer menu styling
     ? alt_color && validateColor(alt_color)
-      ? { backgroundColor: alt_color, position: 'relative' }
-      : { backgroundColor: 'var(--secondary-color)', position: 'relative' }
+      ? { backgroundColor: alt_color }
+      : { backgroundColor: 'var(--secondary-color)' }
     // Header Color
     : color && validateColor(color)
       ? { backgroundColor: color, position: 'absolute' }
