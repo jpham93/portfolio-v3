@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import './styles/global.scss';
 import 'primereact/resources/themes/bootstrap4-dark-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
+import './styles/global.scss';
+import './App.scss';
 import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 
 // Custom Components
 import Menu from './components/menu/Menu';
@@ -17,6 +19,7 @@ import Blog from './pages/blog/Blog';
 
 // Models
 import GridLinksModel from './models/GridLinks.model';
+import Loading from './components/loading/Loading';
 
 const App: React.FunctionComponent = () => {
 
@@ -75,41 +78,42 @@ const App: React.FunctionComponent = () => {
       });
   }, []);
 
+  console.log(loading);
+
   return (
     <Router>
       <div className="App" id={ "OuterContainer" }>
-        {
-          loading
-            ?
-            <h2>Loading...</h2>
-            :
+          <CSSTransition in={ loading } classNames="Loading" timeout={ 300 } unmountOnExit>
+            <Loading />
+          </CSSTransition>
+          <CSSTransition in={ !loading } classNames="Content" timeout={ 800 } mountOnEnter>
             <>
-              <Menu {...{ ...menuProps!, inFooter: false }} />
+              <Menu {...{ ...menuProps!, inFooter: false }} key="TopMenu" />
               <div id={ "PageWrap" }>
-                <Switch>
+                <Switch key="RouterSwitch">
                   <Route exact path='/' >
-                    <Home {...gridLinks!} />
+                    <Home {...gridLinks!} key="Home" />
                   </Route>
-                  <Route path='/about' >
-                    <About />
+                  <Route path='/about'>
+                    <About key="About" />
                   </Route>
                   <Route path='/projects'>
-                    <Portfolio />
+                    <Portfolio key="Portfolio" />
                   </Route>
                   <Route path='/blogs'>
-                    <Blogs />
+                    <Blogs key="Blogs" />
                   </Route>
                   <Route path='/project/:project_id'>
-                    <Project />
+                    <Project key="ProjectPage" />
                   </Route>
                   <Route path='/blog/:blog_id'>
-                    <Blog />
+                    <Blog key="BlogPage" />
                   </Route>
                 </Switch>
               </div>
-              <Menu {...{ ...menuProps!, inFooter: true }} />
+              <Menu {...{ ...menuProps!, inFooter: true }} key="BottomMenu" />
             </>
-        }
+          </CSSTransition>
       </div>
     </Router>
   );
