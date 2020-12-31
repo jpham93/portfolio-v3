@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import './styles/global.scss';
 import 'primereact/resources/themes/bootstrap4-dark-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
+import './styles/global.scss';
+import './App.scss';
 import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 
 // Custom Components
 import Menu from './components/menu/Menu';
@@ -17,6 +19,7 @@ import Blog from './pages/blog/Blog';
 
 // Models
 import GridLinksModel from './models/GridLinks.model';
+import Loading from './components/loading/Loading';
 
 const App: React.FunctionComponent = () => {
 
@@ -70,7 +73,7 @@ const App: React.FunctionComponent = () => {
         setGridLinks({ gridLinks: gLinks });
 
         // finish page load
-        setLoading(false)
+        setLoading(false);
 
       });
   }, []);
@@ -78,23 +81,22 @@ const App: React.FunctionComponent = () => {
   return (
     <Router>
       <div className="App" id={ "OuterContainer" }>
-        {
-          loading
-            ?
-            <h2>Loading...</h2>
-            :
+          <CSSTransition in={ loading } classNames="Loading" timeout={ 300 } unmountOnExit>
+            <Loading headerType="default" />
+          </CSSTransition>
+          <CSSTransition in={ !loading } classNames="AppContent" timeout={ 500 } mountOnEnter>
             <>
-              <Menu {...{ ...menuProps!, inFooter: false }} />
-              <div id={ "PageWrap" }>
+              <div id={ "PageWrap" } className={ loading ? "InitLoad" : "" }>
+                <Menu {...{ ...menuProps!, inFooter: false }} key="TopMenu" />
                 <Switch>
                   <Route exact path='/' >
                     <Home {...gridLinks!} />
                   </Route>
-                  <Route path='/about' >
+                  <Route path='/about'>
                     <About />
                   </Route>
                   <Route path='/projects'>
-                    <Portfolio />
+                    <Portfolio key="Portfolio" />
                   </Route>
                   <Route path='/blogs'>
                     <Blogs />
@@ -106,10 +108,10 @@ const App: React.FunctionComponent = () => {
                     <Blog />
                   </Route>
                 </Switch>
+                <Menu {...{ ...menuProps!, inFooter: true }} />
               </div>
-              <Menu {...{ ...menuProps!, inFooter: true }} />
             </>
-        }
+          </CSSTransition>
       </div>
     </Router>
   );

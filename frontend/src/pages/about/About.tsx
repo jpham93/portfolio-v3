@@ -3,6 +3,8 @@ import './About.scss';
 import Header from '../../components/header/Header';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import ReactMarkdown from 'react-markdown';
+import Loading from '../../components/loading/Loading';
+import { CSSTransition } from 'react-transition-group';
 
 const About = (props: any) => {
 
@@ -40,20 +42,19 @@ const About = (props: any) => {
 
   return (
     <>
-      {
-        loading
-        ?
-          <h1>Loading</h1>
-        :
-          <>
-            <Header {...headerProps!} />
-            <div className="AboutContent Content">
-              <ReactMarkdown>
-                { pageContent! }
-              </ReactMarkdown>
-            </div>
-          </>
-      }
+          <CSSTransition in={ loading } timeout={ 400 } classNames="Loading" unmountOnExit>
+            <Loading headerType="default" />
+          </CSSTransition>
+          <CSSTransition in={ !loading } timeout={ 500 } classNames="Content" mountOnEnter>
+            <>
+              <Header {...headerProps!} />
+              <div className="AboutContent Content">
+                <ReactMarkdown>
+                  { pageContent! }
+                </ReactMarkdown>
+              </div>
+            </>
+          </CSSTransition>
     </>
   )
 };

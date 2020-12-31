@@ -70,3 +70,28 @@ img[src*="#x-large"] {
   margin: 10px auto;
   background-color: black;
 }
+
+.Loading-exit {
+  opacity: 1;
+}
+.Loading-exit-active {
+  opacity: 0;
+  transition: all .4s ease-out;
+}
+
+.AppContent-enter {
+  opacity: 0;
+}
+
+.AppContent-enter-active {
+  opacity: 1;
+  transition: all 0.8s ease-out;
+}
+
+.Content-enter {
+  opacity: 0;
+}
+.Content-enter-active {
+  opacity: 1;
+  transition: all 0.8s ease;
+}

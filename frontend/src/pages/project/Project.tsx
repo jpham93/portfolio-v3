@@ -15,6 +15,8 @@ import ProjectStateModel from '../../models/ProjectState.model';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import ContactBannerPropsModel from '../../models/ContactBannerProps.model';
 import ProjectCardsPropsModel from '../../models/ProjectCardsProps.model';
+import { CSSTransition } from 'react-transition-group';
+import Loading from '../../components/loading/Loading';
 
 const Project = () => {
 
@@ -27,13 +29,18 @@ const Project = () => {
   const [loading, setLoading]                         = useState<boolean>(true);
 
   useEffect(() => {
+    // scroll to the top. Works with reloading.
+    window.scrollTo(0, 0);
+
+    // set to loading again if blog_id changes
+    setLoading(true);
+
     /**
      * Extract single Project entry from custom Endpoint
      */
     fetch(`${process.env.REACT_APP_API_URL}/project/${project_id}`)
       .then(res => res.json())
       .then(async data => {
-        console.log(data);
         // extract required content first
         const { title, description, project_category: { type, color } , galleriaMedia } = data;
 
@@ -108,7 +115,8 @@ const Project = () => {
           project_category: {
             type: projectCard.project_category.type,
             color: projectCard.project_category.color
-          }
+          },
+          project_id: projectCard.project_id
         }));
 
         setProjectCardsProps({ projectCardsProps: recentProjects });
@@ -116,59 +124,58 @@ const Project = () => {
         setLoading(false);
       });
 
-  }, []);
+  }, [project_id]);
 
   return (
     <>
-      {
-        loading
-          ?
-          <h1>Loading...</h1>
-          :
-          <>
-            <Header { ...headerProps! } />
-              {
-                // load Project content when set
-                project
-                ?
-                  <>
-                    <div className="ProjectContent Content LargeHeaderOverlap">
-                    {
-                      // check if alternative image is defined and display dynamically
-                      project.hasOwnProperty('alt_img')
-                        ?
-                        <div style={{ backgroundImage: `url(${process.env.REACT_APP_API_URL}${project.alt_img.url})` }}
-                             className="ProjectAltImg"/>
-                        :
-                        null
-                    }
-                      <div className="ProjectDescription">
-                        <ReactMarkdown>
-                          { project.description }
-                        </ReactMarkdown>
-                      </div>
-                      <div className="ProjectGalleriaContainer">
-                        {
-                          !project.galleria_media
-                            ?
-                            <h2 className="NoImagesMessage">Sorry - No examples images available</h2>
-                            :
-                            <ProjectGalleria { ...project.galleria_media! } />
-                        }
-                      </div>
+      <CSSTransition in={ loading } timeout={ 400 } classNames="Loading" unmountOnExit>
+        <Loading headerType="large" />
+      </CSSTransition>
+      <CSSTransition in={ !loading } timeout={ 500 } classNames="Content" mountOnEnter>
+        <>
+          <Header { ...headerProps! } />
+            {
+              // load Project content when set
+              project
+              ?
+                <>
+                  <div className="ProjectContent Content LargeHeaderOverlap">
+                  {
+                    // check if alternative image is defined and display dynamically
+                    project.hasOwnProperty('alt_img')
+                      ?
+                      <div style={{ backgroundImage: `url(${process.env.REACT_APP_API_URL}${project.alt_img.url})` }}
+                           className="ProjectAltImg"/>
+                      :
+                      null
+                  }
+                    <div className="ProjectDescription">
+                      <ReactMarkdown>
+                        { project.description }
+                      </ReactMarkdown>
                     </div>
-                    <div className="RecentProjectsContainer">
-                      <h2 className="RecentProjectsHeader">Recent Projects</h2>
-                      <div className="SmallDivider" />
-                      <ProjectCards { ...projectCardsProps! } />
+                    <div className="ProjectGalleriaContainer">
+                      {
+                        !project.galleria_media
+                          ?
+                          <h2 className="NoImagesMessage">Sorry - No examples images available</h2>
+                          :
+                          <ProjectGalleria { ...project.galleria_media! } />
+                      }
                     </div>
-                    <ContactBanner { ...contactBannerProps! } />
-                  </>
-                :
-                  null
-              }
+                  </div>
+                  <div className="RecentProjectsContainer">
+                    <h2 className="RecentProjectsHeader">Recent Projects</h2>
+                    <div className="SmallDivider" />
+                    <ProjectCards { ...projectCardsProps! } />
+                  </div>
+                  <ContactBanner { ...contactBannerProps! } />
+                </>
+              :
+                null
+            }
           </>
-      }
+        </CSSTransition>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './GridLinks.scss';
 import SocialLinksModel from '../../models/SocialLinks.model';
 import GridLinksModel from '../../models/GridLinks.model';
@@ -22,9 +22,17 @@ const defaultSocialGridColors = [
   '#202020'
 ];
 
-const GridLinksView = (
-  { gridLinks, socialLinks }: { gridLinks: GridLinksModel[], socialLinks: SocialLinksModel[] },
-) => {
+const GridLinksView = ({ gridLinks, socialLinks }: { gridLinks: GridLinksModel[], socialLinks: SocialLinksModel[] }) => {
+
+  // Cascading Fade-In Animation effect
+  useEffect(() => {
+    setTimeout(() => {
+      const gridTiles = document.querySelectorAll('.GridTile');
+      for (let i = 0; i < 9; i++) {
+        gridTiles[i].classList.add(`FadeCascade-${i}`);
+      }
+    }, 300);
+  });
 
   const gridTiles = gridLinks
     .filter(menuLink => menuLink.name.toLowerCase() !== 'home') // remove home from the array

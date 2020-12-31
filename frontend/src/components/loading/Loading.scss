@@ -1,0 +1,25 @@
+.LoadingComponent {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+
+    .Header {
+        background-color: var(--secondary-color) !important;
+        background-blend-mode: normal !important;
+        width: 100%;
+        position: fixed;
+        top: 0;
+    }
+
+    .LoadingComponentContent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+
+        .Spinner {
+            margin: 0 5px;
+        }
+    }
+}

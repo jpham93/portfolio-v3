@@ -4,18 +4,20 @@
     top: 0;
     width: 100%;
     height: var(--menu-height);
+    z-index: 1;
 
     .Menu {
         max-width: var(--page-content-width);
         margin: auto;
         border: none;
-        background: rgba(0, 0, 0, 0);
+        background: transparent;
 
         .MenuBrand {
             font-size: 2rem;
             font-weight: 300;
             color: #fff;
-            text-transform: uppercase;        }
+            text-transform: uppercase;
+        }
 
         .MenuLink {
             font-size: 0.8rem;

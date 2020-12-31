@@ -5,11 +5,19 @@
     margin: auto;
 
     .GridTile {
+        opacity: 0;
         height: 290px;
         padding: 0;
         border: 5px solid #fff;
         position: relative;
         overflow: hidden;
+
+        @for $i from 0 through 9 {
+            &.FadeCascade-#{$i} {
+                opacity: 1 !important;
+                transition: opacity 300ms ease $i * 150ms;
+            }
+        }
 
         &:hover {
             cursor: pointer;

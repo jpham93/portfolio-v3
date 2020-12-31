@@ -11,6 +11,8 @@ import ProjectCards from '../../components/projectCards/ProjectCards';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import ContactBannerPropsModel from '../../models/ContactBannerProps.model';
 import ProjectCardsPropsModel from '../../models/ProjectCardsProps.model';
+import Loading from '../../components/loading/Loading';
+import { CSSTransition } from 'react-transition-group';
 
 const Portfolio = () => {
 
@@ -111,30 +113,26 @@ const Portfolio = () => {
 
   return(
     <>
-      {
-        loading
-          ?
-          <>
-            <ProgressSpinner />
-            <h2>Loading. Please wait...</h2>
-          </>
-          :
-          <>
-            <Header { ...headerProps! } />
-            <div className="PortfolioContent">
-              <div className="ProjectCardsContainer">
-                {
-                  projectCards === null
-                  ?
-                    <h2 className="NoProjectsHeader">No Projects Available. Coming Soon...</h2>
-                  :
-                    <ProjectCards { ...projectCards! } />
-                }
-              </div>
-              <ContactBanner { ...contactBannerProps! } />
+      <CSSTransition in={ loading } timeout={ 400 } classNames="Loading" unmountOnExit >
+        <Loading headerType="default" />
+      </CSSTransition>
+      <CSSTransition  in={ !loading } timeout={ 500 } classNames="Content" unmountOnExit>
+        <>
+          <Header { ...headerProps! } />
+          <div className="PortfolioContent">
+            <div className="ProjectCardsContainer">
+              {
+                projectCards === null
+                ?
+                  <h2 className="NoProjectsHeader">No Projects Available. Coming Soon...</h2>
+                :
+                  <ProjectCards { ...projectCards! } />
+              }
             </div>
-          </>
-      }
+            <ContactBanner { ...contactBannerProps! } />
+          </div>
+        </>
+      </CSSTransition>
     </>
   );
 }

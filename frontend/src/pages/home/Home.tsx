@@ -5,6 +5,8 @@ import GridLinksView from '../../components/gridLinks/GridLinks';
 import SocialLinksModel from '../../models/SocialLinks.model';
 import GridLinksModel from '../../models/GridLinks.model';
 import HeaderPropsModel from '../../models/HeaderProps.model';
+import Loading from '../../components/loading/Loading';
+import { CSSTransition } from 'react-transition-group';
 
 const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
 
@@ -63,18 +65,17 @@ const Home = ({ gridLinks }: { gridLinks: GridLinksModel[] }) => {
 
     return(
       <>
-        {
-          loading
-            ?
-            <h1>Loading...</h1>
-            :
-            <>
-              <Header {...headerProps!} />
-              <div className="HomeContent">
-                <GridLinksView {...gridLinkProps!} />
-              </div>
-            </>
-        }
+        <CSSTransition in={ loading } timeout={ 400 } unmountOnExit classNames="Loading">
+          <Loading headerType="large" initLoad={ true } />
+        </CSSTransition>
+        <CSSTransition in={ !loading } timeout={ 500 } unmountOnExit classNames="Content">
+          <>
+            <Header {...headerProps!} />
+            <div className="HomeContent">
+              <GridLinksView {...gridLinkProps!} />
+            </div>
+          </>
+        </CSSTransition>
       </>
     );
 };
