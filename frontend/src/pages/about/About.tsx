@@ -42,10 +42,10 @@ const About = (props: any) => {
 
   return (
     <>
-          <CSSTransition in={ loading } timeout={ 300 } classNames="Loading" unmountOnExit>
-            <Loading />
+          <CSSTransition in={ loading } timeout={ 400 } classNames="Loading" unmountOnExit>
+            <Loading headerType="default" />
           </CSSTransition>
-          <CSSTransition in={ !loading } timeout={ 800 } classNames="Content" mountOnEnter>
+          <CSSTransition in={ !loading } timeout={ 500 } classNames="Content" mountOnEnter>
             <>
               <Header {...headerProps!} />
               <div className="AboutContent Content">

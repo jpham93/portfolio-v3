@@ -76,7 +76,16 @@ img[src*="#x-large"] {
 }
 .Loading-exit-active {
   opacity: 0;
-  transition: all .3s ease-out;
+  transition: all .4s ease-out;
+}
+
+.AppContent-enter {
+  opacity: 0;
+}
+
+.AppContent-enter-active {
+  opacity: 1;
+  transition: all 0.8s ease-out;
 }
 
 .Content-enter {
@@ -84,5 +93,5 @@ img[src*="#x-large"] {
 }
 .Content-enter-active {
   opacity: 1;
-  transition: all 0.8s ease-in;
+  transition: all 0.8s ease;
 }

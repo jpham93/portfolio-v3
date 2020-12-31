@@ -1,8 +1,19 @@
 .LoadingComponent {
-    min-height: 100vh;
+    min-height: var(--page-content-min-height-default);
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+
+    .Header {
+        background-color: var(--tertiary-color) !important;
+        background-blend-mode: normal !important;
+        width: 100%;
+        position: fixed;
+        top: 0;
+    }
 
     .Spinner {
         margin: 0 5px;

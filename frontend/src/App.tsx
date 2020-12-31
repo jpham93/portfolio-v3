@@ -73,45 +73,43 @@ const App: React.FunctionComponent = () => {
         setGridLinks({ gridLinks: gLinks });
 
         // finish page load
-        setLoading(false)
+        setLoading(false);
 
       });
   }, []);
 
-  console.log(loading);
-
   return (
     <Router>
       <div className="App" id={ "OuterContainer" }>
-          <CSSTransition in={ loading } classNames="Loading" timeout={ 300 } unmountOnExit>
-            <Loading />
+          <CSSTransition in={ loading } classNames="Loading" timeout={ 400 } unmountOnExit>
+            <Loading headerType="large" />
           </CSSTransition>
-          <CSSTransition in={ !loading } classNames="Content" timeout={ 800 } mountOnEnter>
+          <CSSTransition in={ !loading } classNames="AppContent" timeout={ 500 } mountOnEnter>
             <>
-              <Menu {...{ ...menuProps!, inFooter: false }} key="TopMenu" />
-              <div id={ "PageWrap" }>
-                <Switch key="RouterSwitch">
+              <div id={ "PageWrap" } className={ loading ? "InitLoad" : "" }>
+                <Menu {...{ ...menuProps!, inFooter: false }} key="TopMenu" />
+                <Switch>
                   <Route exact path='/' >
-                    <Home {...gridLinks!} key="Home" />
+                    <Home {...gridLinks!} />
                   </Route>
                   <Route path='/about'>
-                    <About key="About" />
+                    <About />
                   </Route>
                   <Route path='/projects'>
                     <Portfolio key="Portfolio" />
                   </Route>
                   <Route path='/blogs'>
-                    <Blogs key="Blogs" />
+                    <Blogs />
                   </Route>
                   <Route path='/project/:project_id'>
-                    <Project key="ProjectPage" />
+                    <Project />
                   </Route>
                   <Route path='/blog/:blog_id'>
-                    <Blog key="BlogPage" />
+                    <Blog />
                   </Route>
                 </Switch>
+                <Menu {...{ ...menuProps!, inFooter: true }} />
               </div>
-              <Menu {...{ ...menuProps!, inFooter: true }} key="BottomMenu" />
             </>
           </CSSTransition>
       </div>
