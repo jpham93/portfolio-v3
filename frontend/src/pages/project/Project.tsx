@@ -41,7 +41,6 @@ const Project = () => {
     fetch(`${process.env.REACT_APP_API_URL}/project/${project_id}`)
       .then(res => res.json())
       .then(async data => {
-        console.log(data);
         // extract required content first
         const { title, description, project_category: { type, color } , galleriaMedia } = data;
 
