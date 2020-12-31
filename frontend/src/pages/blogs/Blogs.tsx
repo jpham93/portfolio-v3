@@ -6,6 +6,8 @@ import Header from '../../components/header/Header';
 import validateColor from 'validate-color';
 import BlogCardsPropsModel from '../../models/BlogCardsProps.model';
 import BlogCards from '../../components/blogCards/BlogCards';
+import { CSSTransition } from 'react-transition-group';
+import Loading from '../../components/loading/Loading';
 
 const Blogs = () => {
 
@@ -61,29 +63,25 @@ const Blogs = () => {
 
   return(
     <>
-      {
-        loading
-        ?
-          <>
-            <ProgressSpinner />
-            <h2>Loading. Please wait...</h2>
-          </>
-        :
-          <>
-          <Header { ...headerProps! } />
-            <div className="BlogsContent">
-              <div className="BlogCardsContainer">
-                {
-                  blogCardsProps === null
-                    ?
-                      <h2 className="NoBlogsHeader">No Blogs Available. Coming Soon...</h2>
-                    :
-                      <BlogCards blogCardsProps={ blogCardsProps } />
-                }
-              </div>
+      <CSSTransition in={ loading } timeout={ 400 } classNames="Loading" unmountOnExit>
+        <Loading headerType="default" />
+      </CSSTransition>
+      <CSSTransition in={ !loading } timeout={ 500 } classNames="Content" mountOnEnter>
+        <>
+        <Header { ...headerProps! } />
+          <div className="BlogsContent">
+            <div className="BlogCardsContainer">
+              {
+                blogCardsProps === null
+                  ?
+                    <h2 className="NoBlogsHeader">No Blogs Available. Coming Soon...</h2>
+                  :
+                    <BlogCards blogCardsProps={ blogCardsProps } />
+              }
             </div>
-          </>
-      }
+          </div>
+        </>
+      </CSSTransition>
     </>
   );
 }
