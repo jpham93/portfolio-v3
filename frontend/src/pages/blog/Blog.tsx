@@ -7,7 +7,6 @@ import Header from '../../components/header/Header';
 import ReactMarkdown from 'react-markdown';
 import BlogCards from '../../components/blogCards/BlogCards';
 import BlogCardsPropsModel from '../../models/BlogCardsProps.model';
-import ProjectCardsPropsModel from '../../models/ProjectCardsProps.model';
 import { CSSTransition } from 'react-transition-group';
 import Loading from '../../components/loading/Loading';
 
@@ -20,6 +19,12 @@ const Blog = () => {
   const [blogCardsProps, setBlogCardsProps]     = useState<{ blogCardsProps: BlogCardsPropsModel[] } | null>(null);
 
   useEffect(() => {
+    // scroll to the top. Works with reloading.
+    window.scrollTo(0, 0);
+
+    // set to loading again if blog_id changes
+    setLoading(true);
+
     fetch(`${process.env.REACT_APP_API_URL}/blog/${blog_id}`)
       .then(res => res.json())
       .then(async data => {
@@ -81,7 +86,7 @@ const Blog = () => {
 
         setLoading(false);
       });
-  }, []);
+  }, [blog_id]);
 
   return(
     <>

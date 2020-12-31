@@ -29,6 +29,12 @@ const Project = () => {
   const [loading, setLoading]                         = useState<boolean>(true);
 
   useEffect(() => {
+    // scroll to the top. Works with reloading.
+    window.scrollTo(0, 0);
+
+    // set to loading again if blog_id changes
+    setLoading(true);
+
     /**
      * Extract single Project entry from custom Endpoint
      */
@@ -110,7 +116,8 @@ const Project = () => {
           project_category: {
             type: projectCard.project_category.type,
             color: projectCard.project_category.color
-          }
+          },
+          project_id: projectCard.project_id
         }));
 
         setProjectCardsProps({ projectCardsProps: recentProjects });
@@ -118,7 +125,7 @@ const Project = () => {
         setLoading(false);
       });
 
-  }, []);
+  }, [project_id]);
 
   return (
     <>
