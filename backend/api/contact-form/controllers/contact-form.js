@@ -24,7 +24,7 @@ module.exports = {
     console.log(ctx.request.body);
 
     if (err) {
-      ctx.throw(400, 'Contact form submission is missing information.');
+      ctx.throw(406, 'Contact form submission is missing information.');
     }
 
     return ctx.response;

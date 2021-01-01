@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import _ from 'lodash';
 import './ContactForm.scss';
 import { Dialog } from 'primereact/dialog';
@@ -6,7 +6,7 @@ import ContactFormPropsModel from '../models/ContactFormProps.model';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
-import { Toast } from 'primereact/toast';
+import { Toast, ToastMessage, ToastProps } from 'primereact/toast';
 
 // Fill in default. If API contains content, change to user-defined content
 const CONTENT = {
@@ -22,12 +22,14 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
 
   const [loading, setLoading]                       = useState<boolean>(true);
   const [contactFormContent, setContactFormContent] = useState(CONTENT);
-  const [inputValues, setInputValues] = useState<{ name?: string, email?: string, details?: string }>({
+  const [inputValues, setInputValues]               = useState<{ name?: string, email?: string, details?: string }>({
     name: '',
     email: '',
     details: '',
   });
-  const [inputErrors, setInputErrors] = useState({ name: false, email: false, details: false });
+  const [inputErrors, setInputErrors]               = useState({ name: false, email: false, details: false });
+  const [toastRef, setToastRef]                     = useState<Toast | null>(null);
+  const [processingForm, setProcessingForm]         = useState<boolean>(false);
 
   useEffect(() => {
     if (loading) {
@@ -40,7 +42,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
             prevState,
             data,
             (defaultContent, apiContent) => _.isUndefined(apiContent) ? defaultContent : apiContent)
-          )
+          );
           setLoading(false);
         });
     }
@@ -52,9 +54,10 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
   }
 
   const handleSubmit = (e: React.SyntheticEvent) => {
+    setProcessingForm(true);
     e.preventDefault();
 
-    if (true) {
+    if (validateInputs()) {
       fetch(`${process.env.REACT_APP_API_URL}/contact-form-submission`, {
         method: 'POST',
         headers: {
@@ -62,17 +65,52 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
         },
         body: JSON.stringify(inputValues)
       })
-        .then(res => {
+        .then(async res => {
           if (res.status === 200) {
 
+            if (toastRef) {
+              toastRef.show({
+                severity: 'success',
+                summary:  'Thank you!',
+                detail:   'Your message has been successfully sent. I will respond as soon as I can!',
+                life:     1000000
+              });
+            }
+
+          } else {
+
+            if(toastRef) {
+              toastRef.show({
+                severity: 'error',
+                summary:  'Error',
+                detail:   'Message could not be sent. Please try again later.'
+              });
+            }
+            const { error, message }  = await res.json();
+            const err                 = new Error(message);
+            err.name                  = error;
+            throw err;
           }
         })
         .catch(err => {
-          console.log(err);
+          console.error(err);
+          setProcessingForm(false);
         });
-      setFormVisible(false);
+    } else {
+      setProcessingForm(false);
     }
   }
+
+  /**
+   * close form on success toast close
+   */
+  const handleCloseToast = (message: ToastMessage) => {
+    if (message.severity === 'success') {
+      setInputValues({ name: '', email: '', details: '' });
+      setProcessingForm(false);
+      setFormVisible(false);
+    }
+  };
 
   // Hacky way of injecting text into close icon. API does not provide a method to do so.
   const injectCloseText = () => {
@@ -134,6 +172,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
             onChange={ handleChange }
             name="name"
             value={ inputValues.name }
+            disabled={ processingForm }
           />
           {
             inputErrors.name && <small id="username2-help" className="p-invalid p-d-block">Please enter a name.</small>
@@ -147,6 +186,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
             onChange={ handleChange }
             name="email"
             value={ inputValues.email }
+            disabled={ processingForm }
           />
           {
             inputErrors.email && <small id="username2-help" className="p-invalid p-d-block">Please enter a valid email.</small>
@@ -159,13 +199,23 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
             onChange={ handleChange }
             name="details"
             value={ inputValues.details }
+            disabled={ processingForm }
           />
           {
             inputErrors.details && <small id="username2-help" className="p-invalid p-d-block">Please provide a description.</small>
           }
         </div>
-        <Button className="ContactFormButton" label={ contactFormContent.button_text }/>
-        <Toast />
+        <Button
+          className="ContactFormButton"
+          label={ contactFormContent.button_text }
+          disabled={ processingForm }
+          iconPos="right"
+          icon={processingForm ? 'pi pi-spin pi-spinner' : ''}
+        />
+        <Toast
+          ref={(el) => setToastRef(el)}
+          onRemove={ message => handleCloseToast(message) }
+        />
       </form>
     </Dialog>
   );
