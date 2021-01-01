@@ -11,15 +11,17 @@ module.exports = {
 
     let err = false;
 
-    if (!ctx.request.body.hasOwnProperty('name')) {
+    if (!ctx.request.body.hasOwnProperty('name') || !ctx.request.body.name) {
       err = true;
     }
-    if (!ctx.request.body.hasOwnProperty('email')) {
+    if (!ctx.request.body.hasOwnProperty('email') || !ctx.request.body.email) {
       err = true;
     }
-    if (!ctx.request.body.hasOwnProperty('details')) {
+    if (!ctx.request.body.hasOwnProperty('details') || !ctx.request.body.details) {
       err = true;
     }
+
+    console.log(ctx.request.body);
 
     if (err) {
       ctx.throw(400, 'Contact form submission is missing information.');

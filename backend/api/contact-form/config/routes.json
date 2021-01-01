@@ -1,6 +1,14 @@
 {
   "routes": [
     {
+      "method": "GET",
+      "path": "/contact-form",
+      "handler": "contact-form.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/contact-form-submission",
       "handler": "contact-form.sendContactFormSubmission",

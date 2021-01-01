@@ -6,6 +6,7 @@ import ContactFormPropsModel from '../models/ContactFormProps.model';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
 
 // Fill in default. If API contains content, change to user-defined content
 const CONTENT = {
@@ -26,7 +27,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
     email: '',
     details: '',
   });
-  const [inputErrors, setInputErrors] = useState({ name: false, email: false, details: false })
+  const [inputErrors, setInputErrors] = useState({ name: false, email: false, details: false });
 
   useEffect(() => {
     if (loading) {
@@ -52,8 +53,23 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    if (validateInputs()) {
-      console.log(inputValues);
+
+    if (true) {
+      fetch(`${process.env.REACT_APP_API_URL}/contact-form-submission`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(inputValues)
+      })
+        .then(res => {
+          if (res.status === 200) {
+
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
       setFormVisible(false);
     }
   }
@@ -149,6 +165,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
           }
         </div>
         <Button className="ContactFormButton" label={ contactFormContent.button_text }/>
+        <Toast />
       </form>
     </Dialog>
   );
