@@ -1,6 +1,14 @@
 'use strict';
 const nodemailer = require('nodemailer');
 
+const emailTemplate = ({ name, email, details }) => `
+  <p>A new message was submitted from your website!</p>
+  <h2>Name: </h2><strong>${name}</strong>
+  <h2>Email: </h2><strong>${email}</strong>
+  <h3>Details: </h3>
+  <p>${details}</p>
+`
+
 /**
  * Read the documentation (https://strapi.io/documentation/v3.x/concepts/controllers.html#core-controllers)
  * to customize this controller
@@ -29,21 +37,33 @@ module.exports = {
       ctx.throw(406, 'Contact form submission is missing information.');
     }
 
+    /**
+     * If successful, extract payload and send mail...
+     */
     const { name, email, details } = ctx.request.body;
-    console.log(process.env.EMAIL_ACCOUNT);
 
-    // /**
-    //  * Configure Email
-    //  */
-    // let senderAccount = nodemailer.createTransport({
-    //   host: "smtp.ethereal.email",
-    //   port: 587,
-    //   secure: false, // true for 465, false for other ports
-    //   auth: {
-    //     user: testAccount.user, // generated ethereal user
-    //     pass: testAccount.pass, // generated ethereal password
-    //   }
-    // });
+    /**
+     * Configure Email
+     */
+    const { SMTP_HOST, SMTP_PORT, EMAIL_ACCOUNT, EMAIL_PASSWORD, SECURE_FLAG } = process.env;
+
+    let senderAccount = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      secure: SECURE_FLAG === 'true', // true for 465, false for other ports
+      auth: {
+        user: EMAIL_ACCOUNT,
+        pass: EMAIL_PASSWORD,
+      }
+    });
+
+    senderAccount.sendMail({
+      from: '"James Pham" <phamj93@gmail.com>', // sender address
+      to: "jamespham93@yahoo.com", // list of receivers
+      subject: "Portfolio Contact Form Submission ✔", // Subject line
+      text: "New Submission", // plain text body
+      html: emailTemplate({ name, email, details }), // html body
+    });
 
     return ctx.response;
   }
