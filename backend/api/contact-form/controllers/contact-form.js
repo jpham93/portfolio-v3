@@ -48,8 +48,6 @@ module.exports = {
      */
     const { name, email, details, recaptchaRes } = ctx.request.body;
 
-    console.log(recaptchaRes);
-
     /**
      * Verify ReCAPTCHA token from client
      * @see - https://dev.to/kumar_abhirup/implementing-google-recaptcha-with-react-and-node-js-1jgf
@@ -64,30 +62,34 @@ module.exports = {
     }))
       .json();
 
-    console.log(verified);
+    if (!verified.success) {
+      ctx.throw(401, 'Could not verify recaptcha. Please try again later.');
+    } else if (verified.score <= 0.3 ) {
+      ctx.throw(401, 'ReCAPTCHA failed. Please wait a few moments before retrying.')
+    }
 
       /**
      * Configure Email
      */
     const { SMTP_HOST, SMTP_PORT, EMAIL_ACCOUNT, EMAIL_PASSWORD, SECURE_FLAG } = process.env;
 
-    // let senderAccount = nodemailer.createTransport({
-    //   host: SMTP_HOST,
-    //   port: SMTP_PORT,
-    //   secure: SECURE_FLAG === 'true', // true for 465, false for other ports
-    //   auth: {
-    //     user: EMAIL_ACCOUNT,
-    //     pass: EMAIL_PASSWORD,
-    //   }
-    // });
-    //
-    // senderAccount.sendMail({
-    //   from: '"James Pham" <phamj93@gmail.com>', // sender address
-    //   to: "jamespham93@yahoo.com", // list of receivers
-    //   subject: "Portfolio Contact Form Submission ✔", // Subject line
-    //   text: "New Submission", // plain text body
-    //   html: emailTemplate({ name, email, details }), // html body
-    // });
+    const senderAccount = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      secure: SECURE_FLAG === 'true', // true for 465, false for other ports
+      auth: {
+        user: EMAIL_ACCOUNT,
+        pass: EMAIL_PASSWORD,
+      }
+    });
+
+    senderAccount.sendMail({
+      from: '"James Pham" <phamj93@gmail.com>', // sender address
+      to: "jamespham93@yahoo.com", // list of receivers
+      subject: "Portfolio Contact Form Submission ✔", // Subject line
+      text: "New Submission", // plain text body
+      html: emailTemplate({ name, email, details }), // html body
+    });
 
     return ctx.response;
   }

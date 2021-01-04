@@ -239,7 +239,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
       </form>
       <ReCAPTCHA
         size="invisible"
-        sitekey={ process.env.REACT_APP_CAPTCHA_SITE_KEY_TEST! }
+        sitekey={ process.env.REACT_APP_CAPTCHA_SITE_KEY! }
         ref={ recaptchaRef }
       />
     </Dialog>
