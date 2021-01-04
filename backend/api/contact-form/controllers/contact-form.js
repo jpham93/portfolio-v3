@@ -1,5 +1,8 @@
 'use strict';
 const nodemailer = require('nodemailer');
+// required for fetching from Node server
+require("es6-promise").polyfill();
+require("isomorphic-fetch");
 
 const emailTemplate = ({ name, email, details }) => `
   <p>A new message was submitted from your website!</p>
@@ -47,15 +50,21 @@ module.exports = {
 
     console.log(recaptchaRes);
 
-    const isHuman = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
+    /**
+     * Verify ReCAPTCHA token from client
+     * @see - https://dev.to/kumar_abhirup/implementing-google-recaptcha-with-react-and-node-js-1jgf
+     */
+    const verified = await (await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
       method: "post",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
       },
-      body: `secret=${ process.env.RECAPTCHA_SERVER_KEY }&response=${humanKey}`
-    })
+      body: `secret=${ process.env.CAPTCHA_SITE_SECRET_KEY }&response=${ recaptchaRes }`
+    }))
+      .json();
 
+    console.log(verified);
 
       /**
      * Configure Email
