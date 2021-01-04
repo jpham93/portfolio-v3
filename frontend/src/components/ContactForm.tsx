@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import _ from 'lodash';
 import './ContactForm.scss';
 import { Dialog } from 'primereact/dialog';
@@ -6,7 +6,8 @@ import ContactFormPropsModel from '../models/ContactFormProps.model';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
-import { Toast, ToastMessage, ToastProps } from 'primereact/toast';
+import { Toast, ToastMessage } from 'primereact/toast';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 // Fill in default. If API contains content, change to user-defined content
 const CONTENT = {
@@ -30,6 +31,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
   const [inputErrors, setInputErrors]               = useState({ name: false, email: false, details: false });
   const [toastRef, setToastRef]                     = useState<Toast | null>(null);
   const [processingForm, setProcessingForm]         = useState<boolean>(false);
+  const recaptchaRef                                = createRef<ReCAPTCHA>();
 
   useEffect(() => {
     if (loading) {
@@ -53,17 +55,31 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
     setInputValues(prevState => ({ ...prevState, [name]: value}))
   }
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     setProcessingForm(true);
     e.preventDefault();
 
-    if (validateInputs()) {
+    /**
+     * Execute CAPTCHA and retrieve token
+     */
+    const recaptchaRes = await recaptchaRef.current!.executeAsync()
+      .catch(e => {
+        toastRef!.show({
+          severity: 'error',
+          summary:  'Error',
+          detail:   'ReCAPTCHA failed. Please try again later.'
+        });
+        setProcessingForm(false);
+        return;
+      });
+
+    if (validateInputs() && recaptchaRes) {
       fetch(`${process.env.REACT_APP_API_URL}/contact-form-submission`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(inputValues)
+        body: JSON.stringify({ ...inputValues, recaptchaRes })
       })
         .then(async res => {
           if (res.status === 200) {
@@ -73,7 +89,7 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
                 severity: 'success',
                 summary:  'Thank you!',
                 detail:   'Your message has been successfully sent. I will respond as soon as I can!',
-                life:     1000000
+                life:     10000
               });
             }
 
@@ -118,6 +134,10 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
     if (closeButton) {
       closeButton.innerHTML = '<span class="CloseString">Close&nbsp;</span>' + closeButton.innerHTML;
     }
+  }
+
+  const onCaptchaChange = (token: any) => {
+    console.log(token);
   }
 
   const validateInputs = (): boolean => {
@@ -217,6 +237,11 @@ const ContactForm = ({ formVisible, setFormVisible }: ContactFormPropsModel) => 
           onRemove={ message => handleCloseToast(message) }
         />
       </form>
+      <ReCAPTCHA
+        size="invisible"
+        sitekey={ process.env.REACT_APP_CAPTCHA_SITE_KEY_TEST! }
+        ref={ recaptchaRef }
+      />
     </Dialog>
   );
 }

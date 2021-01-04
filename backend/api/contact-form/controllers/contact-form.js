@@ -32,6 +32,9 @@ module.exports = {
     if (!ctx.request.body.hasOwnProperty('details') || !ctx.request.body.details) {
       err = true;
     }
+    if (!ctx.request.body.hasOwnProperty('recaptchaRes') || !ctx.request.body.recaptchaRes) {
+      err = true;
+    }
 
     if (err) {
       ctx.throw(406, 'Contact form submission is missing information.');
@@ -40,30 +43,42 @@ module.exports = {
     /**
      * If successful, extract payload and send mail...
      */
-    const { name, email, details } = ctx.request.body;
+    const { name, email, details, recaptchaRes } = ctx.request.body;
 
-    /**
+    console.log(recaptchaRes);
+
+    const isHuman = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+      },
+      body: `secret=${ process.env.RECAPTCHA_SERVER_KEY }&response=${humanKey}`
+    })
+
+
+      /**
      * Configure Email
      */
     const { SMTP_HOST, SMTP_PORT, EMAIL_ACCOUNT, EMAIL_PASSWORD, SECURE_FLAG } = process.env;
 
-    let senderAccount = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port: SMTP_PORT,
-      secure: SECURE_FLAG === 'true', // true for 465, false for other ports
-      auth: {
-        user: EMAIL_ACCOUNT,
-        pass: EMAIL_PASSWORD,
-      }
-    });
-
-    senderAccount.sendMail({
-      from: '"James Pham" <phamj93@gmail.com>', // sender address
-      to: "jamespham93@yahoo.com", // list of receivers
-      subject: "Portfolio Contact Form Submission ✔", // Subject line
-      text: "New Submission", // plain text body
-      html: emailTemplate({ name, email, details }), // html body
-    });
+    // let senderAccount = nodemailer.createTransport({
+    //   host: SMTP_HOST,
+    //   port: SMTP_PORT,
+    //   secure: SECURE_FLAG === 'true', // true for 465, false for other ports
+    //   auth: {
+    //     user: EMAIL_ACCOUNT,
+    //     pass: EMAIL_PASSWORD,
+    //   }
+    // });
+    //
+    // senderAccount.sendMail({
+    //   from: '"James Pham" <phamj93@gmail.com>', // sender address
+    //   to: "jamespham93@yahoo.com", // list of receivers
+    //   subject: "Portfolio Contact Form Submission ✔", // Subject line
+    //   text: "New Submission", // plain text body
+    //   html: emailTemplate({ name, email, details }), // html body
+    // });
 
     return ctx.response;
   }
