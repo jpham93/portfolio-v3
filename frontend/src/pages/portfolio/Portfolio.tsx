@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Portfolio.scss';
+import './Portfolio.module.scss';
 
 // Components
 import { ProgressSpinner } from 'primereact/progressspinner';

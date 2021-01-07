@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Blogs.scss';
+import './Blogs.module.scss';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import Header from '../../components/header/Header';

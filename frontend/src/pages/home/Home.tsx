@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Home.scss';
+import './Home.module.scss';
 import Header from '../../components/header/Header';
 import GridLinksView from '../../components/gridLinks/GridLinks';
 import SocialLinksModel from '../../models/SocialLinks.model';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Blog.scss';
+import './Blog.module.scss';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import HeaderPropsModel from '../../models/HeaderProps.model';

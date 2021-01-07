@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './About.scss';
+import './About.module.scss';
 import Header from '../../components/header/Header';
 import HeaderPropsModel from '../../models/HeaderProps.model';
 import ReactMarkdown from 'react-markdown';
