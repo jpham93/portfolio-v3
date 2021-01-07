@@ -31,3 +31,6 @@ yarn-error.log*
 
 # ES Lint
 .eslintcache
+
+# Next JS
+.next/

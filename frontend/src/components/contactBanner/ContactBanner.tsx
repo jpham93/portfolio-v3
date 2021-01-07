@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ContactBanner.scss';
 import ContactBannerPropsModel from '../../models/ContactBannerProps.model';
-import ContactForm from '../ContactForm';
+import ContactForm from '../contactForm/ContactForm';
 
 const ContactBanner = ({ header, button_text, background_color, button_color }: ContactBannerPropsModel) => {
 

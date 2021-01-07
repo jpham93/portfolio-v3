@@ -6,7 +6,7 @@ import MenuPropsModel from '../../models/MenuProps.model';
 import validateColor from 'validate-color';
 import { useResizeObserver } from '../../hooks/useResizeObserver';
 import ToggleMenu from '../toggleMenu/ToggleMenu';
-import ContactForm from '../ContactForm';
+import ContactForm from '../contactForm/ContactForm';
 
 /**
  * Menu in header & footer. Displays links and branding.

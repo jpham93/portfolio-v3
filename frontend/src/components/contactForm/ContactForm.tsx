@@ -2,7 +2,7 @@ import React, { createRef, useEffect, useRef, useState } from 'react';
 import _ from 'lodash';
 import './ContactForm.scss';
 import { Dialog } from 'primereact/dialog';
-import ContactFormPropsModel from '../models/ContactFormProps.model';
+import ContactFormPropsModel from '../../models/ContactFormProps.model';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';

@@ -1,5 +1,5 @@
 import React from 'react';
-import './BlogCards.scss';
+import './BlogCards.module.scss';
 import BlogCardsPropsModel from '../../models/BlogCardsProps.model';
 import { NavLink } from 'react-router-dom';
 import validateColor from 'validate-color';
