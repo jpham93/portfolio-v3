@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './ProjectGalleria.scss';
+import './ProjectGalleria.module.scss';
 
 // Components
 import { Galleria } from 'primereact/galleria';

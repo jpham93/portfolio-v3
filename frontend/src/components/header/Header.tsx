@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderPropsModel from '../../models/HeaderProps.model';
-import './Header.scss';
+import './Header.module.scss';
 import validateColor from 'validate-color';
 
 /**

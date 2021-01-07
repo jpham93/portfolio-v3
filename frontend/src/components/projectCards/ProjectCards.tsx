@@ -1,5 +1,5 @@
 import React from 'react';
-import './ProjectCards.scss';
+import './ProjectCards.module.scss';
 import { NavLink } from 'react-router-dom';
 import ProjectCardsPropsModel from '../../models/ProjectCardsProps.model';
 import validateColor from 'validate-color';

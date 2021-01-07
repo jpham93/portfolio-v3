@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import './Menu.scss';
+import './Menu.module.scss';
 import { Toolbar, ToolbarProps } from 'primereact/toolbar';
 import { NavLink } from 'react-router-dom';
 import MenuPropsModel from '../../models/MenuProps.model';

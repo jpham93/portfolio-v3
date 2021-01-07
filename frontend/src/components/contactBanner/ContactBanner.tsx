@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './ContactBanner.scss';
+import './ContactBanner.module.scss';
 import ContactBannerPropsModel from '../../models/ContactBannerProps.model';
 import ContactForm from '../contactForm/ContactForm';
 

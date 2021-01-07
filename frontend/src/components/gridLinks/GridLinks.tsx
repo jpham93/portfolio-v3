@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './GridLinks.scss';
+import './GridLinks.module.scss';
 import SocialLinksModel from '../../models/SocialLinks.model';
 import GridLinksModel from '../../models/GridLinks.model';
 import validateColor from 'validate-color';

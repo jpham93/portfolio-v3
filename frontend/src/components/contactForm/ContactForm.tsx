@@ -1,6 +1,6 @@
 import React, { createRef, useEffect, useRef, useState } from 'react';
 import _ from 'lodash';
-import './ContactForm.scss';
+import './ContactForm.module.scss';
 import { Dialog } from 'primereact/dialog';
 import ContactFormPropsModel from '../../models/ContactFormProps.model';
 import { InputText } from 'primereact/inputtext';
