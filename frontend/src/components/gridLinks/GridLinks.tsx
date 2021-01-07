@@ -31,7 +31,7 @@ const GridLinksView = ({ gridLinks, socialLinks }: { gridLinks: GridLinksModel[]
       for (let i = 0; i < 9; i++) {
         gridTiles[i].classList.add(`FadeCascade-${i}`);
       }
-    }, 300);
+    }, 150);
   });
 
   const gridTiles = gridLinks

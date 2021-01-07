@@ -9,17 +9,9 @@
       }
     },
     {
-      "method": "PUT",
-      "path": "/contact-form",
-      "handler": "contact-form.update",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "DELETE",
-      "path": "/contact-form",
-      "handler": "contact-form.delete",
+      "method": "POST",
+      "path": "/contact-form-submission",
+      "handler": "contact-form.sendContactFormSubmission",
       "config": {
         "policies": []
       }
