@@ -6,7 +6,7 @@ module.exports = ({ env }) => ({
     default: {
       connector: 'mongoose',
       settings: {
-        uri: DB_URI_DEV,
+        uri: DB_URI_PROD,
       },
       options: {
         ssl: DB_SSL_FLAG === 'true',
