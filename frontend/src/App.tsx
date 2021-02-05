@@ -21,6 +21,10 @@ import Blog from './pages/blog/Blog';
 import GridLinksModel from './models/GridLinks.model';
 import Loading from './components/loading/Loading';
 
+/**
+ * Main
+ * @constructor
+ */
 const App: React.FunctionComponent = () => {
 
   // State - Load data
