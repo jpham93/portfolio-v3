@@ -21,6 +21,8 @@ import Blog from './pages/blog/Blog';
 import GridLinksModel from './models/GridLinks.model';
 import Loading from './components/loading/Loading';
 
+// Deploy: Sat Feb  6 23:33:11 UTC 2021
+
 const App: React.FunctionComponent = () => {
 
   // State - Load data
