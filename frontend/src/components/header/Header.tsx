@@ -16,7 +16,7 @@ const Header = ({ title, header_img, headerType, header_color, subtitle }: Heade
   // check to make sure image exist from API
   let imgUrl = null;
   if (header_img) {
-    imgUrl = process.env.REACT_APP_API_URL + header_img.url;
+    imgUrl = header_img.url;
   }
 
   const headerBackground = imgUrl

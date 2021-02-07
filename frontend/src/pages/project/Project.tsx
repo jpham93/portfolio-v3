@@ -144,7 +144,7 @@ const Project = () => {
                     // check if alternative image is defined and display dynamically
                     project.hasOwnProperty('alt_img')
                       ?
-                      <div style={{ backgroundImage: `url(${process.env.REACT_APP_API_URL}${project.alt_img.url})` }}
+                      <div style={{ backgroundImage: `url(${project.alt_img.url})` }}
                            className="ProjectAltImg"/>
                       :
                       null

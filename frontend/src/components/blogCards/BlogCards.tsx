@@ -13,7 +13,7 @@ const BlogCards = ({ blogCardsProps }: { blogCardsProps: BlogCardsPropsModel[] }
 
     let backgroundStyle = {};
     if (main_img) {
-      backgroundStyle = { backgroundImage: `url(${process.env.REACT_APP_API_URL}${blogCard.main_img.url})` };
+      backgroundStyle = { backgroundImage: `url(${blogCard.main_img.url})` };
     } else if (validateColor(color)) {
       backgroundStyle = { backgroundColor: color };
     }
