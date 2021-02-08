@@ -57,7 +57,7 @@ const GridLinksView = ({ gridLinks, socialLinks }: { gridLinks: GridLinksModel[]
       // Determine background image
       let backgroundImage: {} = {};
       if (menuLink.link_img) {
-        const imgUrl = process.env.REACT_APP_API_URL + menuLink.link_img.url;
+        const imgUrl = menuLink.link_img.url;
         backgroundImage = { backgroundImage: `url(${imgUrl})` };
         backgroundStyle = { backgroundColor: '#fff' };
       }
@@ -74,7 +74,7 @@ const GridLinksView = ({ gridLinks, socialLinks }: { gridLinks: GridLinksModel[]
     // Determine tile's content based on API "icon" values
     let content: string | JSX.Element = socialLink.name.toLocaleUpperCase();
     if (socialLink.icon) {
-      const imgUrl = process.env.REACT_APP_API_URL + socialLink.icon.url;
+      const imgUrl = socialLink.icon.url;
       content = <img className="SocialLinkIcon" src={ imgUrl } />;
     }
 
