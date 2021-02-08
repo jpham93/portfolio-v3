@@ -104,7 +104,11 @@ const Blog = () => {
           <div className="RecentBlogsContainer">
             <h2 className="RecentBlogHeader">Recent Blogs</h2>
             <div className="SmallDivider" />
-            <BlogCards { ...blogCardsProps! } />
+            {
+              blogCardsProps?.blogCardsProps.length
+                ? <BlogCards { ...blogCardsProps! } />
+                : <h2 style={{ textAlign: 'center' }}>No recent blogs available...</h2>
+            }
           </div>
         </>
       </CSSTransition>
