@@ -17,6 +17,7 @@ const Blog = () => {
   const [headerProps, setHeaderProps]           = useState<HeaderPropsModel | null>(null);
   const [content, setContent]                   = useState<string | null>(null);
   const [blogCardsProps, setBlogCardsProps]     = useState<{ blogCardsProps: BlogCardsPropsModel[] } | null>(null);
+  const [lastUpdated, setLastUpdated]           = useState<string | undefined | null>(null);
 
   useEffect(() => {
     // scroll to the top. Works with reloading.
@@ -28,12 +29,20 @@ const Blog = () => {
     fetch(`${process.env.REACT_APP_API_URL}/blog/${blog_id}`)
       .then(res => res.json())
       .then(async data => {
+        console.log(data);
         /**
          * Extract Header Props
          */
-        const { title, header_color, main_img, date, author, blog_category: { type, color } } = data;
+        const { title, header_color, main_img, published_at, updatedAt, author, blog_category: { type, color } } = data;
 
-        const subtitleText = { author, type, date: moment(date).format('MMM D, YYYY') };
+        /**
+         * Set lastUpdated state (if exists & different day than published date)
+         */
+        if (moment(published_at).format('MMM D, YYYY') !== moment(updatedAt).format('MMM D, YYYY')) {
+          setLastUpdated(updatedAt);
+        }
+
+        const subtitleText = { author, type, date: moment(published_at).format('MMM D, YYYY') };
 
         let hProps: HeaderPropsModel = {
           title: {
@@ -97,6 +106,15 @@ const Blog = () => {
         <>
           <Header { ...headerProps! } />
           <div className="BlogContent LargeHeaderOverlap">
+            {
+              lastUpdated
+                ?
+                <em className="LastUpdated">
+                  Lasted Updated: { moment(lastUpdated).format('MMM D, YYYY') }
+                </em>
+                :
+                ''
+            }
             <ReactMarkdown>
               { content! }
             </ReactMarkdown>
