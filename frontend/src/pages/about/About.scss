@@ -1,8 +1,13 @@
 @import '../../styles/variables';
 
 .AboutContent {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.3rem;
+    line-height: 30px;
 
     @media (max-width: $tablet-breakpoint) {
         padding: 0 1rem;
+        font-size: 1.1rem;
+        line-height: 25px;
     }
 }

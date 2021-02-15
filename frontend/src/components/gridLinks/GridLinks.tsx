@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './GridLinks.scss';
 import SocialLinksModel from '../../models/SocialLinks.model';
 import GridLinksModel from '../../models/GridLinks.model';
 import validateColor from 'validate-color';
 import { NavLink } from 'react-router-dom';
+import ContactForm from '../ContactForm';
 
 const defaultGridColors = [
   '#CD5C5C',
@@ -23,6 +24,8 @@ const defaultSocialGridColors = [
 ];
 
 const GridLinksView = ({ gridLinks, socialLinks }: { gridLinks: GridLinksModel[], socialLinks: SocialLinksModel[] }) => {
+
+  const [formVisible, setFormVisible] = useState<boolean>(false);
 
   // Cascading Fade-In Animation effect
   useEffect(() => {
@@ -62,8 +65,17 @@ const GridLinksView = ({ gridLinks, socialLinks }: { gridLinks: GridLinksModel[]
         backgroundStyle = { backgroundColor: '#fff' };
       }
 
+      // if last index aka "Contact", create a different behavior for link (opens Contact Form)
+      const lastIndex = gridLinks.length - 2;
+
       return(
-        <NavLink to={ `/${menuLink.path}` } key={ index } className={ `p-md-${colSize} p-col-12 GridTile` } style={ backgroundStyle }>
+        <NavLink
+          to={ index !== lastIndex ? `/${menuLink.path}` : '#' }
+          key={ index }
+          className={ `p-md-${colSize} p-col-12 GridTile` }
+          style={ backgroundStyle }
+          onClick={ index !== lastIndex ? () => null : () => setFormVisible(true) }
+        >
           <div className="GridTileImg" style={backgroundImage} />
           <span className="GridTileText">{ menuLink.alt_title || menuLink.name }</span>
         </NavLink>
@@ -99,6 +111,7 @@ const GridLinksView = ({ gridLinks, socialLinks }: { gridLinks: GridLinksModel[]
       <div className="p-md-4 p-col-12 p-grid GridTile SocialGridContainer">
         { socialLinkGridTiles }
       </div>
+      <ContactForm formVisible={ formVisible } setFormVisible={ setFormVisible }/>
     </div>
   );
 };
