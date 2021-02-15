@@ -15,32 +15,40 @@ img[src*="#float-left"] {
   float: left;
 }
 
-img[src*="#clear-right"] {
+img[src*="clear-right"] {
   clear: right;
 }
 
-img[src*="#clear-left"] {
+img[src*="clear-left"] {
   clear: right;
 }
 
-img[src*="#thumbnail"] {
+img[src*="thumbnail"] {
   width: 150px;
 }
 
-img[src*="#small"] {
+img[src*="small"] {
   width: 300px;
 }
 
-img[src*="#medium"] {
+img[src*="medium"] {
   width: 438px;
 }
 
-img[src*="#large"] {
+img[src*="large"] {
   width: 625px;
 }
 
-img[src*="#x-large"] {
+img[src*="x-large"] {
   width: 1024px
+}
+
+img[src*="centered"] {
+  margin: auto;
+}
+
+img[src*="d-block"] {
+  display: block;
 }
 
 .Content {
