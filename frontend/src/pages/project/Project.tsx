@@ -172,7 +172,7 @@ const Project = () => {
                         ?
                         <ProjectCards { ...projectCardsProps! } />
                         :
-                        <h2><em>No other projects available right now...</em></h2>
+                        <h2 className="NoOtherProjectsMessage"><em>No other projects available right now...</em></h2>
                     }
                   </div>
                   <ContactBanner { ...contactBannerProps! } />
