@@ -138,11 +138,11 @@ const Project = () => {
               // load Project content when set
               project
               ?
-                <>
+                <div>
                   <div className="ProjectContent Content LargeHeaderOverlap">
                   {
                     // check if alternative image is defined and display dynamically
-                    project.hasOwnProperty('alt_img')
+                    project.hasOwnProperty('alt_img') && project.alt_img
                       ?
                       <div style={{ backgroundImage: `url(${project.alt_img.url})` }}
                            className="ProjectAltImg"/>
@@ -167,10 +167,16 @@ const Project = () => {
                   <div className="RecentProjectsContainer">
                     <h2 className="RecentProjectsHeader">Recent Projects</h2>
                     <div className="SmallDivider" />
-                    <ProjectCards { ...projectCardsProps! } />
+                    {
+                      projectCardsProps?.projectCardsProps.length
+                        ?
+                        <ProjectCards { ...projectCardsProps! } />
+                        :
+                        <h2 className="NoOtherProjectsMessage"><em>No other projects available right now...</em></h2>
+                    }
                   </div>
                   <ContactBanner { ...contactBannerProps! } />
-                </>
+                </div>
               :
                 null
             }
