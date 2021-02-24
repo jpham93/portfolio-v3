@@ -167,7 +167,13 @@ const Project = () => {
                   <div className="RecentProjectsContainer">
                     <h2 className="RecentProjectsHeader">Recent Projects</h2>
                     <div className="SmallDivider" />
-                    <ProjectCards { ...projectCardsProps! } />
+                    {
+                      projectCardsProps?.projectCardsProps.length
+                        ?
+                        <ProjectCards { ...projectCardsProps! } />
+                        :
+                        <h2><em>No other projects available right now...</em></h2>
+                    }
                   </div>
                   <ContactBanner { ...contactBannerProps! } />
                 </div>
